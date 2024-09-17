@@ -6,7 +6,7 @@ import LogInOut from './components/LogInOut.vue'
 <template>
   <header class="bg-gradient-to-r from-blue-500 to-red-500 p-4">
     <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-3xl font-bold text-white">Template principale</h1>
+      <h1 class="text-3xl font-bold text-white">Gestionnaire de projet co</h1>
       <LogInOut />
       <nav>
         <ul class="flex space-x-8">
@@ -24,7 +24,7 @@ import LogInOut from './components/LogInOut.vue'
     </div>
   </header>
   
-  <main class="py-10">
+  <main class="">
     <RouterView />
   </main>
 </template>
