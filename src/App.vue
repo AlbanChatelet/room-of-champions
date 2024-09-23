@@ -19,6 +19,9 @@ import LogInOut from './components/LogInOut.vue'
           <li>
             <RouterLink to="/equipes" class="text-white hover:text-gray-200 transition-colors">Équipes</RouterLink>
           </li>
+          <li>
+            <RouterLink to="/equipes/edit/" class="text-white hover:text-gray-200 transition-colors">Ajouter une équipe</RouterLink>
+          </li>
         </ul>
       </nav>
     </div>
