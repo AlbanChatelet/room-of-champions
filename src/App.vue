@@ -4,7 +4,7 @@ import LogInOut from './components/LogInOut.vue'
 </script>
 
 <template>
-  <header class="bg-gradient-to-r from-blue-500 to-red-500 p-4">
+  <header class="bg-gradient-to-r from-yellow-500 to-purple-500 p-4">
     <div class="container mx-auto flex justify-between items-center">
       <h1 class="text-3xl font-bold text-white">Gestionnaire de projet co</h1>
       <LogInOut />
@@ -15,6 +15,9 @@ import LogInOut from './components/LogInOut.vue'
           </li>
           <li>
             <RouterLink to="/About" class="text-white hover:text-gray-200 transition-colors">About</RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/Users" class="text-white hover:text-gray-200 transition-colors">Utilisateurs</RouterLink>
           </li>
           <li>
             <RouterLink to="/equipes" class="text-white hover:text-gray-200 transition-colors">Équipes</RouterLink>

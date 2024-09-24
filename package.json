@@ -14,8 +14,14 @@
     "typegen": "pocketbase-typegen --db ./pocketbase/pb_data/data.db --out ./src/pocketbase-types.ts"
   },
   "dependencies": {
+    "@tiptap/starter-kit": "^2.7.2",
+    "@tiptap/vue-3": "^2.7.2",
+    "@vueup/vue-quill": "^1.2.0",
     "pocketbase": "^0.21.5",
+    "quill": "^2.0.2",
+    "unhead": "^1.11.6",
     "vue": "^3.4.29",
+    "vue-quill-editor": "^3.0.6",
     "vue-router": "^4.3.3"
   },
   "devDependencies": {
