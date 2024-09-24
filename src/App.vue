@@ -4,7 +4,7 @@ import LogInOut from './components/LogInOut.vue'
 </script>
 
 <template>
-  <header class="bg-gradient-to-r from-yellow-500 to-purple-500 p-4">
+  <header class="bg-gradient-to-r from-green-500 to-green-400 p-4">
     <div class="container mx-auto flex justify-between items-center">
       <h1 class="text-3xl font-bold text-white">Gestionnaire de projet co</h1>
       <LogInOut />

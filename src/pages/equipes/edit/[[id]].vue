@@ -5,6 +5,7 @@
       <div>
         <label for="nom" class="block text-sm font-medium text-gray-700 mb-1">Nom de l'équipe</label>
         <input
+          v-model="form.nom"
           type="text"
           id="nom"
           name="nom"
@@ -13,12 +14,8 @@
       </div>
       <div>
         <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-        <textarea
-          id="description"
-          name="description"
-          rows="4"
-          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-        ></textarea>
+        <!-- Utilisation du composant QuillEditor pour la description -->
+        <QuillEditor v-model="form.description" />
       </div>
       <button
         type="submit"
@@ -31,16 +28,32 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import { pb } from '@/backend'
 import { useRouter } from 'vue-router/auto'
+import QuillEditor from '@/components/QuillEditor.vue' // Importer le composant QuillEditor
 
 const router = useRouter()
 
+// Variables pour le formulaire
+const form = ref({
+  nom: '',
+  description: '' // La description sera remplie via le QuillEditor
+})
+
+// Fonction de soumission du formulaire
 const submit = async (event: Event) => {
   event.preventDefault()
-  const form = event.target as HTMLFormElement
-  const formData = new FormData(form)
-  const newEquipe = await pb.collection('equipes').create(formData)
-  router.push({ name: '/equipes/[id]', params: { id: newEquipe.id } })
+  const formData = new FormData()
+
+  formData.append('nom', form.value.nom)
+  formData.append('description', form.value.description) // Ajouter la description issue du QuillEditor
+
+  try {
+    const newEquipe = await pb.collection('equipes').create(formData)
+    router.push({ name: '/equipes/[id]', params: { id: newEquipe.id } })
+  } catch (error) {
+    console.error('Erreur lors de la création de l\'équipe :', error)
+  }
 }
 </script>
