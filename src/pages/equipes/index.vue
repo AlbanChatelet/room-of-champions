@@ -42,6 +42,3 @@ onMounted(async () => {
   </main>
 </template>
 
-<style scoped>
-/* Pas besoin de style personnalisé supplémentaire, Tailwind gère l'essentiel */
-</style>

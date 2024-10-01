@@ -10,48 +10,36 @@ import LogInOut from './components/LogInOut.vue'
       <nav>
         <ul class="flex space-x-8">
           <li>
-            <RouterLink to="/" class="text-white hover:text-gray-200 transition-colors"
-              >Accueil</RouterLink
-            >
+            <RouterLink to="/" class="text-white hover:text-gray-200 transition-colors">Accueil</RouterLink>
           </li>
           <li>
-            <RouterLink to="/About" class="text-white hover:text-gray-200 transition-colors"
-              >About</RouterLink
-            >
+            <RouterLink to="/About" class="text-white hover:text-gray-200 transition-colors">About</RouterLink>
           </li>
           <li>
-            <RouterLink to="/Users" class="text-white hover:text-gray-200 transition-colors"
-              >Utilisateurs</RouterLink
-            >
+            <RouterLink to="/Users" class="text-white hover:text-gray-200 transition-colors">Utilisateurs</RouterLink>
           </li>
           <li>
-            <RouterLink to="/equipes" class="text-white hover:text-gray-200 transition-colors"
-              >Équipes</RouterLink
-            >
+            <RouterLink to="/equipes" class="text-white hover:text-gray-200 transition-colors">Équipes</RouterLink>
           </li>
           <li>
-            <RouterLink to="/equipes/edit/" class="text-white hover:text-gray-200 transition-colors"
-              >Ajouter une équipe</RouterLink
-            >
+            <RouterLink to="/equipes/edit/" class="text-white hover:text-gray-200 transition-colors">Ajouter une équipe</RouterLink>
           </li>
           <li>
-            <RouterLink to="/ProfileEdit" class="text-white hover:text-gray-200 transition-colors"
-              >Profil</RouterLink
-            >
+            <RouterLink to="/ProfileEdit" class="text-white hover:text-gray-200 transition-colors">Profil</RouterLink>
           </li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main class="">
+  <main>
     <RouterView v-slot="{ Component }">
       <Suspense>
-        <!-- main content -->
-        <component :is="Component"></component>
+        <component :is="Component" />
 
-        <!-- loading state -->
-        <template #fallback> Loading... </template>
+        <template #fallback>
+          <div class="text-center">Loading...</div>
+        </template>
       </Suspense>
     </RouterView>
   </main>
