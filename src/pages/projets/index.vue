@@ -1,19 +1,22 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { pb } from '@/backend'
-import type { EquipesResponse } from '@/pocketbase-types'
+import type { EquipesResponse, ProjetsResponse } from '@/pocketbase-types'
 import { RouterLink } from 'vue-router'
+import ImgPb from '@/components/ImgPb.vue'
 
-const equipes = ref<EquipesResponse[]>([])
+const projets = ref<ProjetsResponse[]>([])
 
 onMounted(async () => {
   try {
-    const response = await pb.collection('equipes').getFullList<EquipesResponse>()
-    equipes.value = response
+    const response = await pb.collection('projets').getFullList<EquipesResponse>()
+    projets.value = response
   } catch (error) {
     console.error('Error fetching teams:', error)
   }
 })
+
+
 </script>
 
 <template>
@@ -21,22 +24,31 @@ onMounted(async () => {
 
   <main class="py-10 bg-gray-100">
     <div class="container mx-auto">
-      <div v-if="equipes.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div v-for="equipe in equipes" :key="equipe.id" class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between h-full">
-          <!-- Contenu de l'équipe -->
+      <div v-if="projets.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div v-for="projet in projets" :key="projet.id" class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between h-full">
+          <!-- Contenu du projet -->
           <div>
-            <h2 class="text-2xl font-semibold text-green-700 mb-2">{{ equipe.nom }}</h2>
-            <div v-html="equipe.description" class="mb-4"></div>
+            <h3 class="text-lg font-semibold mt-2">
+        Par : <span class="font-medium text-blue-600">{{ projet.chef_projet }}</span>
+      </h3>
+            <div v-html="projet.description" class="mb-4"></div>
+            <ImgPb
+                v-if="projet.image"
+                :record="projet"
+                :filename="projet.image"
+                class="h-24 w-24 rounded-full object-cover mb-5"
+                />
           </div>
 
           <!-- Bouton pour rediriger vers la page de détails de l'équipe, fixé en bas à gauche -->
-          <RouterLink :to="`/equipes/${equipe.id}`" class="inline-block stroke-blue-500 text-red-500 px-4 py-2 rounded-md shadow hover:bg-slate-200 transition-colors mt-auto">
+          <RouterLink :to="`/projets/${projet.id}`" class="inline-block stroke-blue-500 text-red-500 px-4 py-2 rounded-md shadow hover:bg-slate-200 transition-colors mt-auto">
             Voir les détails
           </RouterLink>
         </div>
+        
       </div>
       <div v-else class="text-center text-gray-500">
-        <p>Aucune équipe trouvée.</p>
+        <p>Aucun projet trouvé.</p>
       </div>
     </div>
   </main>

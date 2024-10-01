@@ -34,6 +34,7 @@ onMounted(async () => {
             Voir les détails
           </RouterLink>
         </div>
+        
       </div>
       <div v-else class="text-center text-gray-500">
         <p>Aucune équipe trouvée.</p>

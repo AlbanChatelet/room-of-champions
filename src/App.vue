@@ -27,6 +27,9 @@ import LogInOut from './components/LogInOut.vue'
           <li>
             <RouterLink to="/ProfileEdit" class="text-white hover:text-gray-200 transition-colors">Profil</RouterLink>
           </li>
+          <li>
+            <RouterLink to="/projets" class="text-white hover:text-gray-200 transition-colors">Projets</RouterLink>
+          </li>
         </ul>
       </nav>
     </div>
