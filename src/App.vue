@@ -6,34 +6,53 @@ import LogInOut from './components/LogInOut.vue'
 <template>
   <header class="bg-gradient-to-r from-green-500 to-green-400 p-4">
     <div class="container mx-auto flex justify-between items-center">
-      
       <LogInOut />
       <nav>
         <ul class="flex space-x-8">
           <li>
-            <RouterLink to="/" class="text-white hover:text-gray-200 transition-colors">Accueil</RouterLink>
+            <RouterLink to="/" class="text-white hover:text-gray-200 transition-colors"
+              >Accueil</RouterLink
+            >
           </li>
           <li>
-            <RouterLink to="/About" class="text-white hover:text-gray-200 transition-colors">About</RouterLink>
+            <RouterLink to="/About" class="text-white hover:text-gray-200 transition-colors"
+              >About</RouterLink
+            >
           </li>
           <li>
-            <RouterLink to="/Users" class="text-white hover:text-gray-200 transition-colors">Utilisateurs</RouterLink>
+            <RouterLink to="/Users" class="text-white hover:text-gray-200 transition-colors"
+              >Utilisateurs</RouterLink
+            >
           </li>
           <li>
-            <RouterLink to="/equipes" class="text-white hover:text-gray-200 transition-colors">Équipes</RouterLink>
+            <RouterLink to="/equipes" class="text-white hover:text-gray-200 transition-colors"
+              >Équipes</RouterLink
+            >
           </li>
           <li>
-            <RouterLink to="/equipes/edit/" class="text-white hover:text-gray-200 transition-colors">Ajouter une équipe</RouterLink>
+            <RouterLink to="/equipes/edit/" class="text-white hover:text-gray-200 transition-colors"
+              >Ajouter une équipe</RouterLink
+            >
           </li>
           <li>
-            <RouterLink to="/ProfileEdit" class="text-white hover:text-gray-200 transition-colors">Profil</RouterLink>
+            <RouterLink to="/ProfileEdit" class="text-white hover:text-gray-200 transition-colors"
+              >Profil</RouterLink
+            >
           </li>
         </ul>
       </nav>
     </div>
   </header>
-  
+
   <main class="">
-    <RouterView />
+    <RouterView v-slot="{ Component }">
+      <Suspense>
+        <!-- main content -->
+        <component :is="Component"></component>
+
+        <!-- loading state -->
+        <template #fallback> Loading... </template>
+      </Suspense>
+    </RouterView>
   </main>
 </template>

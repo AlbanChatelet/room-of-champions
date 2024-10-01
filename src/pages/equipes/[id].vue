@@ -1,21 +1,21 @@
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router/auto'
-import { pb } from '@/backend'
+import { pb, user } from '@/backend'
 import type { EquipesResponse, UsersResponse } from '@/pocketbase-types'
 import { useHead } from 'unhead'
 import QuillEditor from '@/components/QuillEditor.vue'
 
-const route = useRoute('/equipes/[[id]]')
+const route = useRoute('/equipes/[id]')
 const router = useRouter()
 
 useHead({
-  title: 'Détails de l\'équipe'
+  title: () => 'Équipe ' + (infoEquipes?.nom || 'Inconnue'),
 })
 
 // Identifiant de l'équipe
-const equipeId = ref(route.params.id)
 
+const listUsers = await pb.collection('users').getFullList()
 // Mode "édition" ou "lecture"
 const isEditMode = ref(false) // Par défaut, lecture seule
 
@@ -23,40 +23,15 @@ const isEditMode = ref(false) // Par défaut, lecture seule
 const form = ref({
   nom: '',
   description: '',
-  chef_equipe: null as string | null // Utiliser l'ID de l'utilisateur
+  chef_equipe: null as string | null, // Utiliser l'ID de l'utilisateur
+  membres: [] as UsersResponse[] // Liste des membres
 })
 
-// Liste des utilisateurs pour le sélecteur
-const users = ref<UsersResponse[]>([])
-
-// Variable pour l'utilisateur sélectionné indépendamment du chef d'équipe
-const selectedUser = ref<string | null>(null) // ID de l'utilisateur sélectionné
-
-// Charger la liste des utilisateurs
-const loadUsers = async () => {
-  try {
-    const response = await pb.collection('users').getFullList<UsersResponse>()
-    users.value = response
-  } catch (error) {
-    console.error('Erreur lors du chargement des utilisateurs:', error)
-  }
+function edit() {
+  router.push({ name: '/equipes/edit/[[id]]', params: { id: route.params.id } })
 }
 
-// Charger les données de l'équipe
-watchEffect(async () => {
-  loadUsers() // Charger les utilisateurs dès le départ
 
-  if (equipeId.value) {
-    try {
-      const response = await pb.collection('equipes').getOne<EquipesResponse>(equipeId.value)
-      form.value.nom = response.nom
-      form.value.description = response.description
-      form.value.chef_equipe = response.chef_equipe || null
-    } catch (error) {
-      console.error('Erreur lors de la récupération des détails de l\'équipe:', error)
-    }
-  }
-})
 
 // Fonction pour basculer en mode édition
 const toggleEditMode = () => {
@@ -64,16 +39,19 @@ const toggleEditMode = () => {
 }
 
 // Fonction de soumission pour sauvegarder les modifications
-const submit = async () => {
-  try {
-    if (equipeId.value) {
-      await pb.collection('equipes').update(equipeId.value, form.value)
-      isEditMode.value = false // Retour en mode lecture après mise à jour
-    }
-  } catch (error) {
-    console.error('Erreur lors de la mise à jour de l\'équipe:', error)
-  }
+
+const infoEquipes = ref(await pb
+  .collection<EquipesResponse<{ chef: UsersResponse, membre: UsersResponse[] }>>('equipes')
+  .getOne(route.params.id, { expand: 'chef_equipe,membres' }))
+
+// Fonction pour ajouter un membre à l'équipe
+async function addMember(id: string) {
+  infoEquipes.value = await pb.collection('equipes').update(route.params.id, {
+    'membres+': id,
+    'chef': infoEquipes.value.chef_equipe
+  }, { expand: 'membres' })
 }
+
 </script>
 
 <template>
@@ -96,20 +74,31 @@ const submit = async () => {
       <QuillEditor v-model="form.description" :readonly="!isEditMode" />
     </div>
 
-    <!-- Sélecteur d'utilisateur indépendant -->
+    <!-- Afficher les membres de l'équipe -->
     <div class="mb-4">
-      <label for="utilisateur" class="block text-sm font-medium text-gray-700">Sélectionner un utilisateur</label>
-      <select
-        id="utilisateur"
-        v-model="selectedUser"
-        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+      <h2 class="text-lg font-bold">Membres de l'équipe</h2>
+      <ul>
+        <li v-for="membre in form.membres" :key="membre.id">
+          {{ membre.name || membre.username || 'Utilisateur inconnu' }}
+        </li>
+      </ul>
+      <p v-if="form.membres.length === 0">Aucun membre pour l'instant.</p>
+    </div>
+
+    <!-- Sélecteur pour ajouter des membres (toujours visible maintenant) -->
+<div class="mb-4">
+  <label for="utilisateur" class="block text-sm font-medium text-gray-700">Ajouter un membre</label>
+  <select 
+        id="user-select"
+        @change="addMember(($event.target as HTMLSelectElement).value)" 
+        v-if="user && user.id === infoEquipes?.chef_equipe" 
       >
-        <option value="">Aucun</option>
-        <option v-for="user in users" :key="user.id" :value="user.id">
-          {{ user.name || user.username || 'Utilisateur inconnu' }}
+        <option value="" selected>Choisir un utilisateur</option>
+        <option v-for="user in listUsers" :key="user.id" :value="user.id">
+          {{ user.username || user.email }}
         </option>
       </select>
-    </div>
+</div>
 
     <div class="flex space-x-4">
       <button
@@ -122,7 +111,7 @@ const submit = async () => {
 
       <button
         v-else
-        @click="submit"
+        @click="edit"
         class="inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none"
       >
         Sauvegarder

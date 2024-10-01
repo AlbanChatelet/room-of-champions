@@ -35,12 +35,15 @@ export type AuthSystemFields<T = never> = {
 // Record types for each collection
 
 export type EquipesRecord = {
+	chef_equipe?: RecordIdString
 	description?: HTMLString
+	membres?: RecordIdString[]
 	nom?: string
 }
 
 export type UsersRecord = {
 	avatar?: string
+	equipe?: RecordIdString
 	name?: string
 }
 
