@@ -53,13 +53,14 @@ const submit = async (event: Event) => {
   }
 
   // Récupérer l'ID de l'utilisateur connecté
-  const userId = pb.authStore.model.id // Remplace cela par la méthode appropriée si nécessaire
+  const userId = pb.authStore.model.id // Assurez-vous que l'utilisateur est connecté
 
   try {
     const newEquipe = await pb.collection('equipes').create({
       nom: form.value.nom,
       description: form.value.description,
       chef_equipe: userId, // Définit l'utilisateur comme chef de l'équipe
+      'membres': [userId] // Ajoute l'utilisateur comme membre de l'équipe
     })
     
     router.push({ name: '/equipes/[id]', params: { id: newEquipe.id } })
