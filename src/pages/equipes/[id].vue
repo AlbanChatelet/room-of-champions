@@ -5,7 +5,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { pb } from '@/backend'
 import type { EquipesResponse, UsersResponse } from '@/pocketbase-types'
 import sanitizeHtml from 'sanitize-html'
-import QuillEditor from '@/components/QuillEditor.vue' // Importer le composant QuillEditor
+import QuillEditor from '@/components/QuillEditor.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -34,8 +34,8 @@ async function deleteMembre(id: string) {
 }
 
 // Fonction pour supprimer l'équipe
-function deleteEquipe(id: string) {
-  pb.collection('equipes').delete(id)
+async function deleteEquipe(id: string) {
+  await pb.collection('equipes').delete(id)
   router.push({ name: '/equipes/' })
 }
 
@@ -51,7 +51,6 @@ async function submitChanges() {
     console.error('Erreur lors de la mise à jour de l\'équipe :', error)
   }
 }
-
 </script>
 
 <template>
@@ -60,7 +59,10 @@ async function submitChanges() {
     <div v-html="sanitizeHtml(equipe.description)" class="text-gray-700 mb-6 border rounded-lg p-4 bg-gray-100"></div>
     <h2 class="text-lg font-semibold">Nom du chef d'équipe : <span class="font-medium text-blue-600">{{ equipe.expand?.chef_equipe.username }}</span></h2>
 
-    <button class="mt-4 px-4 py-2 text-white bg-red-600 hover:bg-red-700 rounded focus:outline-none focus:ring" @click="deleteEquipe(equipe.id)">
+    <!-- Conditionner le bouton de suppression au chef d'équipe -->
+    <button v-if="user?.id === equipe.expand?.chef_equipe.id" 
+            class="mt-4 px-4 py-2 text-white bg-red-600 hover:bg-red-700 rounded focus:outline-none focus:ring" 
+            @click="deleteEquipe(equipe.id)">
       Supprimer l'équipe
     </button>
 
@@ -81,7 +83,6 @@ async function submitChanges() {
         <div>
           <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
           <QuillEditor v-model="equipe.description" type="text" id="description" required class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
-          
         </div>
         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md">
           Sauvegarder
@@ -94,7 +95,12 @@ async function submitChanges() {
       <ul class="list-disc pl-5 mt-2">
         <li v-for="utilisateur in equipe.expand?.membres" :key="utilisateur.id" class="flex justify-between items-center">
           <span class="text-gray-800">{{ utilisateur.name || utilisateur.username }}</span>
-          <button class="ml-2 text-red-500 hover:text-red-700" @click="deleteMembre(utilisateur.id)">Supprimer</button>
+          <!-- Conditionner le bouton de suppression des membres au chef d'équipe -->
+          <button v-if="user?.id === equipe.expand?.chef_equipe.id" 
+                  class="ml-2 text-red-500 hover:text-red-700" 
+                  @click="deleteMembre(utilisateur.id)">
+            Supprimer
+          </button>
         </li>
       </ul>
     </div>
