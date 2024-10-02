@@ -59,16 +59,14 @@ async function submitChanges() {
 <template>
   <div v-if="projet" class="container mx-auto py-10 px-4">
     <h1 class="text-3xl font-bold mb-4">{{ projet.description }}</h1>
-    <div v-for="projet in projets" :key="projet.id" class="bg-white text-black rounded-lg shadow-lg p-4 mx-auto">
-      <ImgPb 
+    <ImgPb 
           :record="projet" 
           :filename="projet.image" 
           class="w-full h-[215px] object-cover rounded-t-lg"
       />
-    </div>
 
     <h2 class="text-lg font-semibold">
-      Nom du chef d'équipe : 
+      Nom du chef de projet : 
       <span class="font-medium text-blue-600">{{ projet.expand?.chef_projet.username }}</span>
     </h2>
 
@@ -95,7 +93,7 @@ async function submitChanges() {
       <h2 class="text-xl font-semibold">Modifier l'équipe</h2>
       <form @submit.prevent="submitChanges" class="bg-white p-4 rounded shadow-md space-y-4">
         <div>
-          <label for="nom" class="block text-sm font-medium text-gray-700 mb-1">Nom de l'équipe</label>
+          <label for="nom" class="block text-sm font-medium text-gray-700 mb-1">Nom du projet</label>
           <input v-model="projet.description" type="text" id="nom" required class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
         </div>
         <div>
