@@ -12,9 +12,7 @@ import LogInOut from './components/LogInOut.vue'
           <li>
             <RouterLink to="/" class="text-white hover:text-gray-200 transition-colors">Accueil</RouterLink>
           </li>
-          <li>
-            <RouterLink to="/About" class="text-white hover:text-gray-200 transition-colors">About</RouterLink>
-          </li>
+          
           <li>
             <RouterLink to="/Users" class="text-white hover:text-gray-200 transition-colors">Utilisateurs</RouterLink>
           </li>
@@ -29,6 +27,9 @@ import LogInOut from './components/LogInOut.vue'
           </li>
           <li>
             <RouterLink to="/projets" class="text-white hover:text-gray-200 transition-colors">Projets</RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/projets/edit/" class="text-white hover:text-gray-200 transition-colors">Ajouter un projet</RouterLink>
           </li>
         </ul>
       </nav>

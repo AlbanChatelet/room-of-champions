@@ -20,6 +20,8 @@ const listUsers = ref<UsersResponse[]>(await pb.collection('users').getFullList(
 // État pour gérer l'affichage du formulaire de modification
 const isEditing = ref(false)
 
+
+
 // Fonction pour mettre à jour les membres
 async function updateMembres(id: string) {
   projet.value = await pb.collection('projets').update(route.params.id, {
@@ -52,6 +54,7 @@ async function submitChanges() {
     console.error('Erreur lors de la mise à jour de l\'équipe :', error)
   }
 }
+
 
 
 </script>
