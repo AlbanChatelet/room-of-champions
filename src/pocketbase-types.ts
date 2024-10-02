@@ -38,6 +38,7 @@ export type AuthSystemFields<T = never> = {
 export type EquipesRecord = {
 	chef_equipe?: RecordIdString
 	description?: HTMLString
+	liste_projets?: RecordIdString[]
 	membres?: RecordIdString[]
 	nom?: string
 }

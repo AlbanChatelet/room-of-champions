@@ -3,7 +3,7 @@ import { computed, ref } from 'vue'
 import { user } from '@/backend'
 import { useRoute, useRouter } from 'vue-router'
 import { pb } from '@/backend'
-import type { EquipesResponse, UsersResponse } from '@/pocketbase-types'
+import type { EquipesResponse, UsersResponse, ProjetsResponse } from '@/pocketbase-types'
 import sanitizeHtml from 'sanitize-html'
 import QuillEditor from '@/components/QuillEditor.vue'
 
@@ -11,19 +11,30 @@ const route = useRoute()
 const router = useRouter()
 
 // Récupérer l'équipe
-const equipe = ref<EquipesResponse>(await pb.collection<EquipesResponse<{ chef: UsersResponse, membres: UsersResponse }>>('equipes').getOne(route.params.id, {
-  expand: 'chef_equipe, membres'
+const equipe = ref<EquipesResponse>(await pb.collection<EquipesResponse<{ chef: UsersResponse, membres: UsersResponse, liste_projets: ProjetsResponse }>>('equipes').getOne(route.params.id, {
+  expand: 'chef_equipe, membres, liste_projets'
 }))
+
+// Récupérer tous les utilisateurs
 const listUsers = ref<UsersResponse[]>(await pb.collection('users').getFullList())
+
+// Récupérer tous les projets
+const listProjets = ref<ProjetsResponse[]>(await pb.collection('projets').getFullList())
 
 // État pour gérer l'affichage du formulaire de modification
 const isEditing = ref(false)
 
 // Fonction pour mettre à jour les membres
 async function updateMembres(id: string) {
+  // Récupérer les membres et projets actuels de l'équipe
+  const currentMembres = equipe.value.membres || [];
+  const currentProjets = equipe.value.liste_projets || [];
+  
+  // Ajouter le nouveau membre tout en conservant les autres membres et projets
   equipe.value = await pb.collection('equipes').update(route.params.id, {
-    'membres+': id
-  }, { expand: 'chef_equipe, membres' })
+    membres: [...currentMembres, id],
+    liste_projets: currentProjets, // Conserver les projets existants
+  }, { expand: 'chef_equipe, membres, liste_projets' });
 }
 
 // Fonction pour supprimer un membre
@@ -31,6 +42,27 @@ async function deleteMembre(id: string) {
   equipe.value = await pb.collection('equipes').update(route.params.id, {
     'membres-': id
   }, { expand: 'chef_equipe, membres' })
+}
+
+// Fonction pour mettre à jour les projets
+async function updateProjets(id: string) {
+  const currentMembres = equipe.value.membres || [];
+  const currentProjets = equipe.value.liste_projets || [];
+
+  equipe.value = await pb.collection('equipes').update(route.params.id, {
+    liste_projets: [...currentProjets, id],
+    membres: currentMembres,
+  }, { expand: 'chef_equipe, membres, liste_projets' });
+
+  // Affichage dans la console pour vérifier les projets
+  console.log(equipe.value.expand?.liste_projets);
+}
+
+// Fonction pour supprimer un projet
+async function deleteProjet(id: string) {
+  equipe.value = await pb.collection('equipes').update(route.params.id, {
+    'liste_projets-': id
+  }, { expand: 'chef_equipe, liste_projets' })
 }
 
 // Fonction pour supprimer l'équipe
@@ -55,49 +87,19 @@ async function submitChanges() {
 const canEdit = computed(() => user.value && user.value.id === equipe.value.chef_equipe)
 </script>
 
+
 <template>
   <div v-if="equipe" class="container mx-auto py-10 px-4">
     <h1 class="text-3xl font-bold mb-4">{{ equipe.nom }}</h1>
     <div v-html="sanitizeHtml(equipe.description)" class="text-gray-700 mb-6 border rounded-lg p-4 bg-gray-100"></div>
     <h2 class="text-lg font-semibold">Nom du chef d'équipe : <span class="font-medium text-blue-600">{{ equipe.expand?.chef_equipe.username }}</span></h2>
 
-    <!-- Conditionner le bouton de suppression au chef d'équipe -->
-    <button v-if="user?.id === equipe.expand?.chef_equipe.id" 
-            class="mt-4 px-4 py-2 text-white bg-red-600 hover:bg-red-700 rounded focus:outline-none focus:ring" 
-            @click="deleteEquipe(equipe.id)">
-      Supprimer l'équipe
-    </button>
-
-    <div class="mt-6" v-if="user?.id === equipe.expand?.chef_equipe.id">
-      <button @click="canEdit = !canEdit" class="text-blue-600 hover:underline">
-        {{ canEdit ? 'Annuler' : 'Modifier' }}
-      </button>
-    </div>
-
-    <!-- Formulaire de modification -->
-    <div v-if="canEdit" class="mt-4">
-      <h2 class="text-xl font-semibold">Modifier l'équipe</h2>
-      <form @submit.prevent="submitChanges" class="bg-white p-4 rounded shadow-md space-y-4">
-        <div>
-          <label for="nom" class="block text-sm font-medium text-gray-700 mb-1">Nom de l'équipe</label>
-          <input v-model="equipe.nom" type="text" id="nom" required class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
-        </div>
-        <div>
-          <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-          <QuillEditor v-model="equipe.description" type="text" id="description" required class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
-        </div>
-        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md">
-          Sauvegarder
-        </button>
-      </form>
-    </div>
-
+    <!-- Liste des membres -->
     <div class="mt-4">
       <h2 class="text-lg font-semibold">Liste des membres</h2>
       <ul class="list-disc pl-5 mt-2">
         <li v-for="utilisateur in equipe.expand?.membres" :key="utilisateur.id" class="flex justify-between items-center">
           <span class="text-gray-800">{{ utilisateur.name || utilisateur.username }}</span>
-          <!-- Conditionner le bouton de suppression des membres au chef d'équipe -->
           <button v-if="user?.id === equipe.expand?.chef_equipe.id" 
                   class="ml-2 text-red-500 hover:text-red-700" 
                   @click="deleteMembre(utilisateur.id)">
@@ -107,9 +109,35 @@ const canEdit = computed(() => user.value && user.value.id === equipe.value.chef
       </ul>
     </div>
 
+    <!-- Sélection pour ajouter des membres -->
     <select v-if="user?.id === equipe.expand?.chef_equipe.id" @change="updateMembres(($event.target as HTMLSelectElement).value); ($event.target as HTMLSelectElement).value = ''" class="mt-4 px-3 py-2 border rounded">
       <option value="" selected disabled>Sélectionnez un membre</option>
       <option v-for="utilisateur in listUsers" :key="utilisateur.id" :value="utilisateur.id">{{ utilisateur.name || utilisateur.email || utilisateur.username }}</option>
     </select>
+
+    <!-- Liste des projets -->
+        <div class="mt-4">
+  <h2 class="text-lg font-semibold">Liste des projets</h2>
+  <ul class="list-disc pl-5 mt-2">
+    <li v-for="projet in equipe.expand?.liste_projets" :key="projet.id" class="flex justify-between items-center">
+      <span class="text-gray-800">{{ projet.description || 'Nom non défini' }}</span> <!-- Assurez-vous que "nom" existe -->
+      <button v-if="user?.id === equipe.expand?.chef_equipe.id" 
+              class="ml-2 text-red-500 hover:text-red-700" 
+              @click="deleteProjet(projet.id)">
+        Supprimer
+      </button>
+    </li>
+  </ul>
+</div>
+
+<!-- Sélecteur pour ajouter un projet -->
+<select v-if="user?.id === equipe.expand?.chef_equipe.id" @change="updateProjets(($event.target as HTMLSelectElement).value); ($event.target as HTMLSelectElement).value = ''" class="mt-4 px-3 py-2 border rounded">
+  <option value="" selected disabled>Sélectionnez un projet</option>
+  <option v-for="projet in listProjets" :key="projet.id" :value="projet.id">
+    {{ projet.description || 'Nom non défini' }}
+  </option>
+</select>
+
   </div>
 </template>
+
