@@ -4,7 +4,7 @@ import { user } from '@/backend'
 import { useRoute, useRouter } from 'vue-router'
 import { pb } from '@/backend'
 import type { ProjetsResponse, UsersResponse } from '@/pocketbase-types'
-import sanitizeHtml from 'sanitize-html'
+
 import QuillEditor from '@/components/QuillEditor.vue'
 import ImgPb from '@/components/ImgPb.vue'
 

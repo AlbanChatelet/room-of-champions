@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { user } from '@/backend'
 import { useRoute, useRouter } from 'vue-router'
 import { pb } from '@/backend'
@@ -51,6 +51,8 @@ async function submitChanges() {
     console.error('Erreur lors de la mise à jour de l\'équipe :', error)
   }
 }
+
+const canEdit = computed(() => user.value && user.value.id === equipe.value.chef_equipe)
 </script>
 
 <template>
@@ -67,13 +69,13 @@ async function submitChanges() {
     </button>
 
     <div class="mt-6" v-if="user?.id === equipe.expand?.chef_equipe.id">
-      <button @click="isEditing = !isEditing" class="text-blue-600 hover:underline">
-        {{ isEditing ? 'Annuler' : 'Modifier' }}
+      <button @click="canEdit = !canEdit" class="text-blue-600 hover:underline">
+        {{ canEdit ? 'Annuler' : 'Modifier' }}
       </button>
     </div>
 
     <!-- Formulaire de modification -->
-    <div v-if="isEditing" class="mt-4">
+    <div v-if="canEdit" class="mt-4">
       <h2 class="text-xl font-semibold">Modifier l'équipe</h2>
       <form @submit.prevent="submitChanges" class="bg-white p-4 rounded shadow-md space-y-4">
         <div>
