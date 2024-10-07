@@ -29,7 +29,7 @@ onMounted(async () => {
           <!-- Contenu du projet -->
           <div>
             <h3 class="text-lg font-semibold mt-2">
-        Par : <span class="font-medium text-blue-600">{{ projet.chef_projet }}</span>
+        Par : <span class="font-medium text-blue-600">{{ projet.expand?.chef_projet.username }}</span>
       </h3>
             <div v-html="projet.description" class="mb-4"></div>
             <ImgPb

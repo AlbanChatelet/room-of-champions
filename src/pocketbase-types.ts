@@ -46,6 +46,7 @@ export type EquipesRecord = {
 export type ProjetsRecord = {
 	chef_projet?: RecordIdString
 	description?: string
+	equipeChoisie?: RecordIdString
 	image?: string
 }
 

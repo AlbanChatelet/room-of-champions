@@ -72,7 +72,7 @@ const submit = async (event: Event) => {
   // Préparation des données pour la création du projet
   const formData = new FormData()
   formData.append('description', form.value.description)
-  formData.append('chef_projet', userId)
+  formData.append('chef_projet', userId) // Assigner l'utilisateur connecté comme chef du projet
   
   // Ajoute l'image au FormData si elle existe
   if (form.value.image) {
