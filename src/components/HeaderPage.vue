@@ -2,7 +2,7 @@
 import { RouterLink } from 'vue-router/auto';
 import { ref } from 'vue'; // Importer ref
 import MenuBurger from "@/assets/icons/MenuBurger.vue"; // Import du composant de l'icône burger
-import ProfileIcon from "@/assets/icons/profileIcon.vue";
+import ProfileIcon from "@/assets/icons/ProfileIcon.vue";
 const isMenuOpen = ref(false);
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
@@ -24,13 +24,12 @@ const toggleMenu = () => {
   background: linear-gradient(to right, #001E20, #130926);
 }
 </style>
-
 <template>
-  <header class="fond_header text-black flex items-center pt-4 pb-0 justify-between fixed top-0 left-0 w-full shadow-md z-50">
+  <header class="fond_header text-black flex items-center md:pt-4 pb-0 justify-between fixed top-0 left-0 w-full shadow-md z-50">
     <!-- Logo -->
-    <div class="absolute  top-6 left-1/2 transform -translate-x-1/2 -translate-y-1/10">
+    <div class="absolute top-2 md:top-6 left-1/2 transform -translate-x-1/2 -translate-y-1/10">
       <RouterLink to="/" class="flex items-center">
-        <img class="h-32 md:h-40" src="../assets/logo.webp" alt="Logo" />
+        <img class="h-20 md:h-40" src="../assets/logo.webp" alt="Logo" />
       </RouterLink>
     </div>
 
@@ -84,41 +83,59 @@ const toggleMenu = () => {
       </button>
     </nav>
     <!-- Menu Burger pour mobile -->
-    <button @click="toggleMenu" class="md:hidden flex items-center mr-4">
-      <template v-if="isMenuOpen">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      </template>
-      <template v-else>
-        <MenuBurger class="w-6 h-6" />
-      </template>
-    </button>
+     <div class="mr-auto pl-4">
+        <ProfileIcon class="w-14 h-14" />
+      </div>
+  <button @click="toggleMenu" class="md:hidden flex items-center ml-auto py-6 pr-4">
+    <template v-if="isMenuOpen">
+      <svg class="w-12 h-12" fill="none" stroke="#00C9C6" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </template>
+    <template v-else>
+      <MenuBurger class="w-12 h-12" />
+    </template>
+  </button>
 
     <!-- Menu Mobile avec ombre en bas et transition -->
     <transition name="slide-fade">
-      <div v-if="isMenuOpen" class="absolute top-16 right-0 w-full bg-[#D8E4FA] z-50 flex flex-col p-4 md:hidden shadow-lg shadow-gray-500/50">
+      <div v-if="isMenuOpen" class="absolute top-24 right-0 w-full fond_header z-50 flex flex-col p-4 md:hidden shadow-lg shadow-gray-500/50">
         <!-- Liens du menu mobile -->
         <nav class="flex flex-col items-start space-y-2 font-spartan w-full">
           <button 
            
-            class="text-black text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full">
-            ACCUEIL
+            class="text-[#00C9C6] text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full">
+            JEUX
           </button>
           <button 
            
-            class="text-black text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full">
-            A PROPOS
+            class="text-[#00C9C6] text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full">
+            EQUIPES
           </button>
           <button 
            
-            class="text-black text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full">
-            PROJETS
+            class="text-[#00C9C6] text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full">
+            PLANNING
           </button>
           <button 
             
-            class="text-black text-lg font-source-code-pro font-bold py-2 w-full">
-            CONTACT
+            class="text-[#00C9C6] text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full">
+            ÉVÉNEMENTS
+          </button>
+          <button 
+            
+            class="text-[#00C9C6] text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full">
+            MATÉRIEL
+          </button>
+          <button 
+            
+            class="text-[#00C9C6] text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full">
+            INSCRIPTION
+          </button>
+          <button 
+            
+            class="text-[#00C9C6] text-lg font-source-code-pro font-bold py-2 w-full">
+            CONNEXION
           </button>
 
         </nav>
