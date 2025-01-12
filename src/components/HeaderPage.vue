@@ -17,7 +17,7 @@ const toggleMenu = () => {
 </style>
 
 <template>
-  <header class="fond_header text-black flex items-center 2xl:pt-4 pb-0 justify-between fixed md:static top-0 left-0 w-full shadow-md z-50">
+  <header class="fond_header text-black flex items-center 2xl:pt-4 pb-0 justify-between fixed md:static top-0 left-0 w-full shadow-md z-51">
     <!-- Logo -->
     <div class="absolute top-2 2xl:top-6 left-1/2 transform -translate-x-1/2 -translate-y-1/10">
       <RouterLink to="/" class="flex items-center">

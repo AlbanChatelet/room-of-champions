@@ -8,6 +8,8 @@ import rocketleagueImg from "../assets/rocketleague.webp";
 import supersmashbrosImg from "../assets/supersmashbros.webp";
 import mariokartImg from "../assets/mariokart.webp";
 import flecheIcon from "../assets/icons/flecheIcon.vue"
+import lineIcon from "@/assets/icons/lineIcon.vue";
+import lineIcon2 from "@/assets/icons/lineIcon2.vue";
 // Index de l'image active
 const activeIndex = ref(0);
 
@@ -100,14 +102,14 @@ const setImage = (index: number) => {
           </div>
           
             
-          </div><div class="flex absolute px-2 md:px-6 py-3 bg-[#8E3F8D] hover:bg-[#662a64] transition-all text-white shadow-lg rounded-full max-w-fit right-2 md:right-8 "><flecheIcon class="h-4 w-4 md:h-8 md:w-8" />
+          </div><div class="flex absolute px-2 md:px-6 py-3 bg-[#8E3F8D] hover:bg-[#662a64] transition-all text-white shadow-lg top-20 md:top-0 rounded-full max-w-fit right-2 md:right-8 "><flecheIcon class="h-4 w-4 md:h-8 md:w-8" />
                     <p class="text-xs md:font-bold sm:text-lg ml-1 md:ml-4 md:mt-1">JEUX PROPOSÉS</p>
           </div>
 
           <!-- Bouton rond au centre -->
           <button
             @click="nextImage"
-            class="w-32 h-32 bg-[#8E3F8D] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#743272] transition-all absolute z-50"
+            class="md:w-32 md:h-32 w-16 h-16 bg-[#8E3F8D] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#743272] transition-all absolute z-50"
           >
           </button>
         </div>
@@ -118,7 +120,77 @@ const setImage = (index: number) => {
       </div>
     </section>
 
-    <section class="bg-[#8E3F8D] py-10"></section>
+    <section class="bg-[#8E3F8D] py-10">
+  <div class="inset-0 flex flex-col items-center justify-center text-center pt-16">
+    <!-- Titre principal -->
+    <p class="text-[#ffffff] text-2xl md:text-5xl font-bold">ROOM OF CHAMPIONS, C'EST QUOI ?</p>
+  </div>
+
+  <!-- Section des cartes -->
+  <div class="container mx-auto px-12 md:px-4 py-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Card 1 -->
+      <div class="relative bg-[#8E3F8D] rounded-[40px] shadow-lg overflow-hidden border-4 border-white transform transition-transform duration-300 hover:scale-105">
+        <div class="absolute top-2 right-2  text-[#8E518D] text-4xl md:text-9xl font-bold px-4 py-1 rounded-full">1</div>
+        <div class="p-6">
+          <h3 class="md:text-4xl font-bold mt-16 md:mt-64 text-white px-2 text-xl md:px-8">UNE SALLE DÉDIÉE À L'ESPORT</h3>
+          <p class="text-white md:text-2xl font-light mt-4 px-2 md:px-8 text-lg">Home of Champions est un espace pensé pour les étudiants passionnés d'esport, avec un matériel haut de gamme et des jeux compétitifs.</p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="relative bg-[#8E3F8D] rounded-[40px] shadow-lg overflow-hidden border-4 border-white transform transition-transform duration-300 hover:scale-105">
+        <div class="absolute top-2 right-2  text-[#8E518D] text-4xl  md:text-9xl font-bold px-4 py-1 rounded-full">2</div>
+        <div class="p-6">
+          <h3 class="md:text-4xl font-bold mt-16 md:mt-64 text-white px-2 text-xl md:px-8">UN LIEU D'ÉQUIPE ET DE COMPÉTITION</h3>
+          <p class="text-white md:text-2xl font-light mt-4 px-2 md:px-8 text-lg">Rassemblez vos équipes, entraînez-vous, participez à des tournois et vivez une expérience compétitive unique.</p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="relative bg-[#8E3F8D] rounded-[40px] shadow-lg overflow-hidden border-4 border-white transform transition-transform duration-300 hover:scale-105">
+        <div class="absolute top-2 right-2 text-[#8E518D] text-4xl  md:text-9xl font-bold px-4 py-1 rounded-full">3</div>
+        <div class="p-6">
+          <h3 class="md:text-4xl font-bold mt-16 md:mt-64 text-white px-2 text-xl md:px-8">UN AGENDA RICHE ET DYNAMIQUE</h3>
+          <p class="text-white md:text-2xl font-light mt-4 px-2 md:px-8 text-lg">Découvrez un emploi du temps varié : pratiques, formations, événements spéciaux et retransmissions en streaming.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="fond_triangle">
+  <div class="flex justify-center pb-2">
+    <button class="bg-[#FFFFFF] h-[60px] text-[#8E3F8D] font-bold py-2 px-6 rounded-[16px] text-2xl shadow-xl transform transition-transform duration-300 hover:scale-105">
+      NOUS DÉCOUVRIR
+    </button>
+  </div>
+
+  <div class="flex justify-center px-4 pt-20">
+    <div class="bg-gradient-to-b from-[#461145] to-[#8E3F8D] border-[12px] border-white rounded-[30px] w-full max-w-[1550px] p-8 relative">
+      <!-- Contenu du rectangle -->
+      <h2 class="text-white text-2xl md:text-5xl font-bold mb-4">REJOIGNEZ LA COMPÉTITION DÈS AUJOURD'HUI</h2>
+      <p class="text-white text-xl md:text-3xl md:pr-[800px] mb-8 font-light pb-16 md:pb-32">Créez votre compte et devenez un acteur clé de 
+l'univers e-sportif !</p>
+      
+      <!-- Bouton en bas à droite -->
+      <button class="absolute bottom-4 ml-4 md:ml-0 md:right-4 bg-white text-[#8E3F8D] font-bold py-2 px-12 text-2xl rounded-[30px] shadow-md hover:bg-[#ffffff] transition-all duration-300">
+        S'INSCRIRE
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="bg-[#000011] py-16">
+  <div class="inset-0 flex items-center justify-center text-center md:pt-16">
+    <!-- Titre principal -->
+    <lineIcon2 />
+    <p class="text-[#00C9C6] text-xl md:text-5xl font-bold px-4 md:px-16 whitespace-nowrap">LE PLANNING</p>
+    <lineIcon />
+  </div>
+</section>
+
   </main>
 </template>
 
@@ -126,5 +198,9 @@ const setImage = (index: number) => {
 
 
 <style>
-/* Si besoin, styles personnalisés */
+.fond_triangle {
+  background-image: url('@/assets/fond_triangle.webp');
+  background-size: cover;
+}
+
 </style>
