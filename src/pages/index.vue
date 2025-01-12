@@ -7,6 +7,7 @@ import lolImg from "../assets/lol.webp";
 import rocketleagueImg from "../assets/rocketleague.webp";
 import supersmashbrosImg from "../assets/supersmashbros.webp";
 import mariokartImg from "../assets/mariokart.webp";
+import flecheIcon from "../assets/icons/flecheIcon.vue"
 // Index de l'image active
 const activeIndex = ref(0);
 
@@ -44,7 +45,7 @@ const setImage = (index: number) => {
           <p class="text-[#8B44FF] text-4xl md:text-8xl font-bold">ROOM OF CHAMPIONS</p>
           <!-- Texte secondaire -->
           <div class="md:px-[450px] px-8">
-            <p class="text-white text-xs md:text-2xl mt-4">
+            <p class="text-white text-xs md:text-2xl mt-4 mb-4">
               Découvrez l’univers de l’Esport Universitaire grâce à notre salle conçue
               spécialement pour la pratique de jeux vidéos compétitif et en équipe
             </p>
@@ -61,7 +62,7 @@ const setImage = (index: number) => {
     </div>
 
     <!-- Carrousel -->
-    <section class="bg-[#000011] py-10">
+    <section class="bg-[#000011] py-16">
       <div class="relative max-w-screen-lg mx-auto">
         <!-- Images -->
         <div class="flex justify-center">
@@ -83,7 +84,7 @@ const setImage = (index: number) => {
               @click="setImage(index)"
               class="absolute w-4 h-4 rounded-full cursor-pointer transition-all"
               :class="{
-                'bg-[#8E3F8D]': activeIndex === index,
+                'bg-[#8E3F8D] hover:bg-[#662a64] transition-all': activeIndex === index,
                 'bg-gray-500': activeIndex !== index
               }"
               :style="{
@@ -91,7 +92,16 @@ const setImage = (index: number) => {
                 left: `${(100 / (images.length + 1)) * (index + 1)}%`, /* Calcul dynamique de la position horizontale */
                 transform: 'translateX(-50%)'
               }"
-            ></div>
+
+            >
+
+            
+
+          </div>
+          
+            
+          </div><div class="flex absolute px-2 md:px-6 py-3 bg-[#8E3F8D] hover:bg-[#662a64] transition-all text-white shadow-lg rounded-full max-w-fit right-2 md:right-8 "><flecheIcon class="h-4 w-4 md:h-8 md:w-8" />
+                    <p class="text-xs md:font-bold sm:text-lg ml-1 md:ml-4 md:mt-1">JEUX PROPOSÉS</p>
           </div>
 
           <!-- Bouton rond au centre -->
@@ -101,8 +111,14 @@ const setImage = (index: number) => {
           >
           </button>
         </div>
+        
+      </div>
+      <div class="relative">
+        <img src="../assets/CHAMPIONS.webp" alt="Image de fond" class="w-full z-10 -mb-[75px] md:-mb-28">
       </div>
     </section>
+
+    <section class="bg-[#8E3F8D] py-10"></section>
   </main>
 </template>
 

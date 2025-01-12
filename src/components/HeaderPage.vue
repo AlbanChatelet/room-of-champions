@@ -70,9 +70,10 @@ const toggleMenu = () => {
     </nav>
 
     <!-- Menu Burger pour mobile -->
-    <div class="mr-auto pl-4">
-      <ProfileIcon class="w-14 h-14" />
-    </div>
+    <div class="mr-auto pl-4 md:hidden">
+  <ProfileIcon class="w-14 h-14" />
+</div>
+
     <button @click="toggleMenu" class="2xl:hidden flex items-center ml-auto py-6 pr-4">
       <template v-if="isMenuOpen">
         <svg class="w-12 h-12" fill="none" stroke="#00C9C6" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
