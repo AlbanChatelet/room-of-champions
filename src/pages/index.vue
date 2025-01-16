@@ -220,28 +220,40 @@ l'univers e-sportif !</p>
 </section>
 
 <section class="fond_vert">
-  <div class=" mx-20 flex pt-32 ">
+  <div class=" mb-12 mr-16 flex pt-32 ">
     <!-- Première colonne -->
     <div class=" text-white">
       <div class="text-[300px] font-bold opacity-10 text-center">1</div>
       <h3 class="text-[40px] font-bold text-center">COMPOSE TON ÉQUIPE</h3>
-      <p class="text-white md:mt-8 text-3xl px-[100px]">Que ce soit avec tes amis ou alors avec de nouvelles rencontres !</p>
+      <p class="text-white md:mt-8 text-3xl px-[90px]">Que ce soit avec tes amis ou alors avec de nouvelles rencontres !</p>
     </div>
     <div class="w-[5px] h-[550px] mt-32 bg-gradient-to-b from-[#00C9C6] to-[#000011]"></div>
     <div class=" text-white">
       <div class="text-[300px] font-bold opacity-10 text-center">2</div>
       <h3 class="text-[40px] font-bold text-center">INSCRIS TON ÉQUIPE</h3>
-      <p class="text-white text-3xl px-[100px] md:mt-8">Inscrivez-vous à des séances d'entraînements ou des tournois !</p>
+      <p class="text-white text-3xl px-[90px] md:mt-8">Inscrivez-vous à des séances d'entraînements ou des tournois !</p>
     </div>
     <div class="w-[5px] h-[550px] mt-32 bg-gradient-to-b from-[#00C9C6] to-[#000011]"></div>
     <div class=" text-white">
       <div class="text-[300px] font-bold opacity-10  text-center">3</div>
       <h3 class="text-[40px] font-bold text-center ">CHERCHEZ LA VICTOIRE</h3>
-      <p class="text-white text-3xl px-[100px] md:mt-8">Faites partie des meilleurs en remportant des matchs !</p>
+      <p class="text-white text-3xl px-[90px] md:mt-8">Faites partie des meilleurs en remportant des matchs !</p>
     </div>
+  </div>
+
+  <div class="flex justify-center pt-16">
+    <button class="bg-[#FFFFFF] h-[60px] text-[#00C9C6] font-bold py-2 px-6 rounded-[16px] text-2xl shadow-xl transform transition-transform duration-300 hover:scale-105">
+      VOIR LES ÉQUIPES
+    </button>
   </div>
 </section>
 
+<section class="bg-[#000011]">
+  <div class="w-[1100px] items-center justify-center mx-auto flex flex-col md:pl-12">
+    <img src="../assets/setup.webp" alt="">
+  </div>
+
+</section>
 
   </main>
 </template>
