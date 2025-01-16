@@ -32,9 +32,11 @@ const toggleMenu = () => {
       </div>
       <ul class="flex space-x-32 bg-[#00C9C6] w-full justify-between items-center h-[60px] rounded-[16px]">
         <li>
+          <RouterLink to="/jeux">
           <button class="text-black rounded-lg flex pl-24 items-center justify-center font-source-code-pro font-bold">
             JEUX
           </button>
+          </RouterLink>
         </li>
         <li>
           <button class="text-black rounded-lg flex items-center justify-center font-source-code-pro font-bold">
