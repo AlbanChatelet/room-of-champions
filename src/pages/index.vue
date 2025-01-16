@@ -189,7 +189,59 @@ l'univers e-sportif !</p>
     <p class="text-[#00C9C6] text-xl md:text-5xl font-bold px-4 md:px-16 whitespace-nowrap">LE PLANNING</p>
     <lineIcon />
   </div>
+  <div class="flex flex-col md:flex-row">
+    <div class="md:w-1/2">
+      <img src="../assets/calendar.webp" alt="">
+    </div>
+
+    <div class="md:w-1/2">
+      <div class="flex flex-col ">
+        <p class="text-[#ffffff] text-2xl md:text-5xl font-bold pt-[180px] md:pr-[220px]  ">PLANIFIEZ VOS ÉVÉNEMENTS E-SPORTS EN TOUTE SIMPLICITÉ</p>
+        <p class="text-white text-lg md:text-4xl font-light pt-12 md:pr-64">Grâce à notre outil de planning intuitif, réservez vos créneaux pour vos matchs, entraînements ou rendez-vous stratégiques en quelques clics. Prenez le contrôle de votre calendrier, synchronisez-vous avec vos coéquipiers, et assurez-vous d’être toujours prêt pour la victoire. Commencez à planifier votre succès dès maintenant !</p>
+        <div class="md:pl-[500px] md:pt-12">
+    <button class="bg-[#FFFFFF] h-[60px] text-[#00C9C6] font-bold py-2 px-6 rounded-[32px] text-2xl shadow-xl transform transition-transform duration-300 hover:scale-105">
+      DÉCOUVRIR
+    </button>
+  </div>
+      </div>
+    </div>
+  </div>
 </section>
+
+<section>
+  <div class="relative w-full h-32 bg-[#000011] flex items-center justify-center">
+    <div class="absolute inset-0 flex items-center justify-center">
+      <div class="w-full h-[263px] bg-[#00C9C6]"></div>
+    </div>
+    <div class="relative bg-white h-[388px] w-[781px] text-black flex items-center justify-center font-bold md:text-[100px] rounded-md shadow-md">
+      LES ÉQUIPES
+    </div>
+  </div>
+</section>
+
+<section class="fond_vert">
+  <div class=" mx-20 flex pt-32 ">
+    <!-- Première colonne -->
+    <div class=" text-white">
+      <div class="text-[300px] font-bold opacity-10 text-center">1</div>
+      <h3 class="text-[40px] font-bold text-center">COMPOSE TON ÉQUIPE</h3>
+      <p class="text-white md:mt-8 text-3xl px-[100px]">Que ce soit avec tes amis ou alors avec de nouvelles rencontres !</p>
+    </div>
+    <div class="w-[5px] h-[550px] mt-32 bg-gradient-to-b from-[#00C9C6] to-[#000011]"></div>
+    <div class=" text-white">
+      <div class="text-[300px] font-bold opacity-10 text-center">2</div>
+      <h3 class="text-[40px] font-bold text-center">INSCRIS TON ÉQUIPE</h3>
+      <p class="text-white text-3xl px-[100px] md:mt-8">Inscrivez-vous à des séances d'entraînements ou des tournois !</p>
+    </div>
+    <div class="w-[5px] h-[550px] mt-32 bg-gradient-to-b from-[#00C9C6] to-[#000011]"></div>
+    <div class=" text-white">
+      <div class="text-[300px] font-bold opacity-10  text-center">3</div>
+      <h3 class="text-[40px] font-bold text-center ">CHERCHEZ LA VICTOIRE</h3>
+      <p class="text-white text-3xl px-[100px] md:mt-8">Faites partie des meilleurs en remportant des matchs !</p>
+    </div>
+  </div>
+</section>
+
 
   </main>
 </template>
@@ -200,6 +252,11 @@ l'univers e-sportif !</p>
 <style>
 .fond_triangle {
   background-image: url('@/assets/fond_triangle.webp');
+  background-size: cover;
+}
+
+.fond_vert {
+  background-image: url('@/assets/fond_vert.webp');
   background-size: cover;
 }
 
