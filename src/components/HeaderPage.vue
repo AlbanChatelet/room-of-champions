@@ -17,25 +17,32 @@ const toggleMenu = () => {
 </style>
 
 <template>
-  <header class="fond_header text-black flex items-center 2xl:pt-4 pb-0 justify-between fixed md:static top-0 left-0 w-full shadow-md z-51">
-    <!-- Logo -->
-    <div class="absolute top-2 2xl:top-6 left-1/2 transform -translate-x-1/2 -translate-y-1/10">
-      <RouterLink to="/" class="flex items-center">
-        <img class="h-20 2xl:h-40" src="../assets/logo.webp" alt="Logo" />
-      </RouterLink>
+  <header class="fond_header text-black flex items-center pt-4 pb-0 justify-between fixed md:static top-0 left-0 w-full shadow-md z-50">
+    
+    <!-- Profile Icon Mobile -->
+    <div class="pl-4 md:hidden">
+      <ProfileIcon class="w-14 h-14" />
     </div>
+
+    <!-- Logo -->
+<div class="absolute left-1/2 -translate-x-1/2">
+  <RouterLink to="/" class="flex items-center">
+    <img class="h-16 md:h-20 2xl:h-40" src="../assets/logo.webp" alt="Logo" />
+  </RouterLink>
+</div>
+
 
     <!-- Menu Desktop -->
     <nav class="hidden 2xl:flex items-center space-x-8 py-14 w-full pl-24 pr-[550px]">
-      <div class="mr-12">
+      <div class="mr-12 hidden md:flex">
         <ProfileIcon class="w-20 h-20" />
       </div>
       <ul class="flex space-x-32 bg-[#00C9C6] w-full justify-between items-center h-[60px] rounded-[16px]">
         <li>
           <RouterLink to="/jeux">
-          <button class="text-black rounded-lg flex pl-24 items-center justify-center font-source-code-pro font-bold">
-            JEUX
-          </button>
+            <button class="text-black rounded-lg flex pl-24 items-center justify-center font-source-code-pro font-bold">
+              JEUX
+            </button>
           </RouterLink>
         </li>
         <li>
@@ -49,9 +56,7 @@ const toggleMenu = () => {
           </button>
         </li>
         <li>
-          <RouterLink
-            to="/evenements"
-            class="text-black rounded-lg flex pl-48 items-center justify-center font-source-code-pro font-bold">
+          <RouterLink to="/evenements" class="text-black rounded-lg flex pl-48 items-center justify-center font-source-code-pro font-bold">
             ÉVÉNEMENTS
           </RouterLink>
         </li>
@@ -72,11 +77,7 @@ const toggleMenu = () => {
     </nav>
 
     <!-- Menu Burger pour mobile -->
-    <div class="mr-auto pl-4 md:hidden">
-  <ProfileIcon class="w-14 h-14" />
-</div>
-
-    <button @click="toggleMenu" class="2xl:hidden flex items-center ml-auto py-6 pr-4">
+    <button @click="toggleMenu" class="2xl:hidden flex items-center ml-auto py-6 pr-4 z-51">
       <template v-if="isMenuOpen">
         <svg class="w-12 h-12" fill="none" stroke="#00C9C6" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -117,3 +118,4 @@ const toggleMenu = () => {
     </transition>
   </header>
 </template>
+

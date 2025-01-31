@@ -7,7 +7,6 @@ import lolImg from "../assets/lol.webp";
 import rocketleagueImg from "../assets/rocketleague.webp";
 import supersmashbrosImg from "../assets/supersmashbros.webp";
 import mariokartImg from "../assets/mariokart.webp";
-import flecheIcon from "../assets/icons/flecheIcon.vue"
 import lineIcon from "@/assets/icons/lineIcon.vue";
 import lineIcon2 from "@/assets/icons/lineIcon2.vue";
 // Index de l'image active
@@ -64,61 +63,47 @@ const setImage = (index: number) => {
     </div>
 
     <!-- Carrousel -->
-    <section class="bg-[#000011] py-16">
-      <div class="relative max-w-screen-lg mx-auto">
-        <!-- Images -->
-        <div class="flex justify-center">
-          <img
-            :src="images[activeIndex]"
-            alt="Jeu vidéo"
-            class="w-full"
-          />
-        </div>
+<section class="bg-[#000011] py-16">
+  <div class="relative max-w-screen-lg mx-auto">
+    <!-- Images -->
+    <div class="flex justify-center">
+      <img
+  :src="images[activeIndex]"
+  alt="Jeu vidéo"
+  class="w-full max-w-xs sm:max-w-sm md:max-w-full mx-auto"
+/>
+    </div>
 
-        <!-- Rond et points sous le carrousel -->
-        <div class="relative flex flex-col items-center mt-6">
-          <!-- Points autour du rond -->
-          <div class="relative mt-4 w-40 h-40">
-            <!-- Points au-dessus du cercle -->
-            <div
-              v-for="(image, index) in images"
-              :key="index"
-              @click="setImage(index)"
-              class="absolute w-4 h-4 rounded-full cursor-pointer transition-all"
-              :class="{
-                'bg-[#8E3F8D] hover:bg-[#662a64] transition-all': activeIndex === index,
-                'bg-gray-500': activeIndex !== index
-              }"
-              :style="{
-                top: '-25%', /* Positionnement des points au-dessus du cercle */
-                left: `${(100 / (images.length + 1)) * (index + 1)}%`, /* Calcul dynamique de la position horizontale */
-                transform: 'translateX(-50%)'
-              }"
-
-            >
-
-            
-
-          </div>
-          
-            
-          </div><div class="flex absolute px-2 md:px-6 py-3 bg-[#8E3F8D] hover:bg-[#662a64] transition-all text-white shadow-lg top-20 md:top-0 rounded-full max-w-fit right-2 md:right-8 "><flecheIcon class="h-4 w-4 md:h-8 md:w-8" />
-                    <p class="text-xs md:font-bold sm:text-lg ml-1 md:ml-4 md:mt-1">JEUX PROPOSÉS</p>
-          </div>
-
-          <!-- Bouton rond au centre -->
-          <button
-            @click="nextImage"
-            class="md:w-32 md:h-32 w-16 h-16 bg-[#8E3F8D] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#743272] transition-all absolute z-50"
-          >
-          </button>
-        </div>
-        
+    <!-- Rond et points sous le carrousel -->
+    <div class="relative flex flex-col items-center mt-6">
+      <!-- Points autour du rond -->
+      <div class="relative mt-4 w-40 h-40">
+        <div
+          v-for="(image, index) in images"
+          :key="index"
+          @click="setImage(index)"
+          class="absolute w-4 h-4 rounded-full cursor-pointer transition-all"
+          :class="{
+            'bg-[#8E3F8D] hover:bg-[#662a64] transition-all': activeIndex === index,
+            'bg-gray-500': activeIndex !== index
+          }"
+          :style="{
+            top: '-25%',
+            left: `${(100 / (images.length + 1)) * (index + 1)}%`,
+            transform: 'translateX(-50%)'
+          }"
+        ></div>
       </div>
-      <div class="relative">
-        <img src="../assets/CHAMPIONS.webp" alt="Image de fond" class="w-full z-10 -mb-[75px] md:-mb-28">
-      </div>
-    </section>
+      
+      <!-- Bouton rond au centre -->
+      <button
+        @click="nextImage"
+        class="md:w-32 md:h-32 w-16 h-16 bg-[#8E3F8D] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#743272] transition-all absolute"
+      >
+      </button>
+    </div>
+  </div>
+</section>
 
     <section class="bg-[#8E3F8D] py-10">
   <div class="inset-0 flex flex-col items-center justify-center text-center pt-16">
@@ -182,7 +167,7 @@ l'univers e-sportif !</p>
   </div>
 </section>
 
-<section class="bg-[#000011] py-16">
+<section class="bg-[#000011] pt-12 md:pt-0 md:py-16">
   <div class="inset-0 flex items-center justify-center text-center md:pt-16">
     <!-- Titre principal -->
     <lineIcon2 />
@@ -196,13 +181,14 @@ l'univers e-sportif !</p>
 
     <div class="md:w-1/2">
       <div class="flex flex-col ">
-        <p class="text-[#ffffff] text-2xl md:text-5xl font-bold pt-[180px] md:pr-[220px]  ">PLANIFIEZ VOS ÉVÉNEMENTS E-SPORTS EN TOUTE SIMPLICITÉ</p>
-        <p class="text-white text-lg md:text-4xl font-light pt-12 md:pr-64">Grâce à notre outil de planning intuitif, réservez vos créneaux pour vos matchs, entraînements ou rendez-vous stratégiques en quelques clics. Prenez le contrôle de votre calendrier, synchronisez-vous avec vos coéquipiers, et assurez-vous d’être toujours prêt pour la victoire. Commencez à planifier votre succès dès maintenant !</p>
-        <div class="md:pl-[500px] md:pt-12">
-    <button class="bg-[#FFFFFF] h-[60px] text-[#00C9C6] font-bold py-2 px-6 rounded-[32px] text-2xl shadow-xl transform transition-transform duration-300 hover:scale-105">
-      DÉCOUVRIR
-    </button>
-  </div>
+        <p class="text-[#ffffff] text-2xl md:text-5xl font-bold md:pt-[180px] md:pr-[220px] md:px-0 px-8 ">PLANIFIEZ VOS ÉVÉNEMENTS E-SPORTS EN TOUTE SIMPLICITÉ</p>
+        <p class="text-white text-lg md:text-4xl font-light pt-12 md:pr-64 mx-8 pb-8 md:mx-0 md:pb-0">Grâce à notre outil de planning intuitif, réservez vos créneaux pour vos matchs, entraînements ou rendez-vous stratégiques en quelques clics. Prenez le contrôle de votre calendrier, synchronisez-vous avec vos coéquipiers, et assurez-vous d’être toujours prêt pour la victoire. Commencez à planifier votre succès dès maintenant !</p>
+        <div class="flex justify-center items-center md:pl-[500px] md:pt-12 pb-12 md:pb-0">
+  <button class="bg-[#FFFFFF] h-[60px] text-[#00C9C6] font-bold py-2 px-6 rounded-[32px] text-2xl shadow-xl transform transition-transform duration-300 hover:scale-105">
+    DÉCOUVRIR
+  </button>
+</div>
+
       </div>
     </div>
   </div>
@@ -211,33 +197,37 @@ l'univers e-sportif !</p>
 <section>
   <div class="relative w-full h-32 bg-[#000011] flex items-center justify-center">
     <div class="absolute inset-0 flex items-center justify-center">
-      <div class="w-full h-[263px] bg-[#00C9C6]"></div>
+      <div class="w-full h-[80px] md:h-[263px] bg-[#00C9C6]"></div>
     </div>
-    <div class="relative bg-white h-[388px] w-[781px] text-black flex items-center justify-center font-bold md:text-[100px] rounded-md shadow-md">
+    <div class="relative bg-white h-[130px] w-[200px] md:h-[388px] md:w-[781px] text-black flex items-center justify-center font-bold text-[24px] md:text-[100px] rounded-md shadow-md">
       LES ÉQUIPES
     </div>
   </div>
 </section>
 
 <section class="fond_vert">
-  <div class=" mb-12 mr-16 flex pt-32 ">
-    <!-- Première colonne -->
-    <div class=" text-white">
-      <div class="text-[300px] font-bold opacity-10 text-center">1</div>
-      <h3 class="text-[40px] font-bold text-center">COMPOSE TON ÉQUIPE</h3>
-      <p class="text-white md:mt-8 text-3xl px-[90px]">Que ce soit avec tes amis ou alors avec de nouvelles rencontres !</p>
+  <div class="mb-12 flex flex-wrap md:flex-nowrap justify-center items-center pt-32 gap-8 md:gap-16">
+    <!-- Étape 1 -->
+    <div class="text-white text-center">
+      <div class="text-[200px] md:text-[300px] font-bold opacity-10">1</div>
+      <h3 class="text-3xl md:text-[40px] font-bold">COMPOSE TON ÉQUIPE</h3>
+      <p class="text-white text-xl md:text-3xl px-4 sm:px-8 md:px-[90px]">Que ce soit avec tes amis ou alors avec de nouvelles rencontres !</p>
     </div>
-    <div class="w-[5px] h-[550px] mt-32 bg-gradient-to-b from-[#00C9C6] to-[#000011]"></div>
-    <div class=" text-white">
-      <div class="text-[300px] font-bold opacity-10 text-center">2</div>
-      <h3 class="text-[40px] font-bold text-center">INSCRIS TON ÉQUIPE</h3>
-      <p class="text-white text-3xl px-[90px] md:mt-8">Inscrivez-vous à des séances d'entraînements ou des tournois !</p>
+    <div class="w-[5px] h-auto md:h-[550px] bg-gradient-to-b from-[#00C9C6] to-[#000011] hidden md:block"></div>
+
+    <!-- Étape 2 -->
+    <div class="text-white text-center">
+      <div class="text-[200px] md:text-[300px] font-bold opacity-10">2</div>
+      <h3 class="text-3xl md:text-[40px] font-bold">INSCRIS TON ÉQUIPE</h3>
+      <p class="text-white text-xl md:text-3xl px-4 sm:px-8 md:px-[90px]">Inscrivez-vous à des séances d'entraînements ou des tournois !</p>
     </div>
-    <div class="w-[5px] h-[550px] mt-32 bg-gradient-to-b from-[#00C9C6] to-[#000011]"></div>
-    <div class=" text-white">
-      <div class="text-[300px] font-bold opacity-10  text-center">3</div>
-      <h3 class="text-[40px] font-bold text-center ">CHERCHEZ LA VICTOIRE</h3>
-      <p class="text-white text-3xl px-[90px] md:mt-8">Faites partie des meilleurs en remportant des matchs !</p>
+    <div class="w-[5px] h-auto md:h-[550px] bg-gradient-to-b from-[#00C9C6] to-[#000011] hidden md:block"></div>
+
+    <!-- Étape 3 -->
+    <div class="text-white text-center">
+      <div class="text-[200px] md:text-[300px] font-bold opacity-10">3</div>
+      <h3 class="text-3xl md:text-[40px] font-bold">CHERCHEZ LA VICTOIRE</h3>
+      <p class="text-white text-xl md:text-3xl px-4 sm:px-8 md:px-[90px]">Faites partie des meilleurs en remportant des matchs !</p>
     </div>
   </div>
 
@@ -248,11 +238,21 @@ l'univers e-sportif !</p>
   </div>
 </section>
 
+
 <section class="bg-[#000011]">
-  <div class="w-[1100px] items-center justify-center mx-auto flex flex-col md:pl-12">
+  <div class="md:w-[1100px] items-center justify-center mx-8 md:mx-auto flex flex-col pb-8 md:pb-0">
     <img src="../assets/setup.webp" alt="">
   </div>
-
+<div class="text-white text-center">
+      
+      <h3 class="text-3xl md:text-[40px] font-bold mx-8 md:pt-16">RETROUVE LA PAGE DU MATÉRIEL</h3>
+      
+    </div>
+    <div class="flex justify-center pt-8 pb-8">
+    <button class="bg-[#FFFFFF] h-[60px] text-[#00C9C6] font-bold py-2 px-6 rounded-[16px] text-2xl shadow-xl transform transition-transform duration-300 hover:scale-105">
+      JUSTE ICI !
+    </button>
+  </div>
 </section>
 
   </main>

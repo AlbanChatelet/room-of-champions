@@ -2,11 +2,12 @@
 import { RouterLink, RouterView } from 'vue-router/auto'
 
 import HeaderPage from './components/HeaderPage.vue';
+import FooterPage from './components/FooterPage.vue';
 </script>
 
 <template>
   <header>
-    <div class="wrapper bg-[#DEF5FF]">
+    <div class="wrapper bg-[#DEF5FF] z-index-99">
       <HeaderPage />
     </div>
   </header>
@@ -22,4 +23,10 @@ import HeaderPage from './components/HeaderPage.vue';
       </Suspense>
     </RouterView>
   </main>
+
+  <footer>
+    <div class="wrapper bg-[#DEF5FF] z-index-99">
+      <FooterPage />
+    </div>
+  </footer>
 </template>
