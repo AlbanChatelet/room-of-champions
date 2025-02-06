@@ -2,32 +2,51 @@
 import { ref, onMounted } from "vue";
 
 // Importation des images
-import valorantImg from "../assets/valorant.webp";
-import lolImg from "../assets/lol.webp";
-import rocketleagueImg from "../assets/rocketleague.webp";
-import supersmashbrosImg from "../assets/supersmashbros.webp";
-import mariokartImg from "../assets/mariokart.webp";
+
 import lineIcon from "@/assets/icons/lineIcon.vue";
 import lineIcon2 from "@/assets/icons/lineIcon2.vue";
 // Index de l'image active
 const activeIndex = ref(0);
 
 // Liste des images
-const images = [valorantImg, lolImg, rocketleagueImg, supersmashbrosImg, mariokartImg];
 
-// Fonction pour changer l'image active
-const nextImage = () => {
-  activeIndex.value = (activeIndex.value + 1) % images.length;
-};
 
 // Fonction pour changer l'image après un certain temps
 onMounted(() => {
   setInterval(nextImage, 4000); // Change l'image toutes les 4 secondes (4000ms)
 });
 
+
+import PocketBase from "pocketbase"; // Assure-toi que l'import de PocketBase est bien configuré
+const pb = new PocketBase("http://127.0.0.1:8090"); // Remplace l'URL par celle de ton serveur PocketBase
+
+const images = ref<string[]>([]);
+
+// Fonction pour récupérer les images depuis PocketBase
+const fetchImages = async () => {
+  try {
+    const records = await pb.collection("jeux").getFullList();
+    images.value = records.map((record: any) => pb.files.getUrl(record, record.image));
+  } catch (error) {
+    console.error("Erreur lors de la récupération des images:", error);
+  }
+};
+
+// Fonction pour passer à l'image suivante
+const nextImage = () => {
+  if (images.value.length > 0) {
+    activeIndex.value = (activeIndex.value + 1) % images.value.length;
+  }
+};
+
 const setImage = (index: number) => {
   activeIndex.value = index;
 };
+
+onMounted(() => {
+  fetchImages();
+  setInterval(nextImage, 4000); // Change l'image toutes les 4 secondes
+});
 </script>
 
 <template>
@@ -64,46 +83,38 @@ const setImage = (index: number) => {
 
     <!-- Carrousel -->
 <section class="bg-[#000011] py-16">
-  <div class="relative max-w-screen-lg mx-auto">
-    <!-- Images -->
-    <div class="flex justify-center">
-      <img
-  :src="images[activeIndex]"
-  alt="Jeu vidéo"
-  class="w-full max-w-xs sm:max-w-sm md:max-w-full mx-auto"
-/>
-    </div>
-
-    <!-- Rond et points sous le carrousel -->
-    <div class="relative flex flex-col items-center mt-6">
-      <!-- Points autour du rond -->
-      <div class="relative mt-4 w-40 h-40">
-        <div
-          v-for="(image, index) in images"
-          :key="index"
-          @click="setImage(index)"
-          class="absolute w-4 h-4 rounded-full cursor-pointer transition-all"
-          :class="{
-            'bg-[#8E3F8D] hover:bg-[#662a64] transition-all': activeIndex === index,
-            'bg-gray-500': activeIndex !== index
-          }"
-          :style="{
-            top: '-25%',
-            left: `${(100 / (images.length + 1)) * (index + 1)}%`,
-            transform: 'translateX(-50%)'
-          }"
-        ></div>
+    <div class="relative max-w-screen-lg mx-auto">
+      <!-- Images -->
+      <div v-if="images.length" class="flex justify-center">
+        <img :src="images[activeIndex]" alt="Jeu vidéo" class="w-full max-w-xs sm:max-w-sm md:max-w-full mx-auto" />
       </div>
-      
-      <!-- Bouton rond au centre -->
-      <button
-        @click="nextImage"
-        class="md:w-32 md:h-32 w-16 h-16 bg-[#8E3F8D] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#743272] transition-all absolute"
-      >
-      </button>
+
+      <!-- Indicateurs sous le carrousel -->
+      <div class="relative flex flex-col items-center mt-6">
+        <div class="relative mt-4 w-40 h-40">
+          <div
+            v-for="(image, index) in images"
+            :key="index"
+            @click="setImage(index)"
+            class="absolute w-4 h-4 rounded-full cursor-pointer transition-all"
+            :class="{
+              'bg-[#8E3F8D] hover:bg-[#662a64]': activeIndex === index,
+              'bg-gray-500': activeIndex !== index
+            }"
+            :style="{
+              top: '-25%',
+              left: `${(100 / (images.length + 1)) * (index + 1)}%`,
+              transform: 'translateX(-50%)'
+            }"
+          ></div>
+        </div>
+        <button
+          @click="nextImage"
+          class="md:w-32 md:h-32 w-16 h-16 bg-[#8E3F8D] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#743272] transition-all absolute"
+        ></button>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
     <section class="bg-[#8E3F8D] py-10">
   <div class="inset-0 flex flex-col items-center justify-center text-center pt-16">

@@ -28,3 +28,33 @@ export async function loginWithGoogle() {
   const authData = await pb.collection('users').authWithOAuth2({ provider: 'google' })
   console.log('loginWithGoogle authData', authData)
 }
+
+
+
+  /** Inscription d'un utilisateur */
+  export async function registerUser(email: string, password: string, passwordConfirm: string) {
+    try {
+      const newUser = await pb.collection('users').create({
+        email,
+        password,
+        passwordConfirm,
+      })
+      console.log("Utilisateur créé avec succès :", newUser)
+      return newUser
+    } catch (error) {
+      console.error("Erreur lors de l'inscription :", error)
+      throw error
+    }
+  }
+
+  /** Connexion de l'utilisateur avec email et mot de passe */
+  export async function loginWithEmail(email: string, password: string) {
+    try {
+      const authData = await pb.collection('users').authWithPassword(email, password)
+      console.log("Connexion réussie :", authData)
+      return authData
+    } catch (error) {
+      console.error("Erreur lors de la connexion :", error)
+      throw error
+    }
+  }
