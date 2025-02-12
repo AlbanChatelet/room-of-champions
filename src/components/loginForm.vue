@@ -14,7 +14,8 @@ const handleLogin = async () => {
     await loginWithEmail(email.value, password.value)
     errorMessage.value = null
     alert("Connexion réussie !")
-    router.push('/') // Redirige vers la page d'accueil
+
+    window.location.replace('/') // Force le chargement de la page d'accueil sans conserver l'historique
   } catch (error) {
     errorMessage.value = "Échec de la connexion. Vérifiez vos informations."
   }
