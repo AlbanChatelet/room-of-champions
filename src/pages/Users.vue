@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { ref } from 'vue'
 import { pb } from '@/backend'
@@ -32,7 +33,7 @@ const getAvatarUrl = (user: UsersResponse) => {
   if (user.avatar) {
     return pb.getFileUrl(user, user.avatar)
   }
-  return null
+  return ''
 }
 </script>
 

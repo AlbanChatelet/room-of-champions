@@ -1,3 +1,50 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useRouter } from 'vue-router/auto'
+import { pb } from '@/backend'
+
+const form = ref({
+  username: '',
+  email: '',
+  avatar: null as File | null
+})
+
+const router = useRouter()
+
+// Charger les données de l'utilisateur actuel
+const user = pb.authStore.model
+if (user) {
+  form.value.username = user.username
+  form.value.email = user.email
+}
+
+const onFileChange = (event: Event) => {
+  const fileInput = event.target as HTMLInputElement
+  if (fileInput.files && fileInput.files[0]) {
+    form.value.avatar = fileInput.files[0]
+  }
+}
+
+const submit = async () => {
+  try {
+    const formData = new FormData()
+    formData.append('username', form.value.username)
+    formData.append('email', form.value.email)
+    if (form.value.avatar) {
+      formData.append('avatar', form.value.avatar)
+    }
+    
+    if (!user) {
+      throw new Error('User is not authenticated')
+    }
+    await pb.collection('users').update(user.id, formData)
+    router.push('/profile') // Redirection après la mise à jour
+  } catch (error) {
+    console.error('Error updating profile:', error)
+  }
+}
+</script>
+
 <template>
   <div class="container mx-auto py-10">
     <h1 class="text-3xl font-bold text-blue-600 mb-6">Modifier mon profil</h1>
@@ -33,45 +80,3 @@
     </form>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router/auto'
-import { pb } from '@/backend'
-
-const form = ref({
-  username: '',
-  email: '',
-  avatar: null
-})
-
-const router = useRouter()
-
-// Charger les données de l'utilisateur actuel
-const user = pb.authStore.model
-form.value.username = user.username
-form.value.email = user.email
-
-const onFileChange = (event: Event) => {
-  const fileInput = event.target as HTMLInputElement
-  if (fileInput.files && fileInput.files[0]) {
-    form.value.avatar = fileInput.files[0]
-  }
-}
-
-const submit = async () => {
-  try {
-    const formData = new FormData()
-    formData.append('username', form.value.username)
-    formData.append('email', form.value.email)
-    if (form.value.avatar) {
-      formData.append('avatar', form.value.avatar)
-    }
-    
-    await pb.collection('users').update(user.id, formData)
-    router.push('/profile') // Redirection après la mise à jour
-  } catch (error) {
-    console.error('Error updating profile:', error)
-  }
-}
-</script>

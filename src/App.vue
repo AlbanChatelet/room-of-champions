@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router/auto'
+import { RouterView } from 'vue-router/auto'
 
 import HeaderPage from './components/HeaderPage.vue';
 import FooterPage from './components/FooterPage.vue';
