@@ -5,7 +5,7 @@ import App from './App.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from 'vue-router/auto-routes'
 import 'quill/dist/quill.snow.css'; // Importer les styles de Quill
-import { createHead } from 'unhead'
+import { createHead } from '@vueuse/head'
 import 'leaflet/dist/leaflet.css'
 
 const app = createApp(App)

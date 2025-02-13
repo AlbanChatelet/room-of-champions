@@ -20,6 +20,7 @@
     "@tiptap/starter-kit": "^2.7.2",
     "@tiptap/vue-3": "^2.7.2",
     "@vueup/vue-quill": "^1.2.0",
+    "@vueuse/head": "^2.0.0",
     "bootstrap": "^5.3.3",
     "leaflet": "^1.9.4",
     "pocketbase": "^0.21.5",
