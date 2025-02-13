@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <section class="max-w-md mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
         <h2 class="text-xl font-semibold text-gray-700 mb-4">Réserver un créneau</h2>

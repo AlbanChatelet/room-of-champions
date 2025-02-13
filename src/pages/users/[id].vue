@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router/auto'
@@ -28,7 +29,7 @@ const getAvatarUrl = (user: UsersResponse) => {
   if (user.avatar) {
     return pb.getFileUrl(user, user.avatar)
   }
-  return null
+  return undefined
 }
 
 // Fonction pour retourner à la page de la liste des utilisateurs
