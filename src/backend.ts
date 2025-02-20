@@ -32,14 +32,20 @@ export async function loginWithGoogle() {
 
 
   /** Inscription d'un utilisateur */
-  export async function registerUser(email: string, password: string, passwordConfirm: string) {
+  export async function registerUser(
+    username: string,
+    email: string,
+    password: string,
+    passwordConfirm: string
+  ) {
     try {
       const newUser = await pb.collection('users').create({
+        username,
         email,
         password,
-        passwordConfirm,
+        passwordConfirm
       })
-      console.log("Utilisateur créé avec succès :", newUser)
+      console.log('Utilisateur créé avec succès :', newUser)
       return newUser
     } catch (error) {
       console.error("Erreur lors de l'inscription :", error)
