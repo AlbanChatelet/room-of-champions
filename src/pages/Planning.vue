@@ -61,8 +61,8 @@
         <h3 class="text-lg font-semibold text-white">Créneaux réservés :</h3>
         <ul class="list-disc pl-6 mt-2">
           <li v-for="(slot, index) in reservedSlots" :key="index" class="text-gray-300">
-            {{ slot.date }} à {{ slot.time }} - Réservé par {{ slot.user }}
-          </li>
+  {{ formatDate2(formatDate(slot.date)) }} à {{ slot.heure }} - Réservé par {{ slot.user }}
+</li>
         </ul>
       </div>
     </section>
@@ -96,7 +96,7 @@ import PocketBase from 'pocketbase';
 const pb = new PocketBase('http://127.0.0.1:8090'); // Remplace par ton URL PocketBase
 
 const date = ref('');
-const time = ref('');
+const heure = ref('');
 const reservedSlots = ref([]);
 
 const dateConfig = ref({
@@ -126,9 +126,10 @@ const fetchReservedSlots = async () => {
       expand: 'user', // On étend la relation 'user'
     });
 
+    console.log(records);  // Vérifie que les réservations sont récupérées
     reservedSlots.value = records.map(record => ({
       date: record.date,
-      time: record.time,
+      heure: record.heure,
       user: record.expand?.user?.username || "Inconnu",
     }));
   } catch (error) {
@@ -139,7 +140,7 @@ const fetchReservedSlots = async () => {
 
 // Fonction pour réserver un créneau
 const reserveSlot = async () => {
-    if (!date.value || !time.value) {  // Vérifie si la date et l'heure sont sélectionnées
+    if (!date.value || !heure.value) {  // Vérifie si la date et l'heure sont sélectionnées
         alert("Veuillez sélectionner une date et une heure.");
         return;
     }
@@ -154,7 +155,7 @@ const reserveSlot = async () => {
         // Crée la réservation avec la date et l'heure
         const reservation = await pb.collection('reservations').create({
             date: date.value,
-            heure: time.value,  // Ajoute l'heure dans la réservation
+            heure: heure.value,  // Ajoute l'heure dans la réservation
             user: user.id, // Envoie l'ID de l'utilisateur
             statut: true,
         });
@@ -179,6 +180,21 @@ const reserveSlot = async () => {
 // Fonction pour effacer la sélection
 const clearSelection = () => {
   date.value = '';
-  time.value = '';
+  heure.value = '';
 };
+
+const formatDate = (dateString) => {
+  return dateString.slice(0, 10); // Prend les 10 premiers caractères de la date
+  
+};
+
+const formatDate2 = (dateString) => {
+  return new Date(dateString).toLocaleDateString('fr-FR', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+};
+
 </script>

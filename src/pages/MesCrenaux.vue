@@ -10,7 +10,7 @@
 
         <ul v-else class="space-y-3">
             <li v-for="(slot, index) in reservedSlots" :key="index" class="p-4 bg-[#F3E5F5] rounded-lg shadow">
-                <p class="text-lg font-semibold text-[#6A0DAD]">📅 {{ formatDate(slot.date) }}</p>
+                <p class="text-lg font-semibold text-[#6A0DAD]">📅 {{ formatDate(slot.date)}} à {{ slot.heure }}</p>
             </li>
         </ul>
 
@@ -46,6 +46,7 @@ const fetchMyReservations = async () => {
 
         reservedSlots.value = records.map(record => ({
             date: record.date,
+            heure: record.heure, // Ajoute l'heure
         }));
     } catch (error) {
         console.error("Erreur lors de la récupération des créneaux :", error);
@@ -53,6 +54,7 @@ const fetchMyReservations = async () => {
         loading.value = false;
     }
 };
+
 
 const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('fr-FR', {
