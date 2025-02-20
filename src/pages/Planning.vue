@@ -44,6 +44,9 @@
         </ul>
     </div>
 </section>
+<router-link to="/MesCrenaux" class="px-4 py-2 bg-[#4B0082] text-white rounded-lg hover:bg-[#6A0DAD]">
+    📅 Mes créneaux
+</router-link>
 
 </template>
 
