@@ -1,7 +1,14 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <section class="bg-black">
-    <section class="max-w-md mx-auto p-6 bg-[#4B0082] text-white shadow-lg rounded-lg">
+        <div class="pl-16 py-12">
+      <h1 class="font-poppins font-black text-4xl text-white  pb-6">
+        LE PLANNING CHEZ HOME OF CHAMPIONS
+      </h1>
+      <div class="w-[502px] h-[3px] bg-[#8B44FF]"></div>
+    </div>
+    
+    <section class="max-w-md mx-auto p-6 bg-[#8B44FF] text-white shadow-lg rounded-lg">
     <h2 class="text-xl font-semibold text-white mb-4">Réserver un créneau</h2>
 
     <div class="space-y-4">
