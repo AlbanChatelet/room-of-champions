@@ -16,9 +16,10 @@
 
         
     </section>
+    <div class="text-center py-12">
     <router-link to="/Planning" class="px-4 py-2 bg-[#4B0082] text-white rounded-lg hover:bg-[#6A0DAD]">
     📅 Voir le planning
-</router-link>
+</router-link></div>
 </template>
 
 <script setup>

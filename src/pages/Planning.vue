@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-    <section class="max-w-md mx-auto mt-10 p-6 bg-[#4B0082] text-white shadow-lg rounded-lg">
+    <section class="bg-black">
+    <section class="max-w-md mx-auto p-6 bg-[#4B0082] text-white shadow-lg rounded-lg">
     <h2 class="text-xl font-semibold text-white mb-4">Réserver un créneau</h2>
 
     <div class="space-y-4">
@@ -44,10 +45,23 @@
         </ul>
     </div>
 </section>
-<router-link to="/MesCrenaux" class="px-4 py-2 bg-[#4B0082] text-white rounded-lg hover:bg-[#6A0DAD]">
-    📅 Mes créneaux
+
+<div class="text-center pt-12">
+<router-link to="/MesCrenaux" class="px-12 py-2 bg-black text-[#8B44FF] border border-white rounded-lg hover:bg-black md:text-3xl font-bold">
+    MES CRENAUX
 </router-link>
 
+</div>
+<div class="text-center py-12">
+<button 
+                class="px-4 py-2 bg-white text-[#9932CC] rounded-lg hover:bg-[#9932CC] hover:text-white transition duration-200 md:text-3xl font-bold" 
+                title="Réserver"
+                @click="reserveSlot"
+            >
+                <i class="fa fa-calendar"></i> RESERVER UN CRENAU
+</button>
+</div>
+            </section>
 </template>
 
 <script setup>
