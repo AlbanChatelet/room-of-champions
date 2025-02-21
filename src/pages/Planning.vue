@@ -25,15 +25,13 @@
         <!-- Sélecteur d'heure -->
         <div class="relative">
     <flat-pickr
-        v-model="time"
-        :config="timeConfig"
-        class="w-full px-4 py-2 border border-[#9B59B6] bg-white text-gray-900 rounded-lg focus:ring-2 focus:ring-[#D8BFD8] focus:outline-none"
-        placeholder="Sélectionnez une heure"
-        name="time"
-        time
-        enableTime
-        noCalendar
-    />
+    v-model="heure"
+    :config="timeConfig"
+    class="w-full px-4 py-2 border border-[#9B59B6] bg-white text-gray-900 rounded-lg focus:ring-2 focus:ring-[#D8BFD8] focus:outline-none"
+    placeholder="Sélectionnez une heure"
+    name="heure"
+/>
+
 </div>
 
         <div class="flex justify-between">
@@ -55,7 +53,7 @@
         </div>
       </div>
 
-      <pre class="mt-4 text-white bg-[#6A0DAD] p-2 rounded">Date et heure sélectionnées : {{ selectedDateTime || 'Aucunes' }}</pre>
+      <pre class="mt-4 text-white bg-[#6A0DAD] p-2 rounded">Sélection : {{ selectedDateTime || 'Aucunes' }}</pre>
 
       <div v-if="reservedSlots.length" class="mt-6">
         <h3 class="text-lg font-semibold text-white">Créneaux réservés :</h3>
@@ -98,6 +96,8 @@ const pb = new PocketBase('http://127.0.0.1:8090'); // Remplace par ton URL Pock
 const date = ref('');
 const heure = ref('');
 const reservedSlots = ref([]);
+const selectedDateTime = ref('');
+
 
 const dateConfig = ref({
   altFormat: 'd F Y',
@@ -196,5 +196,15 @@ const formatDate2 = (dateString) => {
         day: 'numeric'
     });
 };
+
+import { watch } from 'vue';
+
+watch([date, heure], () => {
+  if (date.value && heure.value) {
+    selectedDateTime.value = `${formatDate2(date.value)} à ${heure.value}`;
+  } else {
+    selectedDateTime.value = 'Aucunes';
+  }
+});
 
 </script>
