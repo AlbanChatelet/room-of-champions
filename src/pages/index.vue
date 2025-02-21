@@ -159,10 +159,13 @@ onMounted(() => {
 
 <section class="fond_triangle">
   <div class="flex justify-center pb-2">
+  <router-link to="/aPropos">
     <button class="bg-[#FFFFFF] h-[60px] text-[#8E3F8D] font-bold py-2 px-6 rounded-[16px] text-2xl shadow-xl transform transition-transform duration-300 hover:scale-105">
       NOUS DÉCOUVRIR
     </button>
-  </div>
+  </router-link>
+</div>
+
 
   <div class="flex justify-center px-4 pt-20">
     <div class="bg-gradient-to-b from-[#461145] to-[#8E3F8D] border-[12px] border-white rounded-[30px] w-full max-w-[1550px] p-8 relative">
