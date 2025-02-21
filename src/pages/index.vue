@@ -220,28 +220,35 @@ l'univers e-sportif !</p>
 <section class="fond_vert">
   <div class="mb-12 flex flex-wrap md:flex-nowrap justify-center items-center pt-32 gap-8 md:gap-16">
     <!-- Étape 1 -->
-    <div class="text-white text-center">
+    <div class="text-white text-center flex-1">
       <div class="text-[200px] md:text-[300px] font-bold opacity-10">1</div>
       <h3 class="text-3xl md:text-[40px] font-bold">COMPOSE TON ÉQUIPE</h3>
-      <p class="text-white text-xl md:text-3xl px-4 sm:px-8 md:px-[90px]">Que ce soit avec tes amis ou alors avec de nouvelles rencontres !</p>
+      <p class="text-white text-xl md:text-3xl px-4 sm:px-8 md:px-[90px]">
+        Que ce soit avec tes amis ou alors avec de nouvelles rencontres !
+      </p>
     </div>
     <div class="w-[5px] h-auto md:h-[550px] bg-gradient-to-b from-[#00C9C6] to-[#000011] hidden md:block"></div>
 
     <!-- Étape 2 -->
-    <div class="text-white text-center">
+    <div class="text-white text-center flex-1">
       <div class="text-[200px] md:text-[300px] font-bold opacity-10">2</div>
       <h3 class="text-3xl md:text-[40px] font-bold">INSCRIS TON ÉQUIPE</h3>
-      <p class="text-white text-xl md:text-3xl px-4 sm:px-8 md:px-[90px]">Inscrivez-vous à des séances d'entraînements ou des tournois !</p>
+      <p class="text-white text-xl md:text-3xl px-4 sm:px-8 md:px-[90px]">
+        Inscrivez-vous à des séances d'entraînements ou des tournois !
+      </p>
     </div>
     <div class="w-[5px] h-auto md:h-[550px] bg-gradient-to-b from-[#00C9C6] to-[#000011] hidden md:block"></div>
 
     <!-- Étape 3 -->
-    <div class="text-white text-center">
+    <div class="text-white text-center flex-1">
       <div class="text-[200px] md:text-[300px] font-bold opacity-10">3</div>
       <h3 class="text-3xl md:text-[40px] font-bold">CHERCHEZ LA VICTOIRE</h3>
-      <p class="text-white text-xl md:text-3xl px-4 sm:px-8 md:px-[90px]">Faites partie des meilleurs en remportant des matchs !</p>
+      <p class="text-white text-xl md:text-3xl px-4 sm:px-8 md:px-[90px]">
+        Faites partie des meilleurs en remportant des matchs !
+      </p>
     </div>
-  </div>
+</div>
+
 
   <div class="flex justify-center pt-16">
     <button class="bg-[#FFFFFF] h-[60px] text-[#00C9C6] font-bold py-2 px-6 rounded-[16px] text-2xl shadow-xl transform transition-transform duration-300 hover:scale-105">
