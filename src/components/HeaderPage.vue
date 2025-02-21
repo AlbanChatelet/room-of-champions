@@ -72,33 +72,33 @@ onMounted(() => {
       <ul class="flex space-x-16 bg-[#00C9C6] items-center h-[60px] rounded-[16px]">
         <li>
           <RouterLink to="/jeux">
-            <button class="text-black rounded-lg flex pl-12 items-center justify-center font-source-code-pro font-bold">
+            <button class="text-black rounded-lg hover:text-white transition duration-300 ease-in-out flex pl-12 items-center justify-center font-source-code-pro font-bold">
               JEUX
             </button>
           </RouterLink>
         </li>
         <li>
-          <button class="text-black rounded-lg flex items-center justify-center font-source-code-pro font-bold">
+          <button class="text-black hover:text-white transition duration-300 ease-in-out  rounded-lg flex items-center justify-center font-source-code-pro font-bold">
             EQUIPES
           </button>
         </li>
         <li>
-          <RouterLink to="/Planning" class="text-black rounded-lg flex items-center justify-center font-source-code-pro font-bold">
+          <RouterLink to="/Planning" class="text-black hover:text-white transition duration-300 ease-in-out  rounded-lg flex items-center justify-center font-source-code-pro font-bold">
             PLANNING
           </RouterLink>
         </li>
         <li>
-          <RouterLink to="/evenements" class="text-black rounded-lg flex ml-[170px] items-center justify-center font-source-code-pro font-bold">
+          <RouterLink to="/evenements" class="text-black hover:text-white transition duration-300 ease-in-out  rounded-lg flex ml-[170px] items-center justify-center font-source-code-pro font-bold">
             ÉVÉNEMENTS
           </RouterLink>
         </li>
         <li>
-          <RouterLink to="/" class="text-black rounded-lg flex items-center justify-center font-source-code-pro font-bold">
+          <RouterLink to="/" class="text-black  hover:text-white transition duration-300 ease-in-out rounded-lg flex items-center justify-center font-source-code-pro font-bold">
             MATÉRIEL
           </RouterLink>
         </li>
         <li>
-          <RouterLink to="/" class="text-black rounded-lg flex items-center pr-12 justify-center font-source-code-pro font-bold">
+          <RouterLink to="/" class="text-black  hover:text-white transition duration-300 ease-in-out rounded-lg flex items-center pr-12 justify-center font-source-code-pro font-bold">
             CONTACT
           </RouterLink>
         </li>
