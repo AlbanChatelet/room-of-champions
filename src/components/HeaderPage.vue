@@ -88,7 +88,7 @@ onMounted(() => {
           </RouterLink>
         </li>
         <li>
-          <RouterLink to="/evenements" class="text-black hover:text-white transition duration-300 ease-in-out  rounded-lg flex ml-[170px] items-center justify-center font-source-code-pro font-bold">
+          <RouterLink to="/Event" class="text-black hover:text-white transition duration-300 ease-in-out  rounded-lg flex ml-[170px] items-center justify-center font-source-code-pro font-bold">
             ÉVÉNEMENTS
           </RouterLink>
         </li>
