@@ -42,5 +42,36 @@
             ÉVÉNEMENTS PRÉCÉDENTS
             </span>
         </div>
+        <div class="flex flex-wrap justify-between mt-12">
+            <div class="w-1/2 p-2">
+            <img src="/img/inauguration_salle.png" alt="inauguration" class="w-full h-auto rounded-3xl">
+            </div>
+            <div class="w-1/2 p-10 mt-4 bg-white rounded-3xl">
+                <div class="text-black font-black font-poppins text-4xl">ÉVÉNEMENT 1</div>
+                <div class="text-black font-poppins mt-4 text-xl leading-relaxed">
+                    Une journée portes ouvertes marquant l’inauguration officielle de la salle Home for Champions. Les étudiants ont pu découvrir les équipements dernier cri, participer à des démonstrations de jeux en direct, et s’inscrire à des compétitions exclusives.
+                </div>
+                <div class="flex justify-end mt-4">
+                    <button class="font-poppins font-black p-3 text-4xl border-4 border-[#00c9c6] rounded-3xl">
+                        VOIR PLUS
+                    </button>
+                </div>
+            </div>
+            <div class="w-1/2 p-10 mt-4 bg-white rounded-3xl">
+                <div class="text-black font-black font-poppins text-4xl">ÉVÉNEMENT 2</div>
+                <div class="text-black font-poppins mt-4 text-xl leading-relaxed">
+                    Un tournoi convivial réunissant les amateurs et passionnés d’esport du campus pour clôturer l’année dans une ambiance festive. Les participants se sont affrontés sur League of Legends.
+                </div>
+                <div class="flex justify-end mt-4">
+                    <button class="font-poppins font-black p-3 text-4xl border-4 border-[#00c9c6] rounded-3xl">
+                        VOIR PLUS
+                    </button>
+                </div>
+            </div>
+            
+            <div class="w-1/2 p-2">
+            <img src="/img/winter_gaming_cup.png" alt="winter gaming cup" class="w-full h-auto rounded-3xl">
+            </div>
+        </div>
     </main>
 </template>
