@@ -48,6 +48,7 @@ export type NousRecord = {
 export type EquipesRecord = {
 	chef_equipe?: RecordIdString
 	description?: HTMLString
+	icone?: string
 	liste_projets?: RecordIdString[]
 	membres?: RecordIdString[]
 	nom?: string
