@@ -1,17 +1,20 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { pb } from '@/backend'
-import type { EquipesResponse } from '@/pocketbase-types'
+import type { EquipesResponse, JeuxResponse } from '@/pocketbase-types'
 import { RouterLink } from 'vue-router'
 
 const equipes = ref<EquipesResponse[]>([])
 
 onMounted(async () => {
   try {
-    const response = await pb.collection('equipes').getFullList<EquipesResponse>()
+    const response = await pb.collection('equipes').getFullList<EquipesResponse>({
+      expand: 'jeu_associe'
+    })
+    console.log('Données récupérées avec expand:', response)
     equipes.value = response
   } catch (error) {
-    console.error('Error fetching teams:', error)
+    console.error('Erreur lors de la récupération des équipes:', error)
   }
 })
 
@@ -19,6 +22,7 @@ onMounted(async () => {
 const getIconUrl = (equipe: EquipesResponse) => {
   return equipe.icone ? pb.getFileUrl(equipe, equipe.icone) : null
 }
+
 </script>
 
 <template>
@@ -34,6 +38,16 @@ const getIconUrl = (equipe: EquipesResponse) => {
           <div>
             <h2 class="text-2xl font-semibold text-green-700 mb-2">{{ equipe.nom }}</h2>
             <div v-html="equipe.description" class="mb-4"></div>
+
+            <!-- Affichage du jeu associé -->
+            <p v-if="equipe.expand?.jeu_associe?.length" class="text-gray-700">
+  Jeux associés :
+  <span class="font-semibold">
+    {{ equipe.expand.jeu_associe.map(jeu => jeu.nom_jeux).join(', ') }}
+  </span>
+</p>
+
+
           </div>
 
           <!-- Bouton pour voir les détails -->
