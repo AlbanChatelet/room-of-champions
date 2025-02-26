@@ -25,40 +25,59 @@ const getIconUrl = (equipe: EquipesResponse) => {
 </script>
 
 <template>
-  <main class="py-10 bg-gray-100">
-    <RouterLink to="/equipes/edit/:id?">Créer une équipe</RouterLink>
+  <main class="py-10 bg-[#000011] ">
+    <div class="pl-16 py-12">
+      <h1 class="font-poppins font-black text-4xl text-white pb-6">
+        LA LISTE DES EQUIPES INSCRITES
+      </h1>
+      <div class="w-[502px] h-[3px] bg-[#00C9C6]"></div>
+    </div>
+    <div class="justify-center flex py-12">
+      <button class="bg-[#FFFFFF] h-[60px] text-[#00C9C6] font-bold py-2 px-6 rounded-[32px] text-2xl shadow-xl transform transition-transform duration-300 hover:scale-105">
+        <RouterLink to="/equipes/edit/:id?">Créer une équipe</RouterLink>
+      </button>
+    </div>
     <div class="container mx-auto">
       <div v-if="equipes.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div v-for="equipe in equipes" :key="equipe.id" class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between h-full">
-          <!-- Image de l'équipe -->
-          <img v-if="equipe.icone" :src="getIconUrl(equipe)" :alt="`Icône de ${equipe.nom}`" class="w-full h-40 object-cover rounded-md mb-4">
+        <div v-for="equipe in equipes" :key="equipe.id" class="bg-gradient-to-b from-[#016D72] to-black p-6 rounded-lg border-4 border-white shadow-md hover:shadow-xl flex flex-col justify-between h-full relative rounded-tr-[80px] transform transition-transform duration-300 hover:scale-105">
+
+          <!-- Icône de l'équipe (format carré, en haut à gauche) -->
+          <img v-if="equipe.icone" :src="getIconUrl(equipe)" :alt="`Icône de ${equipe.nom}`" class="absolute top-4 left-4 w-32 h-32 object-cover  shadow-xl">
           
           <!-- Contenu de l'équipe -->
-          <div>
-            <h2 class="text-2xl font-semibold text-green-700 mb-2">{{ equipe.nom }}</h2>
-            <div v-html="equipe.description" class="mb-4"></div>
+          <div class="pl-24"> <!-- Décalage pour ne pas chevaucher l'icône -->
+            <div class="flex flex-col ml-8"> <!-- Alignement du nom de l'équipe et des jeux associés à droite -->
+              <h2 class="text-2xl font-semibold text-white mb-1 uppercase">{{ equipe.nom }}</h2> <!-- Nom de l'équipe en majuscule -->
 
-            <!-- Affichage des jeux associés -->
-            <p v-if="equipe.expand?.jeu_associe?.length" class="text-gray-700">
-              Jeux associés :
-              <span class="font-semibold">
-                {{ equipe.expand.jeu_associe.map(jeu => jeu.nom_jeux).join(', ') }}
-              </span>
-            </p>
+              <!-- Affichage des jeux associés -->
+              <div v-if="equipe.expand?.jeu_associe?.length" class="text-white text-[16px] mt-2">
+  <ul>
+    <li v-for="jeu in equipe.expand.jeu_associe" :key="jeu.id" class="mb-1">
+      {{ jeu.nom_jeux }}
+    </li>
+  </ul>
+</div>
 
-            <!-- Affichage des membres -->
-            <p v-if="equipe.expand?.membres?.length" class="text-gray-700">
-              Membres :
-              <span class="font-semibold">
-                {{ equipe.expand.membres.map(membre => membre.username).join(', ') }}
-              </span>
-            </p>
+            </div>
           </div>
 
+          <!-- Affichage des membres -->
+          <p v-if="equipe.expand?.membres?.length" class="text-white mt-12 text-center mx-auto text-xl uppercase"> <!-- Membres en majuscule -->
+            <span class="font-semibold">
+              <span v-for="(membre, index) in equipe.expand.membres" :key="membre.id">
+                {{ membre.username }}
+                <span v-if="index < equipe.expand.membres.length - 1"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span>
+              </span>
+            </span>
+          </p>
+
           <!-- Bouton pour voir les détails -->
-          <RouterLink :to="`/equipes/${equipe.id}`" class="inline-block stroke-blue-500 text-red-500 px-4 py-2 rounded-md shadow hover:bg-slate-200 transition-colors mt-auto">
-            Voir les détails
-          </RouterLink>
+          <div class="flex justify-center items-center pt-8">
+            <RouterLink :to="`/equipes/${equipe.id}`" class="text-center bg-white stroke-blue-500 text-black font-bold px-2 py-2 rounded-md shadow hover:bg-slate-200 transition-colors mt-auto w-[160px]">
+              VOIR L'EQUIPE
+            </RouterLink>
+          </div>
+
         </div>
       </div>
       <div v-else class="text-center text-gray-500">
@@ -67,3 +86,5 @@ const getIconUrl = (equipe: EquipesResponse) => {
     </div>
   </main>
 </template>
+
+
