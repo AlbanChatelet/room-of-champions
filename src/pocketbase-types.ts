@@ -49,6 +49,7 @@ export type EquipesRecord = {
 	chef_equipe?: RecordIdString
 	description?: HTMLString
 	icone?: string
+	jeu_associe?: RecordIdString[]
 	liste_projets?: RecordIdString[]
 	membres?: RecordIdString[]
 	nom?: string
