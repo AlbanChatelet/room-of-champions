@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { pb } from '@/backend'
-import type { EquipesResponse, JeuxResponse } from '@/pocketbase-types'
+import type { EquipesResponse, UsersResponse } from '@/pocketbase-types'
 import { RouterLink } from 'vue-router'
 
 const equipes = ref<EquipesResponse[]>([])
@@ -9,7 +9,7 @@ const equipes = ref<EquipesResponse[]>([])
 onMounted(async () => {
   try {
     const response = await pb.collection('equipes').getFullList<EquipesResponse>({
-      expand: 'jeu_associe'
+      expand: 'jeu_associe,membres'  // Ajoute 'membres' pour récupérer les utilisateurs associés
     })
     console.log('Données récupérées avec expand:', response)
     equipes.value = response
@@ -22,7 +22,6 @@ onMounted(async () => {
 const getIconUrl = (equipe: EquipesResponse) => {
   return equipe.icone ? pb.getFileUrl(equipe, equipe.icone) : null
 }
-
 </script>
 
 <template>
@@ -39,15 +38,21 @@ const getIconUrl = (equipe: EquipesResponse) => {
             <h2 class="text-2xl font-semibold text-green-700 mb-2">{{ equipe.nom }}</h2>
             <div v-html="equipe.description" class="mb-4"></div>
 
-            <!-- Affichage du jeu associé -->
+            <!-- Affichage des jeux associés -->
             <p v-if="equipe.expand?.jeu_associe?.length" class="text-gray-700">
-  Jeux associés :
-  <span class="font-semibold">
-    {{ equipe.expand.jeu_associe.map(jeu => jeu.nom_jeux).join(', ') }}
-  </span>
-</p>
+              Jeux associés :
+              <span class="font-semibold">
+                {{ equipe.expand.jeu_associe.map(jeu => jeu.nom_jeux).join(', ') }}
+              </span>
+            </p>
 
-
+            <!-- Affichage des membres -->
+            <p v-if="equipe.expand?.membres?.length" class="text-gray-700">
+              Membres :
+              <span class="font-semibold">
+                {{ equipe.expand.membres.map(membre => membre.username).join(', ') }}
+              </span>
+            </p>
           </div>
 
           <!-- Bouton pour voir les détails -->
