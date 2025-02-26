@@ -62,14 +62,15 @@ const getIconUrl = (equipe: EquipesResponse) => {
           </div>
 
           <!-- Affichage des membres -->
-          <p v-if="equipe.expand?.membres?.length" class="text-white mt-12 text-center mx-auto text-xl uppercase"> <!-- Membres en majuscule -->
-            <span class="font-semibold">
-              <span v-for="(membre, index) in equipe.expand.membres" :key="membre.id">
-                {{ membre.username }}
-                <span v-if="index < equipe.expand.membres.length - 1"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span>
-              </span>
-            </span>
-          </p>
+          <!-- Affichage des membres -->
+<div v-if="equipe.expand?.membres?.length" class="text-white mt-16 text-center mx-auto text-xl uppercase"> 
+  <div class="font-semibold flex flex-wrap justify-center gap-x-12 gap-y-2">
+    <span v-for="membre in equipe.expand.membres" :key="membre.id">
+      {{ membre.username }}
+    </span>
+  </div>
+</div>
+
 
           <!-- Bouton pour voir les détails -->
           <div class="flex justify-center items-center pt-8">
