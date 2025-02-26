@@ -20,6 +20,7 @@ onMounted(async () => {
   
 
   <main class="py-10 bg-gray-100">
+    <RouterLink to="/equipes/edit/:id?">Créer une équipe</RouterLink>
     <div class="container mx-auto">
       <div v-if="equipes.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div v-for="equipe in equipes" :key="equipe.id" class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between h-full">

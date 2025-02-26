@@ -254,9 +254,10 @@ l'univers e-sportif !</p>
 
 
   <div class="flex justify-center pt-16">
+    <RouterLink to="/equipes">
     <button class="bg-[#FFFFFF] h-[60px] text-[#00C9C6] font-bold py-2 px-6 rounded-[16px] text-2xl shadow-xl transform transition-transform duration-300 hover:scale-105">
       VOIR LES ÉQUIPES
-    </button>
+    </button></RouterLink>
   </div>
 </section>
 
