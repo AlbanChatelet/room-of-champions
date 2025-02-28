@@ -69,5 +69,10 @@ onUnmounted(() => {
         </span>
       </div>
     </div>
+    <h1 class="font-poppins font-black text-2xl md:text-4xl text-white pl-4 md:pl-16 pb-6">
+      LA LISTE COMPLETE
+    </h1>
+    <div class="w-full md:w-[502px] h-[3px] bg-[#00c9c6] ml-4 md:ml-16"></div>
+
   </main>
 </template>
