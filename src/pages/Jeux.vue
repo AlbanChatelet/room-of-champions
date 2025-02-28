@@ -1,64 +1,94 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from "vue";
+
+// Liste des images
+import rocketLeagueImage from "../assets/rocketleague.webp";
+import valorantImage from "../assets/valorant.webp";
+import superSmashBrosImage from "../assets/supersmashbros.webp";
+
+const images = [
+  { src: rocketLeagueImage, alt: "Rocket League" },
+  { src: valorantImage, alt: "Valorant" },
+  { src: superSmashBrosImage, alt: "Super Smash Bros" },
+];
+
+const currentIndex = ref(0);
+let interval: ReturnType<typeof setInterval> | null = null;
+
+// Fonction pour passer au slide suivant
+const nextSlide = () => {
+  currentIndex.value = (currentIndex.value + 1) % images.length;
+};
+
+// Fonction pour passer au slide précédent
+const prevSlide = () => {
+  currentIndex.value = (currentIndex.value - 1 + images.length) % images.length;
+};
+
+// Auto-scroll toutes les 3 secondes
+onMounted(() => {
+  interval = setInterval(nextSlide, 3000);
+});
+
+// Stop auto-scroll lorsqu'on quitte le composant
+onUnmounted(() => {
+  if (interval) clearInterval(interval);
+});
 </script>
 
 <template>
-  <main class="bg-[#000011] p-24">
-    <div>
-      <h1 class="font-poppins font-black text-4xl text-white pl-16 pb-6">
-        LES JEUX PROPOSÉS À HOME OF CHAMPIONS
-      </h1>
-    </div>
-    <div class="w-[502px] h-[3px] bg-[#00c9c6]"></div>
-    
-    <div class="flex justify-center mt-6 pt-24">
-      <h2 class="text-xl text-white font-black font-poppins">
-        LES JEUX LES PLUS DEMANDÉS
-      </h2>
-    </div>
+  <main class="bg-[#000011] p-10 flex flex-col items-center">
+    <h1 class="text-white text-3xl font-bold text-center mb-6">
+      LES JEUX PROPOSÉS À HOME OF CHAMPIONS
+    </h1>
+    <div class="w-48 h-[3px] bg-[#00c9c6] mb-6"></div>
 
-    <!-- Carrousel -->
-    <div 
-      data-hs-carousel='{
-        "loadingClasses": "opacity-0",
-        "dotsItemClasses": "hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 dark:hs-carousel-active:bg-blue-500 dark:hs-carousel-active:border-blue-500",
-        "isCentered": true,
-        "slidesQty": { "xs": 1, "lg": 2 }
-      }'
-      class="relative mt-10"
-    >
-      <div class="hs-carousel w-full overflow-hidden bg-white rounded-lg">
-        <div class="relative min-h-72 flex transition-transform duration-700">
-          <!-- Première image -->
-          <div class="hs-carousel-slide flex justify-center px-2">
-            <img src="../assets/rocketleague.webp" alt="Rocket League" class="w-full h-auto rounded-lg">
-          </div>
-          <!-- Deuxième image -->
-          <div class="hs-carousel-slide flex justify-center px-2">
-            <img src="../assets/valorant.webp" alt="Valorant" class="w-full h-auto rounded-lg">
-          </div>
-          <!-- Troisième image -->
-          <div class="hs-carousel-slide flex justify-center px-2">
-            <img src="../assets/supersmashbros.webp" alt="Super Smash Bros" class="w-full h-auto rounded-lg">
-          </div>
+    <div class="relative w-full max-w-lg overflow-hidden">
+      <!-- Slides -->
+      <div
+        class="flex transition-transform duration-700"
+        :style="{ transform: `translateX(-${currentIndex * 100}%)` }"
+      >
+        <div
+          v-for="(image, index) in images"
+          :key="index"
+          class="w-full flex-shrink-0"
+        >
+          <img
+            :src="image.src"
+            :alt="image.alt"
+            class="w-full h-auto rounded-lg"
+          />
         </div>
       </div>
 
-      <!-- Boutons de navigation -->
-      <button type="button" class="hs-carousel-prev absolute inset-y-0 start-0 flex items-center w-12 h-full text-white hover:bg-gray-800/50 rounded-s-lg">
-        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="m15 18-6-6 6-6"></path>
-        </svg>
+      <!-- Bouton Précédent -->
+      <button
+        @click="prevSlide"
+        class="absolute top-1/2 -translate-y-1/2 left-4 bg-gray-800/70 text-white p-2 rounded-full hover:bg-gray-900"
+      >
+        ❮
       </button>
-      <button type="button" class="hs-carousel-next absolute inset-y-0 end-0 flex items-center w-12 h-full text-white hover:bg-gray-800/50 rounded-e-lg">
-        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="m9 18 6-6-6-6"></path>
-        </svg>
+
+      <!-- Bouton Suivant -->
+      <button
+        @click="nextSlide"
+        class="absolute top-1/2 -translate-y-1/2 right-4 bg-gray-800/70 text-white p-2 rounded-full hover:bg-gray-900"
+      >
+        ❯
       </button>
 
       <!-- Pagination -->
-      <div class="hs-carousel-pagination flex justify-center absolute bottom-3 w-full space-x-2"></div>
+      <div class="flex justify-center mt-4 space-x-2">
+        <span
+          v-for="(image, index) in images"
+          :key="index"
+          @click="currentIndex = index"
+          class="w-3 h-3 rounded-full cursor-pointer"
+          :class="index === currentIndex ? 'bg-blue-500' : 'bg-gray-400'"
+        ></span>
+      </div>
     </div>
-    <!-- Fin Carrousel -->
   </main>
 </template>
