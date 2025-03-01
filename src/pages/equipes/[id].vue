@@ -74,11 +74,16 @@ async function submitChanges() {
     console.error('Erreur lors de la mise à jour de l\'équipe :', error)
   }
 }
-
+// Fonction pour obtenir l'URL de l'avatar de l'utilisateur, sinon retourner un avatar par défaut
+const getAvatarUrl = (utilisateur: UsersResponse) => {
+  return utilisateur.avatar ? pb.getFileUrl(utilisateur, utilisateur.avatar) : '/src/assets/profile.webp';
+}
 const canEdit = computed(() => user.value && user.value.id === equipe.value.chef_equipe)
 </script>
 
 <template>
+  <section class="fond_equipe py-12 px-12">
+    <section class="bg-white bg-opacity-5 rounded-tl-[80px]">
   <div v-if="equipe" class="container mx-auto py-10 px-4">
     <h1 class="text-3xl font-bold mb-4">{{ equipe.nom }}</h1>
     <div v-html="sanitizeHtml(equipe.description)" class="text-gray-700 mb-6 border rounded-lg p-4 bg-gray-100"></div>
@@ -89,7 +94,14 @@ const canEdit = computed(() => user.value && user.value.id === equipe.value.chef
       <h2 class="text-lg font-semibold">Liste des membres</h2>
       <ul class="list-disc pl-5 mt-2">
         <li v-for="utilisateur in equipe.expand?.membres" :key="utilisateur.id" class="flex justify-between items-center">
-          <span class="text-gray-800">{{ utilisateur.name || utilisateur.username }}</span>
+          <div class="flex items-center">
+            <img :src="getAvatarUrl(utilisateur)" 
+                 alt="Avatar de l'utilisateur" 
+                 class="w-10 h-10 rounded-full object-cover mr-4" />
+            <span class="text-gray-800">{{ utilisateur.name || utilisateur.username }}</span>
+          </div>
+          
+          
           <button v-if="user?.id === equipe.expand?.chef_equipe.id" 
                   class="ml-2 text-red-500 hover:text-red-700" 
                   @click="deleteMembre(utilisateur.id)">
@@ -121,10 +133,20 @@ const canEdit = computed(() => user.value && user.value.id === equipe.value.chef
       </ul>
     </div>
 
-    <!-- Sélection pour ajouter des membres -->
+    <!-- Sélection pour ajouter des jeux -->
     <select v-if="user?.id === equipe.expand?.chef_equipe.id" @change="updateJeux(($event.target as HTMLSelectElement).value); ($event.target as HTMLSelectElement).value = ''" class="mt-4 px-3 py-2 border rounded">
       <option value="" selected disabled>Sélectionnez un jeu</option>
       <option v-for="jeu in listJeux" :key="jeu.id" :value="jeu.id">{{ jeu.nom_jeux }}</option>
     </select>
   </div>
+    </section>
+  </section>
 </template>
+
+<style>
+.fond_equipe {
+  background-image: url('@/assets/fond_de_con.webp');
+  background-size: cover;
+}
+
+</style>
