@@ -7,7 +7,7 @@ import { pb } from '@/backend'
 import type { EquipesResponse, UsersResponse, JeuxResponse } from '@/pocketbase-types'
 import sanitizeHtml from 'sanitize-html'
 import QuillEditor from '@/components/QuillEditor.vue'
-
+import deleteIcon from '@/assets/icons/deleteIcon.vue'
 const route = useRoute()
 const router = useRouter()
 
@@ -25,36 +25,37 @@ const isEditing = ref(false)
 
 // Fonction pour mettre à jour les membres
 async function updateMembres(id: string) {
-  // Récupérer les membres actuels de l'équipe
   const currentMembres = equipe.value.membres || [];
-  
-  // Ajouter le nouveau membre tout en conservant les autres membres
+  const currentJeux = equipe.value.jeu_associe || [];  // Ajoute ça pour garder les jeux
+
   equipe.value = await pb.collection('equipes').update(route.params.id, {
     membres: [...currentMembres, id],
-  }, { expand: 'chef_equipe, membres' });
+    jeu_associe: currentJeux.map(j => j) // On renvoie tous les jeux existants
+  }, { expand: 'chef_equipe, membres, jeu_associe' });
 }
 
-// Fonction pour mettre à jour les membres
+
 async function updateJeux(id: string) {
-  // Récupérer les membres actuels de l'équipe
+  const currentMembres = equipe.value.membres || [];  // Ajoute ça pour garder les membres
   const currentJeux = equipe.value.jeu_associe || [];
-  
-  // Ajouter le nouveau membre tout en conservant les autres membres
+
   equipe.value = await pb.collection('equipes').update(route.params.id, {
-    jeu_associe: [...currentJeux, id],
-  }, { expand: 'chef_equipe, jeu_associe' });
+    membres: currentMembres.map(m => m), // On renvoie tous les membres existants
+    jeu_associe: [...currentJeux, id]
+  }, { expand: 'chef_equipe, membres, jeu_associe' });
 }
 
 // Fonction pour supprimer un membre
 async function deleteMembre(id: string) {
   equipe.value = await pb.collection('equipes').update(route.params.id, {
     'membres-': id
-  }, { expand: 'chef_equipe, membres' })
+  }, { expand: 'chef_equipe, membres, jeu_associe' }) // <- ajoute jeu_associe ici
 }
+
 async function deleteGame(id: string) {
   equipe.value = await pb.collection('equipes').update(route.params.id, {
     'jeu_associe-': id
-  }, { expand: 'chef_equipe, jeu_associe' })
+  }, { expand: 'chef_equipe, membres, jeu_associe' })
 }
 // Fonction pour supprimer l'équipe
 async function deleteEquipe(id: string) {
@@ -147,13 +148,14 @@ const getIconUrl = (equipe: EquipesResponse) => {
       </button>
 
       <!-- Bouton Supprimer (si chef d'équipe connecté) -->
+       <div class="bg-white px-2 mt-2 rounded-lg">
       <button 
         v-if="user?.id === equipe.expand?.chef_equipe.id" 
-        class="mt-2 text-red-500 hover:text-red-700"
+        class=" text-red-500 hover:text-red-700"
         @click="deleteMembre(utilisateur.id)"
       >
-        Supprimer
-      </button>
+        <deleteIcon />
+      </button></div>
     </div>
   </div>
 </div>
@@ -162,7 +164,7 @@ const getIconUrl = (equipe: EquipesResponse) => {
     
     <!-- Sélection pour ajouter des membres -->
     <select v-if="user?.id === equipe.expand?.chef_equipe.id" @change="updateMembres(($event.target as HTMLSelectElement).value); ($event.target as HTMLSelectElement).value = ''" class="mt-4 px-3 py-2 border rounded">
-      <option value="" selected disabled>Sélectionnez un membre</option>
+      <option value="" selected disabled>Ajouter un membre</option>
       <option v-for="utilisateur in listUsers" :key="utilisateur.id" :value="utilisateur.id">{{ utilisateur.name || utilisateur.email || utilisateur.username }}</option>
     </select>
     
@@ -173,19 +175,19 @@ const getIconUrl = (equipe: EquipesResponse) => {
         <li v-for="jeu in equipe.expand?.jeu_associe" :key="jeu.id" class="flex justify-between items-center">
           <div class="bg-white py-2 px-4 rounded-xl mr-8">
           <span class="text-black font-bold md:text-2xl">{{ jeu.nom_jeux || jeu.nom_jeux }}</span>
-        </div>
+        
           <button v-if="user?.id === equipe.expand?.chef_equipe.id" 
                   class="ml-2 text-red-500 hover:text-red-700" 
                   @click="deleteGame(jeu.id)">
-            Supprimer
-          </button>
+            <deleteIcon />
+          </button></div>
         </li>
       </ul>
     </div>
 
     <!-- Sélection pour ajouter des jeux -->
     <select v-if="user?.id === equipe.expand?.chef_equipe.id" @change="updateJeux(($event.target as HTMLSelectElement).value); ($event.target as HTMLSelectElement).value = ''" class="mt-4 px-3 py-2 border rounded">
-      <option value="" selected disabled>Sélectionnez un jeu</option>
+      <option value="" selected disabled>Ajouter un jeu</option>
       <option v-for="jeu in listJeux" :key="jeu.id" :value="jeu.id">{{ jeu.nom_jeux }}</option>
     </select>
   </div>
