@@ -76,40 +76,88 @@ async function submitChanges() {
 }
 // Fonction pour obtenir l'URL de l'avatar de l'utilisateur, sinon retourner un avatar par défaut
 const getAvatarUrl = (utilisateur: UsersResponse) => {
-  return utilisateur.avatar ? pb.getFileUrl(utilisateur, utilisateur.avatar) : '/src/assets/profile.webp';
+  return utilisateur.avatar
+    ? pb.getFileUrl(utilisateur, utilisateur.avatar)
+    : new URL('@/assets/profileDefaut.webp', import.meta.url).href;
 }
+
 const canEdit = computed(() => user.value && user.value.id === equipe.value.chef_equipe)
+
+const getIconUrl = (equipe: EquipesResponse) => {
+  return equipe.icone ? pb.getFileUrl(equipe, equipe.icone) : null
+}
 </script>
 
 <template>
   <section class="fond_equipe py-12 px-12">
-    <section class="bg-white bg-opacity-5 rounded-tl-[80px]">
-  <div v-if="equipe" class="container mx-auto py-10 px-4">
-    <h1 class="text-3xl font-bold mb-4">{{ equipe.nom }}</h1>
-    <div v-html="sanitizeHtml(equipe.description)" class="text-gray-700 mb-6 border rounded-lg p-4 bg-gray-100"></div>
-    <h2 class="text-lg font-semibold">Nom du chef d'équipe : <span class="font-medium text-blue-600">{{ equipe.expand?.chef_equipe.username }}</span></h2>
+    <section class="bg-white bg-opacity-10 rounded-tl-[80px]">
+  <div v-if="equipe" class="container mx-auto pt-10 px-4">
+    <div class="flex items-center justify-between">
+    <h1 class="text-3xl md:text-7xl font-bold mb-4 text-white">{{ equipe.nom }}</h1>
+    <img 
+    v-if="equipe.icone" 
+    :src="getIconUrl(equipe)" 
+    :alt="`Icône de ${equipe.nom}`" 
+    class="w-[185px] h-[185px] object-cover rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.85)]"
+/>
 
-    <!-- Liste des membres -->
-    <div class="mt-4">
-      <h2 class="text-lg font-semibold">Liste des membres</h2>
-      <ul class="list-disc pl-5 mt-2">
-        <li v-for="utilisateur in equipe.expand?.membres" :key="utilisateur.id" class="flex justify-between items-center">
-          <div class="flex items-center">
-            <img :src="getAvatarUrl(utilisateur)" 
-                 alt="Avatar de l'utilisateur" 
-                 class="w-10 h-10 rounded-full object-cover mr-4" />
-            <span class="text-gray-800">{{ utilisateur.name || utilisateur.username }}</span>
-          </div>
-          
-          
-          <button v-if="user?.id === equipe.expand?.chef_equipe.id" 
-                  class="ml-2 text-red-500 hover:text-red-700" 
-                  @click="deleteMembre(utilisateur.id)">
-            Supprimer
-          </button>
-        </li>
-      </ul>
+</div>
+
+    <div v-html="sanitizeHtml(equipe.description)" class="text-white md:text-2xl"></div>
+    
+
+    <!-- Remplace cette section : -->
+<!-- Liste des membres -->
+<div class="mt-4">
+  <h2 class="text-lg text-[#8B44FF] md:text-4xl font-bold">MEMBRES :</h2>
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:px-64 md:gap-16 mt-4">
+    <div 
+      v-for="utilisateur in equipe.expand?.membres" 
+      :key="utilisateur.id" 
+      class="bg-[#8B44FF] text-white rounded-tl-[60px] shadow-xl p-4 flex flex-col items-center justify-between md:w-[300px] md:h-[300px] transform transition-transform duration-300 hover:scale-105"
+    >
+    <!-- Nom -->
+      <h3 class="font-bold text-lg md:text-2xl">
+        {{ utilisateur.name || utilisateur.username }}
+      </h3>
+<span 
+    class="text-xl font-semibold"
+    :class="utilisateur.id === equipe.expand?.chef_equipe.id ? 'text-white' : 'text-gray-300'"
+>
+    {{ utilisateur.id === equipe.expand?.chef_equipe.id ? '(CAPITAINE)' : '(JOUEUR)' }}
+</span>
+      <!-- Photo de profil -->
+      <img 
+        :src="getAvatarUrl(utilisateur)" 
+        alt="Avatar de l'utilisateur" 
+        class="w-32 h-32 rounded-full object-cover mb-2"
+      />
+
+      
+      
+
+
+      <!-- Bouton Voir le profil -->
+      <button 
+        @click="router.push(`/users/${utilisateur.id}`)" 
+        class="mt-4 bg-white text-black font-bold py-1 px-4 rounded hover:bg-gray-200"
+      >
+        VOIR LE PROFIL
+      </button>
+
+      <!-- Bouton Supprimer (si chef d'équipe connecté) -->
+      <button 
+        v-if="user?.id === equipe.expand?.chef_equipe.id" 
+        class="mt-2 text-red-500 hover:text-red-700"
+        @click="deleteMembre(utilisateur.id)"
+      >
+        Supprimer
+      </button>
     </div>
+  </div>
+</div>
+
 
     
     <!-- Sélection pour ajouter des membres -->
@@ -120,10 +168,12 @@ const canEdit = computed(() => user.value && user.value.id === equipe.value.chef
     
     <!-- Liste des jeux -->
     <div class="mt-4">
-      <h2 class="text-lg font-semibold">Liste des jeux</h2>
-      <ul class="list-disc pl-5 mt-2">
+      <h2 class="text-lg text-[#8B44FF] md:text-4xl font-bold">JEUX ASSOCIES :</h2>
+      <ul class="list-disc py-8 flex">
         <li v-for="jeu in equipe.expand?.jeu_associe" :key="jeu.id" class="flex justify-between items-center">
-          <span class="text-gray-800">{{ jeu.nom_jeux || jeu.nom_jeux }}</span>
+          <div class="bg-white py-2 px-4 rounded-xl mr-8">
+          <span class="text-black font-bold md:text-2xl">{{ jeu.nom_jeux || jeu.nom_jeux }}</span>
+        </div>
           <button v-if="user?.id === equipe.expand?.chef_equipe.id" 
                   class="ml-2 text-red-500 hover:text-red-700" 
                   @click="deleteGame(jeu.id)">
