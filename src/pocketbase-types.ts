@@ -76,6 +76,8 @@ export type ReservationsRecord = {
 	date?: IsoDateString
 	end_date?: IsoDateString
 	heure?: string
+	nom_reservation?: string
+	participants?: RecordIdString[]
 	status?: ReservationsStatusOptions
 	user?: RecordIdString
 }
