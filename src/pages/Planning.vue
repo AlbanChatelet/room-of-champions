@@ -33,21 +33,21 @@
           />
         </div>
 
-        <!-- Participants sous forme de grille compacte -->
-<div class="space-y-2">
+        <div class="space-y-2">
   <h3 class="text-lg font-semibold">Participants :</h3>
-  <div class="flex flex-wrap gap-4">
-    <div v-for="user in users" :key="user.id" class="flex items-center space-x-1">
-      <input 
-        type="checkbox" 
-        :id="'user-' + user.id" 
-        :value="user.id" 
-        v-model="selectedParticipants"
-      />
-      <label :for="'user-' + user.id" class="text-sm">{{ user.username }}</label>
+  <div class="flex flex-wrap gap-2">
+    <div 
+      v-for="user in users" 
+      :key="user.id"
+      @click="toggleParticipant(user.id)"
+      class="cursor-pointer px-3 py-2 rounded-lg transition duration-200 text-sm font-medium"
+      :class="selectedParticipants.includes(user.id) ? 'bg-purple-600 text-white' : 'bg-gray-200 text-gray-800 hover:bg-purple-200'"
+    >
+      {{ user.username }}
     </div>
   </div>
 </div>
+
 
 
         <div class="flex justify-between">
@@ -222,4 +222,14 @@ watch([date, heure], () => {
     selectedDateTime.value = 'Aucunes';
   }
 });
+
+const toggleParticipant = (id) => {
+  const index = selectedParticipants.value.indexOf(id);
+  if (index === -1) {
+    selectedParticipants.value.push(id);
+  } else {
+    selectedParticipants.value.splice(index, 1);
+  }
+};
+
 </script>
