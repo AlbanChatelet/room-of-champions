@@ -13,14 +13,14 @@ const onRegisterSuccess = () => {
 </script>
 
 <template>
-  <section class="section_teemo">
+  <section class="fond_auth">
     
     <div class="container mx-auto py-10">
       <div class="text-center pb-6">
-        <h1 class="text-4xl font-black lg:text-7xl text-[#E7C920] font-mulish shadow-text">Authentification</h1>
+        <h1 class="text-4xl font-black lg:text-7xl text-white font-mulish shadow-text">CREER UN <span class="text-[#8B44FF]">COMPTE</span></h1>
       </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8  p-8 ">
+      <div class="">
         <div v-if="!isRegistered">
           <RegisterForm @register-success="onRegisterSuccess" />
         </div>
@@ -33,12 +33,11 @@ const onRegisterSuccess = () => {
 </template>
 
 <style>
-.section_teemo {
-  background-image: url('@/assets/fond_teemo.webp');
+.fond_auth {
+  background-image: url('@/assets/fond_de_con.webp');
   background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
+
 
 .shadow-text {
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);

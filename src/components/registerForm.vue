@@ -3,6 +3,8 @@ import { ref, defineEmits } from 'vue'
 import { registerUser } from '@/backend'
 import LoginForm from '@/components/loginForm.vue'
 
+const acceptCookies = ref(false)
+
 const emit = defineEmits(['register-success'])
 const username = ref('')
 const email = ref('')
@@ -11,8 +13,12 @@ const passwordConfirm = ref('')
 const errorMessage = ref<string | null>(null)
 const showLogin = ref(false)
 
-// Fonction d'inscription
 const handleRegister = async () => {
+  if (!acceptCookies.value) {
+    errorMessage.value = "Veuillez accepter les CGU"
+    return
+  }
+
   try {
     await registerUser(username.value, email.value, password.value, passwordConfirm.value)
     errorMessage.value = null
@@ -28,61 +34,108 @@ const showLoginComponent = () => {
 }
 </script>
 
+
 <template>
-  <div class="register-form bg-[#303030] p-8 rounded-lg border-2 border-[#E7C920] text-white">
-    <h2 class="text-2xl font-bold text-[#E7C920] mb-6 font-mulish">Inscription</h2>
-    <form @submit.prevent="handleRegister" class="flex flex-col space-y-4">
-      <input
-        type="text"
-        v-model="username"
-        placeholder="Nom d'utilisateur"
-        required
-        class="border border-[#E7C920] bg-[#505050] text-white p-3 rounded focus:outline-none focus:ring-2 focus:ring-[#E7C920]"
-      />
-      <input
-        type="email"
-        v-model="email"
-        placeholder="Email"
-        required
-        class="border border-[#E7C920] bg-[#505050] text-white p-3 rounded focus:outline-none focus:ring-2 focus:ring-[#E7C920]"
-      />
-      <input
-        type="password"
-        v-model="password"
-        placeholder="Mot de passe"
-        required
-        class="border border-[#E7C920] bg-[#505050] text-white p-3 rounded focus:outline-none focus:ring-2 focus:ring-[#E7C920]"
-      />
-      <input
-        type="password"
-        v-model="passwordConfirm"
-        placeholder="Confirmer le mot de passe"
-        required
-        class="border border-[#E7C920] bg-[#505050] text-white p-3 rounded focus:outline-none focus:ring-2 focus:ring-[#E7C920]"
-      />
-      <button
-        type="submit"
-        class="bg-[#E7C920] text-[#303030] font-bold py-2 rounded hover:bg-[#c8a800] transition-colors duration-200"
-      >
-        Inscription
-      </button>
-      <p v-if="errorMessage" class="text-red-500">{{ errorMessage }}</p>
-      <div class="flex items-center text-[#E7C920]">
-        <input type="checkbox" id="acceptCookies" class="mr-2" />
-        <label for="acceptCGU" class="text-[#c79e53] text-[12px] font-semibold">J’accepte les CGU</label>
+  <section class="rounded-3xl overflow-hidden">
+    <div class="flex h-screen rounded-xl">
+      <!-- Partie gauche pour l'image -->
+      <div class="w-1/2 bg-[#0F0F1D] flex justify-center items-center rounded-l-xl">
+        <img src="@/assets/logo_auth.webp" alt="Logo" class="max-w-[400px]"/>
       </div>
-    </form>
-    <p class="mt-6">
-      Déjà un compte ? 
-      <button @click="showLoginComponent" class="text-[#1ac0b8] hover:underline">Connectez-vous ici</button>
-    </p>
-    <LoginForm v-if="showLogin" />
-  </div>
+
+      <!-- Partie droite pour le formulaire -->
+      <div class="w-1/2 bg-[#0F0F1D] pr-8 text-white flex pt-32 rounded-r-xl">
+        <form @submit.prevent="handleRegister" class="flex flex-col space-y-6 w-full max-w-2xl">
+          <div class="relative pb-2 border-b border-white">
+            <input
+              type="text"
+              v-model="username"
+              placeholder="Nom d'utilisateur"
+              required
+              class="input-no-outline bg-[#0F0F1D] text-white text-3xl p-3 w-full rounded"
+            />
+          </div>
+
+          <div class="relative pb-2 border-b border-white">
+            <input
+              type="email"
+              v-model="email"
+              placeholder="Email"
+              required
+              class="input-no-outline bg-[#0F0F1D] text-white text-3xl p-3 w-full rounded"
+            />
+          </div>
+
+          <div class="relative pb-2 border-b border-white">
+            <input
+              type="password"
+              v-model="password"
+              placeholder="Mot de passe"
+              required
+              class="input-no-outline bg-[#0F0F1D] text-white text-3xl p-3 w-full rounded"
+            />
+          </div>
+
+          <div class="relative pb-2 border-b border-white">
+            <input
+              type="password"
+              v-model="passwordConfirm"
+              placeholder="Confirmer le mot de passe"
+              required
+              class="input-no-outline bg-[#0F0F1D] text-white text-3xl p-3 w-full rounded"
+            />
+          </div>
+          
+          <div class="flex items-start text-white mt-4 space-x-4">
+            <div
+              class="w-6 h-6 rounded-full border-2 border-white flex items-center justify-center cursor-pointer"
+              @click="acceptCookies = !acceptCookies"
+            >
+              <div
+                class="w-6 h-5 rounded-full bg-[#8E3F8D]"
+                :class="acceptCookies ? 'scale-100' : 'scale-0'"
+                style="transition: transform 0.2s ease"
+              ></div>
+            </div>
+
+            <label class="text-white text-[16px] font-light leading-5">
+              En cliquant sur “Valider”, vous confirmez que vous acceptez les Conditions Générales d'Utilisation (CGU) et la Politique de Confidentialité (lien vers les CGU et la politique de confidentialité).
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            class="bg-[#8E3F8D] text-4xl text-white font-bold py-4 rounded hover:bg-[#793377] transition-colors duration-200 input-no-outline"
+          >
+            VALIDER
+          </button>
+
+          <p v-if="errorMessage" class="text-red-500">{{ errorMessage }}</p>
+          
+          <p class="mt-6">
+          Déjà un compte ? 
+          <button @click="showLoginComponent" class="text-[#1ac0b8] hover:underline">Connectez-vous ici</button>
+        </p>
+        </form>
+
+        <LoginForm v-if="showLogin" />
+      </div>
+    </div>
+  </section>
 </template>
 
+
+
 <style>
-.font-mulish {
-  font-family: 'Mulish', sans-serif;
+/* On cible tous les inputs, boutons et checkboxes */
+.input-no-outline {
+  outline: none !important;
+  box-shadow: none !important;
 }
-@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+/* Pour s’assurer de virer les focus sur les navigateurs chiants (Safari/Chrome) */
+input:focus, button:focus, textarea:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
 </style>
