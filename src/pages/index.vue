@@ -221,9 +221,9 @@ l'univers e-sportif !</p>
 </section>
 
 <section class="fond_vert">
-  <div class="mb-12 flex flex-wrap md:flex-nowrap justify-center items-center pt-32 gap-8 md:gap-16">
+  <div class="mb-12 flex flex-col md:flex-row justify-center items-center pt-32 gap-8 md:gap-16">
     <!-- Étape 1 -->
-    <div class="text-white text-center flex-1">
+    <div class="text-white text-center w-full md:flex-1">
       <div class="text-[200px] md:text-[300px] font-bold opacity-10">1</div>
       <h3 class="text-3xl md:text-[40px] font-bold">COMPOSE TON ÉQUIPE</h3>
       <p class="text-white text-xl md:text-3xl px-4 sm:px-8 md:px-[90px]">
@@ -233,7 +233,7 @@ l'univers e-sportif !</p>
     <div class="w-[5px] h-auto md:h-[550px] bg-gradient-to-b from-[#00C9C6] to-[#000011] hidden md:block"></div>
 
     <!-- Étape 2 -->
-    <div class="text-white text-center flex-1">
+    <div class="text-white text-center w-full md:flex-1">
       <div class="text-[200px] md:text-[300px] font-bold opacity-10">2</div>
       <h3 class="text-3xl md:text-[40px] font-bold">INSCRIS TON ÉQUIPE</h3>
       <p class="text-white text-xl md:text-3xl px-4 sm:px-8 md:px-[90px]">
@@ -243,7 +243,7 @@ l'univers e-sportif !</p>
     <div class="w-[5px] h-auto md:h-[550px] bg-gradient-to-b from-[#00C9C6] to-[#000011] hidden md:block"></div>
 
     <!-- Étape 3 -->
-    <div class="text-white text-center flex-1">
+    <div class="text-white text-center w-full md:flex-1">
       <div class="text-[200px] md:text-[300px] font-bold opacity-10">3</div>
       <h3 class="text-3xl md:text-[40px] font-bold">CHERCHEZ LA VICTOIRE</h3>
       <p class="text-white text-xl md:text-3xl px-4 sm:px-8 md:px-[90px]">
