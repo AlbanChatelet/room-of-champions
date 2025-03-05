@@ -139,38 +139,53 @@ onMounted(() => {
       </template>
     </button>
 
-    <!-- Menu Mobile avec ombre en bas et transition -->
     <transition name="slide-fade">
-      <div v-if="isMenuOpen" class="absolute top-24 right-0 w-full fond_header z-50 flex flex-col p-4 2xl:hidden shadow-lg shadow-gray-500/50">
-        <nav class="flex flex-col items-start space-y-2 font-spartan w-full">
-          <button class="text-[#00C9C6] text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full">
-            JEUX
-          </button>
-          <button class="text-[#00C9C6] text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full">
-            EQUIPES
-          </button>
-          <RouterLink to="/equipes">
-          <button class="text-[#00C9C6] text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full">
-            PLANNING
-          </button>
-        </RouterLink>
-          <button class="text-[#00C9C6] text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full">
-            ÉVÉNEMENTS
-          </button>
-          <button class="text-[#00C9C6] text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full">
-            MATÉRIEL
-          </button>
-          <button class="text-[#00C9C6] text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full">
-            CONTACT
-          </button>
-          <button class="text-[#00C9C6] text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full">
-            INSCRIPTION
-          </button>
-          <button class="text-[#00C9C6] text-lg font-source-code-pro font-bold py-2 w-full">
-            CONNEXION
-          </button>
-        </nav>
-      </div>
-    </transition>
+  <div v-if="isMenuOpen" class="absolute top-24 right-0 w-full fond_header z-50 flex flex-col items-center p-4 2xl:hidden shadow-lg shadow-gray-500/50">
+    <nav class="flex flex-col items-center space-y-2 font-spartan w-full">
+      <RouterLink to="/Jeux" class="w-full">
+        <button class="text-[#00C9C6] text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full text-center">
+          JEUX
+        </button>
+      </RouterLink>
+      <RouterLink to="/equipes" class="w-full">
+        <button class="text-[#00C9C6] text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full text-center">
+          EQUIPES
+        </button>
+      </RouterLink>
+      <RouterLink to="/planning" class="w-full">
+        <button class="text-[#00C9C6] text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full text-center">
+          PLANNING
+        </button>
+      </RouterLink>
+      <RouterLink to="/Event" class="w-full">
+        <button class="text-[#00C9C6] text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full text-center">
+          ÉVÉNEMENTS
+        </button>
+      </RouterLink>
+      <RouterLink to="/Materiel" class="w-full">
+        <button class="text-[#00C9C6] text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full text-center">
+          MATÉRIEL
+        </button>
+      </RouterLink>
+      <RouterLink to="/Contact" class="w-full">
+        <button class="text-[#00C9C6] text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full text-center">
+          CONTACT
+        </button>
+      </RouterLink>
+      <RouterLink to="/Auth" class="w-full">
+        <button class="text-[#00C9C6] text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full text-center">
+          INSCRIPTION
+        </button>
+      </RouterLink>
+      <RouterLink to="/Auth" class="w-full">
+        <button class="text-[#00C9C6] text-lg font-source-code-pro font-bold py-2 w-full text-center">
+          CONNEXION
+        </button>
+      </RouterLink>
+    </nav>
+  </div>
+</transition>
+
+
   </header>
 </template>
