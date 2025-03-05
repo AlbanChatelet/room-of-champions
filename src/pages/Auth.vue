@@ -1,28 +1,33 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { ref } from 'vue'
 import LoginForm from '@/components/loginForm.vue'
 import RegisterForm from '@/components/registerForm.vue'
 
-const isRegistered = ref(false)
+const showLoginForm = ref(false)
 
-// Fonction pour changer d'état après l'inscription
+// Fonction pour passer à la page de login
+const onShowLoginForm = () => {
+  showLoginForm.value = true
+}
+
+// Fonction pour revenir à la page d'inscription après l'inscription réussie
 const onRegisterSuccess = () => {
-  isRegistered.value = true
+  showLoginForm.value = false
 }
 </script>
 
 <template>
   <section class="fond_auth">
-    
     <div class="container mx-auto py-10">
       <div class="text-center pb-6">
-        <h1 class="text-4xl font-black lg:text-7xl text-white font-mulish shadow-text">CREER UN <span class="text-[#8B44FF]">COMPTE</span></h1>
+        <h1 class="text-4xl font-black lg:text-7xl text-[#8B44FF] font-mulish shadow-text">
+          {{ showLoginForm ? 'CONNEXION' : 'CREER UN COMPTE' }}
+        </h1>
       </div>
       
-      <div class="">
-        <div v-if="!isRegistered">
-          <RegisterForm @register-success="onRegisterSuccess" />
+      <div>
+        <div v-if="!showLoginForm">
+          <RegisterForm @register-success="onRegisterSuccess" @show-login="onShowLoginForm" />
         </div>
         <div v-else>
           <LoginForm />
@@ -37,7 +42,6 @@ const onRegisterSuccess = () => {
   background-image: url('@/assets/fond_de_con.webp');
   background-size: cover;
 }
-
 
 .shadow-text {
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);

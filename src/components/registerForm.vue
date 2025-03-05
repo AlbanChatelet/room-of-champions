@@ -5,7 +5,7 @@ import LoginForm from '@/components/loginForm.vue'
 
 const acceptCookies = ref(false)
 
-const emit = defineEmits(['register-success'])
+const emit = defineEmits(['register-success', 'show-login']) // Ajout de l'événement 'show-login'
 const username = ref('')
 const email = ref('')
 const password = ref('')
@@ -30,13 +30,12 @@ const handleRegister = async () => {
 }
 
 const showLoginComponent = () => {
-  showLogin.value = true
+  emit('show-login') // Emission de l'événement pour afficher le formulaire de connexion
 }
 </script>
 
-
 <template>
-  <section class="rounded-3xl overflow-hidden">
+  <section class="rounded-3xl overflow-hidden shadow-2xl">
     <div class="flex h-screen rounded-xl">
       <!-- Partie gauche pour l'image -->
       <div class="w-1/2 bg-[#0F0F1D] flex justify-center items-center rounded-l-xl">
@@ -113,9 +112,9 @@ const showLoginComponent = () => {
           <p v-if="errorMessage" class="text-red-500">{{ errorMessage }}</p>
           
           <p class="mt-6">
-          Déjà un compte ? 
-          <button @click="showLoginComponent" class="text-[#1ac0b8] hover:underline">Connectez-vous ici</button>
-        </p>
+            Déjà un compte ? 
+            <button @click="showLoginComponent" class="text-[#1ac0b8] hover:underline">Connectez-vous ici</button>
+          </p>
         </form>
 
         <LoginForm v-if="showLogin" />

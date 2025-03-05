@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { loginWithEmail } from '@/backend'
-import { useRouter } from 'vue-router'
 
-const router = useRouter()
+
+
 const email = ref('')
 const password = ref('')
 const errorMessage = ref<string | null>(null)
@@ -20,36 +20,48 @@ const handleLogin = async () => {
     errorMessage.value = "Échec de la connexion. Vérifiez vos informations."
   }
 }
+
+// Fonction pour revenir au formulaire d'inscription
+
 </script>
 
 <template>
-  <div class="login-form bg-[#303030] p-8 rounded-lg border-2 border-[#1AB2C0] text-white">
-    <h2 class="text-2xl font-bold text-[#1AB2C0] mb-6 font-mulish">Connexion</h2>
-    <form @submit.prevent="handleLogin" class="flex flex-col space-y-4">
-      <input
-        type="email"
-        v-model="email"
-        placeholder="Email"
-        required
-        class="border border-[#1AB2C0] bg-[#505050] text-white p-3 rounded focus:outline-none focus:ring-2 focus:ring-[#1a91c0]"
-      />
-      <input
-        type="password"
-        v-model="password"
-        placeholder="Mot de passe"
-        required
-        class="border border-[#1AB2C0] bg-[#505050] text-white p-3 rounded focus:outline-none focus:ring-2 focus:ring-[#1a91c0]"
-      />
-      <button
-        type="submit"
-        class="bg-[#1AB2C0] text-[#303030] font-bold py-2 rounded hover:bg-[#1a91c0] transition-colors duration-200"
-      >
-        Connexion
-      </button>
-      <p v-if="errorMessage" class="text-red-500">{{ errorMessage }}</p>
-    </form>
-  </div>
+  <section class="rounded-3xl overflow-hidden ">
+    <div class="login-form bg-[#0F0F1D] pt-16 p-8 rounded-lg text-white max-w-[800px] mx-auto shadow-2xl">
+      <form @submit.prevent="handleLogin" class="flex flex-col space-y-4">
+        <div class="relative pb-2 border-b border-white">
+          <input
+            type="email"
+            v-model="email"
+            placeholder="Email"
+            required
+            class="input-no-outline bg-[#0F0F1D] text-white text-3xl p-3 w-full rounded"
+          />
+        </div>
+        <div class="relative pb-2 pt-16 border-b border-white">
+          <input
+            type="password"
+            v-model="password"
+            placeholder="Mot de passe"
+            required
+            class="input-no-outline bg-[#0F0F1D] text-white text-3xl p-3 w-full rounded"
+          />
+        </div>
+        <div class="pb-12"></div>
+        <button
+          type="submit"
+          class="bg-[#8B44FF] text-white w-[400px] mx-auto font-bold py-4 text-3xl rounded hover:bg-[#6f37c9] transition-colors duration-200"
+        >
+          VALIDER
+        </button>
+        <p v-if="errorMessage" class="text-red-500">{{ errorMessage }}</p>
+      </form>
+
+      
+    </div>
+  </section>
 </template>
+
 
 <style>
 .font-mulish {
