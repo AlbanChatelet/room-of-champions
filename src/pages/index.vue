@@ -272,9 +272,11 @@ l'univers e-sportif !</p>
       
     </div>
     <div class="flex justify-center pt-8 pb-8">
-    <button class="bg-[#FFFFFF] h-[60px] text-[#00C9C6] font-bold py-2 px-6 rounded-[16px] text-2xl shadow-xl transform transition-transform duration-300 hover:scale-105">
-      JUSTE ICI !
-    </button>
+    <RouterLink to="/materiel">
+      <button class="bg-[#FFFFFF] h-[60px] text-[#00C9C6] font-bold py-2 px-6 rounded-[16px] text-2xl shadow-xl transform transition-transform duration-300 hover:scale-105">
+        JUSTE ICI !
+      </button>
+    </RouterLink>
   </div>
 </section>
 
