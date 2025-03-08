@@ -95,7 +95,7 @@ onMounted(() => {
           </RouterLink>
         </li>
         <li>
-          <RouterLink to="/" class="text-black  hover:text-white transition duration-300 ease-in-out rounded-lg flex items-center justify-center font-source-code-pro font-bold">
+          <RouterLink to="/Materiel" class="text-black  hover:text-white transition duration-300 ease-in-out rounded-lg flex items-center justify-center font-source-code-pro font-bold">
             MATÉRIEL
           </RouterLink>
         </li>
