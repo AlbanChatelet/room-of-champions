@@ -56,5 +56,12 @@ Logitech G Pro X Gaming. Entrez dans une symphonie sonore avec le Logitech G Pro
 Ecran odyssez G3 24 “ led 165 Hz. Plongez au cœur de l'action avec le Samsung Odyssey G3 24 pouces, l'écran pensé pour les gamers exigeants et les créatifs audacieux. Grâce à son design futuriste et ses performances de pointe, il ne se contente pas de suivre le rythme... il le dicte.            </h2>
         </div>
     </div>
+    <div class="flex justify-center items-center mt-32">
+        <div class="relative bg-[#00C9C6] w-full h-32 border-2 border-white flex justify-center items-center">
+            <div class="absolute bg-white w-80 h-64 flex justify-center items-center rounded-3xl">
+                <span class="font-poppins font-black text-4xl text-[#000011]">COMPOSANTS</span>
+            </div>
+        </div>
+    </div>
 </main>
 </template>
