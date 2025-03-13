@@ -38,7 +38,7 @@ const submit = async () => {
       throw new Error('User is not authenticated')
     }
     await pb.collection('users').update(user.id, formData)
-    router.push('/profile') // Redirection après la mise à jour
+    router.push('/Profil') // Redirection après la mise à jour
   } catch (error) {
     console.error('Error updating profile:', error)
   }

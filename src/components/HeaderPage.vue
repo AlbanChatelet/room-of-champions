@@ -107,22 +107,16 @@ onMounted(() => {
       </ul>
 
       <div v-if="isLoggedIn" class="relative mr-48">
-        <ProfileIcon @click="toggleProfileMenu" class="w-20 h-20 cursor-pointer" />
+  <RouterLink :to="isLoggedIn ? '/Profil' : '/Auth'">
+  <ProfileIcon class="w-20 h-20 cursor-pointer" />
+</RouterLink>
 
-        <div v-if="isProfileMenuOpen" class="absolute top-full right-0 bg-white shadow-md rounded-lg mt-2 p-4 z-50">
-          <p class="text-black font-bold">Bonjour, {{ user?.username || 'Utilisateur' }}</p>
-          <button @click="logout" class="mt-2 bg-red-500 text-white px-4 py-2 rounded-md">
-            Déconnexion
-          </button>
-        </div>
-      </div>
+</div>
 
       <div v-if="!isLoggedIn" class="flex space-x-4 mr-12">
-        <RouterLink to="/Auth" class="bg-[#00C9C6] h-[60px] text-black font-bold py-2 px-6 rounded-[16px] shadow-md hover:bg-[#7aecea] transition-all duration-300 pt-4">
-          INSCRIPTION
-        </RouterLink>
+
         <RouterLink to="/Auth" class="bg-[#FFFFFF] h-[60px] text-[#00C9C6] font-bold py-2 px-6 rounded-[16px] shadow-md hover:bg-[#e4ffff] transition-all duration-300 pt-4">
-          CONNEXION
+          AUTHENTIFICATION
         </RouterLink>
       </div>
     </nav>
@@ -174,14 +168,10 @@ onMounted(() => {
       </RouterLink>
       <RouterLink to="/Auth" class="w-full">
         <button class="text-[#00C9C6] text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full text-center">
-          INSCRIPTION
+          AUTHENTIFICATION
         </button>
       </RouterLink>
-      <RouterLink to="/Auth" class="w-full">
-        <button class="text-[#00C9C6] text-lg font-source-code-pro font-bold py-2 w-full text-center">
-          CONNEXION
-        </button>
-      </RouterLink>
+      
     </nav>
   </div>
 </transition>
