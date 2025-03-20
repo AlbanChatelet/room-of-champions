@@ -73,6 +73,11 @@ onUnmounted(() => {
       LA LISTE COMPLETE
     </h1>
     <div class="w-full md:w-[502px] h-[3px] bg-[#00c9c6] ml-4 md:ml-16"></div>
-
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+      <div v-for="(image, index) in images" :key="index" class="text-center">
+        <img :src="image.src" :alt="image.alt" class="w-full h-48 md:h-64 object-cover rounded-lg">
+        <h3 class="text-white font-bold mt-2">{{ image.alt }}</h3>
+      </div>
+    </div>
   </main>
 </template>
