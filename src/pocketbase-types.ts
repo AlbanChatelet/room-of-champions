@@ -56,6 +56,7 @@ export type EquipesRecord = {
 }
 
 export type JeuxRecord = {
+	icone?: string
 	image?: string
 	nom_jeux?: string
 }

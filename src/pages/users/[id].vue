@@ -15,7 +15,9 @@ const userTeam = ref<EquipesResponse | null>(null) // Stocker l'équipe de l'uti
 // Fonction pour récupérer les détails de l'utilisateur
 const fetchUser = async () => {
   try {
-    const response = await pb.collection('users').getOne<UsersResponse>(route.params.id)
+    const response = await pb.collection('users').getOne<UsersResponse>(route.params.id, {
+      expand: 'jeuxFavoris' // Permet de récupérer l'objet jeu lié
+    })
     user.value = response
 
     // Récupérer l'équipe de l'utilisateur
@@ -25,6 +27,13 @@ const fetchUser = async () => {
   }
 }
 
+// Fonction pour générer l'URL de l'icône du jeu favori
+const getGameIconUrl = (game: any) => {
+  if (game && game.icone) {
+    return pb.getFileUrl(game, game.icone)
+  }
+  return undefined
+}
 // Fonction pour récupérer l'équipe de l'utilisateur
 const fetchUserTeam = async (userId: string) => {
   try {
@@ -81,6 +90,26 @@ fetchUser()
         Cet utilisateur n'appartient à aucune équipe.
       </div>
     </div>
+    <!-- Affichage du jeu favori -->
+<!-- Affichage du jeu favori -->
+<div v-if="user?.expand?.jeuxFavoris" class="mt-4 text-center">
+  <p class="text-md font-semibold">Jeu favori :</p>
+  
+  <!-- Affichage de l'icône si elle existe -->
+  <div v-if="getGameIconUrl(user.expand.jeuxFavoris)" class="mt-2">
+    <img
+      :src="getGameIconUrl(user.expand.jeuxFavoris)"
+      alt="Icône du jeu favori"
+      class="w-16 h-16 mx-auto rounded-lg shadow-md"
+    />
+  </div>
+</div>
+<div v-else class="mt-4 text-center text-gray-500">
+  Cet utilisateur n'a pas encore de jeu favori.
+</div>
+<div v-else class="mt-4 text-center text-gray-500">
+  Cet utilisateur n'a pas encore de jeu favori.
+</div>
 
     <!-- Bouton pour revenir à la liste des utilisateurs -->
     <div class="mt-6">
