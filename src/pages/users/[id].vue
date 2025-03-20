@@ -64,61 +64,71 @@ fetchUser()
 </script>
 
 <template>
-  <div class="container mx-auto py-10">
-    <h1 class="text-2xl mb-4">Détails de l'utilisateur</h1>
+  <section class="fond_equipe py-12 px-12">
+    <section class="bg-white bg-opacity-10 rounded-tl-[80px] p-8">
+      <div class="flex flex-col md:flex-row justify-center items-center gap-8">
+        <!-- Partie gauche : Avatar + Nom -->
+        <div class="md:w-1/2 flex flex-col items-center">
+          <div v-if="getAvatarUrl(user)" class="mb-4">
+            <img
+              :src="getAvatarUrl(user)"
+              alt="Avatar de l'utilisateur"
+              class="w-48 h-48 md:w-[600px] md:h-[600px] object-cover rounded-xl"
+            />
+          </div>
+          <p class="text-center text-3xl md:text-7xl font-bold mb-4 text-white">
+            {{ user.username }}
+          </p>
+        </div>
 
-    <div v-if="user" class="border p-4 rounded-lg shadow-md">
-      <!-- Afficher l'avatar de l'utilisateur s'il existe -->
-      <div v-if="getAvatarUrl(user)" class="mb-4">
-        <img
-          :src="getAvatarUrl(user)"
-          alt="Avatar de l'utilisateur"
-          class="w-24 h-24 rounded-full object-cover mx-auto"
-        />
-      </div>
-      <div class="text-center">
-        <p class="text-lg font-semibold">{{ user.username }}</p>
-        <p class="text-sm text-gray-500">{{ user.email }}</p>
+        <!-- Partie droite : Équipe + Jeu Favori -->
+        <div class="md:w-1/2">
+          <!-- Affichage de l'équipe -->
+          <div v-if="userTeam">
+  <p class="text-3xl md:text-7xl font-bold mb-4 text-white">EQUIPE</p>
+  <p class="text-3xl md:text-7xl font-light mb-4 text-white">{{ userTeam.nom }}</p>
+  <hr class="border-t-2 border-white opacity-50 mb-4">
+  <p class="text-3xl md:text-xl font-light mb-4 text-white">Description : {{ userTeam.description }}</p>
+  <hr class="border-t-2 border-white opacity-50 mb-4">
+</div>
+          <div v-else class="text-gray-500">
+            Cet utilisateur n'appartient à aucune équipe.
+          </div>
+
+          <!-- Affichage du jeu favori -->
+          <div v-if="user?.expand?.jeuxFavoris" class="mt-4">
+            <p class="text-3xl md:text-7xl font-bold mb-4 text-white md:pb-12">JEU FAVORIS</p>
+            
+            <div v-if="getGameIconUrl(user.expand.jeuxFavoris)" class="mt-2">
+              <img
+                :src="getGameIconUrl(user.expand.jeuxFavoris)"
+                alt="Icône du jeu favori" 
+                class="w-16 h-16 md:w-[250px] md:h-[250px] rounded-lg shadow-md md:mb-24"
+              />
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Afficher l'équipe de l'utilisateur -->
-      <div v-if="userTeam" class="mt-4 text-center">
-        <p class="text-md font-semibold">Équipe :</p>
-        <p class="text-lg font-bold text-blue-600">{{ userTeam.nom }}</p>
+      <!-- Bouton retour -->
+      <div class="mt-6 text-center">
+        <button
+          @click="goBackToUsers"
+          class="bg-[#8E3F8D] hover:bg-[#b447b2] text-white md:text-2xl font-bold py-2 px-4 rounded"
+        >
+          Retour à la liste des utilisateurs
+        </button>
       </div>
-      <div v-else class="mt-4 text-center text-gray-500">
-        Cet utilisateur n'appartient à aucune équipe.
-      </div>
-    </div>
-    <!-- Affichage du jeu favori -->
-<!-- Affichage du jeu favori -->
-<div v-if="user?.expand?.jeuxFavoris" class="mt-4 text-center">
-  <p class="text-md font-semibold">Jeu favori :</p>
-  
-  <!-- Affichage de l'icône si elle existe -->
-  <div v-if="getGameIconUrl(user.expand.jeuxFavoris)" class="mt-2">
-    <img
-      :src="getGameIconUrl(user.expand.jeuxFavoris)"
-      alt="Icône du jeu favori"
-      class="w-16 h-16 mx-auto rounded-lg shadow-md"
-    />
-  </div>
-</div>
-<div v-else class="mt-4 text-center text-gray-500">
-  Cet utilisateur n'a pas encore de jeu favori.
-</div>
-<div v-else class="mt-4 text-center text-gray-500">
-  Cet utilisateur n'a pas encore de jeu favori.
-</div>
-
-    <!-- Bouton pour revenir à la liste des utilisateurs -->
-    <div class="mt-6">
-      <button
-        @click="goBackToUsers"
-        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Retour à la liste des utilisateurs
-      </button>
-    </div>
-  </div>
+    </section>
+  </section>
 </template>
+
+
+
+<style>
+.fond_equipe {
+  background-image: url('@/assets/fond_de_con.webp');
+  background-size: cover;
+}
+
+</style>
