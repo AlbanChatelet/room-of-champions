@@ -76,6 +76,7 @@ export type ReservationsRecord = {
 	date?: IsoDateString
 	end_date?: IsoDateString
 	heure?: string
+	jeu_creneau?: RecordIdString
 	nom_reservation?: string
 	participants?: RecordIdString[]
 	status?: ReservationsStatusOptions
@@ -85,6 +86,7 @@ export type ReservationsRecord = {
 export type UsersRecord = {
 	avatar?: string
 	equipe?: RecordIdString
+	jeuxFavoris?: RecordIdString
 	name?: string
 }
 
