@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router/auto'
 import { pb } from '@/backend'
 import type { UsersResponse, EquipesResponse } from '@/pocketbase-types'
@@ -27,18 +27,11 @@ const fetchUser = async () => {
   }
 }
 
-// Fonction pour générer l'URL de l'icône du jeu favori
-const getGameIconUrl = (game: any) => {
-  if (game && game.icone) {
-    return pb.getFileUrl(game, game.icone)
-  }
-  return undefined
-}
 // Fonction pour récupérer l'équipe de l'utilisateur
 const fetchUserTeam = async (userId: string) => {
   try {
     const response = await pb.collection('equipes').getFirstListItem<EquipesResponse>(
-      `membres ?~ "${userId}"` // Filtrer les équipes où l'utilisateur est membre
+      `membres ?~ "${userId}"`
     )
     userTeam.value = response
   } catch (error) {
@@ -46,13 +39,21 @@ const fetchUserTeam = async (userId: string) => {
   }
 }
 
-// Fonction pour générer l'URL de l'avatar
-const getAvatarUrl = (user: UsersResponse) => {
-  if (user.avatar) {
-    return pb.getFileUrl(user, user.avatar)
+// Computed pour l'URL de l'avatar
+const avatarUrl = computed(() => {
+  if (user.value?.avatar) {
+    return pb.getFileUrl(user.value, user.value.avatar)
   }
   return undefined
-}
+})
+
+// Computed pour l'URL de l'icône du jeu favori
+const gameIconUrl = computed(() => {
+  if (user.value?.expand?.jeuxFavoris?.icone) {
+    return pb.getFileUrl(user.value.expand.jeuxFavoris, user.value.expand.jeuxFavoris.icone)
+  }
+  return undefined
+})
 
 // Fonction pour retourner à la page de la liste des utilisateurs
 const goBackToUsers = () => {
@@ -66,12 +67,12 @@ fetchUser()
 <template>
   <section class="fond_equipe py-12 px-12">
     <section class="bg-white bg-opacity-10 rounded-tl-[80px] p-8">
-      <div class="flex flex-col md:flex-row justify-center items-center gap-8">
+      <div v-if="user" class="flex flex-col md:flex-row justify-center items-center gap-8">
         <!-- Partie gauche : Avatar + Nom -->
         <div class="md:w-1/2 flex flex-col items-center">
-          <div v-if="getAvatarUrl(user)" class="mb-4">
+          <div v-if="avatarUrl" class="mb-4">
             <img
-              :src="getAvatarUrl(user)"
+              :src="avatarUrl"
               alt="Avatar de l'utilisateur"
               class="w-48 h-48 md:w-[600px] md:h-[600px] object-cover rounded-xl"
             />
@@ -85,29 +86,31 @@ fetchUser()
         <div class="md:w-1/2">
           <!-- Affichage de l'équipe -->
           <div v-if="userTeam">
-  <p class="text-3xl md:text-7xl font-bold mb-4 text-white">EQUIPE</p>
-  <p class="text-3xl md:text-7xl font-light mb-4 text-white">{{ userTeam.nom }}</p>
-  <hr class="border-t-2 border-white opacity-50 mb-4">
-  <p class="text-3xl md:text-xl font-light mb-4 text-white">Description : {{ userTeam.description }}</p>
-  <hr class="border-t-2 border-white opacity-50 mb-4">
-</div>
+            <p class="text-3xl md:text-7xl font-bold mb-4 text-white">EQUIPE</p>
+            <p class="text-3xl md:text-7xl font-light mb-4 text-white">{{ userTeam.nom }}</p>
+            <hr class="border-t-2 border-white opacity-50 mb-4">
+            <p class="text-3xl md:text-xl font-light mb-4 text-white">Description : {{ userTeam.description }}</p>
+            <hr class="border-t-2 border-white opacity-50 mb-4">
+          </div>
           <div v-else class="text-gray-500">
             Cet utilisateur n'appartient à aucune équipe.
           </div>
 
           <!-- Affichage du jeu favori -->
-          <div v-if="user?.expand?.jeuxFavoris" class="mt-4">
-            <p class="text-3xl md:text-7xl font-bold mb-4 text-white md:pb-12">JEU FAVORIS</p>
-            
-            <div v-if="getGameIconUrl(user.expand.jeuxFavoris)" class="mt-2">
-              <img
-                :src="getGameIconUrl(user.expand.jeuxFavoris)"
-                alt="Icône du jeu favori" 
-                class="w-16 h-16 md:w-[250px] md:h-[250px] rounded-lg shadow-md md:mb-24"
-              />
-            </div>
+          <div v-if="gameIconUrl" class="mt-4">
+            <p class="text-3xl md:text-7xl font-bold mb-4 text-white md:pb-4">JEU FAVORIS</p>
+            <img
+              :src="gameIconUrl"
+              alt="Icône du jeu favori"
+              class="w-16 h-16 md:w-[250px] md:h-[250px] rounded-lg shadow-md md:mb-24"
+            />
           </div>
         </div>
+      </div>
+
+      <!-- Chargement -->
+      <div v-else class="text-center text-white text-2xl">
+        Chargement des données...
       </div>
 
       <!-- Bouton retour -->
@@ -123,12 +126,9 @@ fetchUser()
   </section>
 </template>
 
-
-
 <style>
 .fond_equipe {
   background-image: url('@/assets/fond_de_con.webp');
   background-size: cover;
 }
-
 </style>
