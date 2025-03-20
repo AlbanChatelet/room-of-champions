@@ -63,5 +63,60 @@ Ecran odyssez G3 24 “ led 165 Hz. Plongez au cœur de l'action avec le Samsung
             </div>
         </div>
     </div>
+    <!-- Processeur -->
+    <div class="flex flex-col md:flex-row pt-10 items-center">
+        <div class="md:w-1/2">
+            <h1 class="font-poppins font-black text-2xl md:text-4xl text-white pl-4 md:pl-16 pb-6">
+                <span class="text-9xl m-10">05.</span><span class="text-[#00c9c6] pl-8">PROCESSEUR</span>
+            </h1>
+            <h2 class="font-poppins text-xl md:text-2xl text-white pl-4 md:pl-16 pb-6 w-full">
+                Découvrez la puissance sans limite avec l'Intel Core i7, un processeur doté de 20 cœurs taillé pour répondre aux besoins des gamers acharnés et des créateurs ambitieux. Plus qu’un simple processeur, c’est un moteur d’innovation qui transforme vos sessions de jeu et vos projets en véritables œuvres d’art numérique. Préparez-vous à dominer chaque tâche avec une fluidité inégalée.
+            </h2>
+        </div>
+        <div class="hidden md:block w-[2px] bg-gradient-to-b from-white to-[#000011] mx-8 self-stretch"></div>
+        <img src="@/assets/processeur.png" alt="processeur" class="md:w-1/2 w-full h-auto rounded-3xl mt-6 md:mt-0">
+    </div>
+    
+    <!-- Carte graphique -->
+    <div class="flex flex-col md:flex-row pt-10 items-center">
+        <img src="@/assets/carte_graphique.png" alt="carte graphique" class="md:w-1/2 w-full h-auto rounded-3xl mt-6 md:mt-0">
+        <div class="hidden md:block w-[2px] bg-gradient-to-b from-white to-[#000011] mx-8 self-stretch"></div>
+        <div class="md:w-1/2">
+            <h1 class="font-poppins font-black text-2xl md:text-4xl text-white pl-4 md:pl-16 pb-6">
+                <span class="text-9xl m-10">06.</span><span class="text-[#00c9c6] pl-8">CARTE GRAPHIQUE</span>
+            </h1>
+            <h2 class="font-poppins text-xl md:text-2xl text-white pl-4 md:pl-16 pb-6 w-full">
+                Plongez dans des univers graphiques époustouflants avec la NVIDIA GeForce RTX 4060 Ti, une carte graphique qui ne connaît pas de limites. Que ce soit pour jouer aux titres les plus exigeants ou pour donner vie à vos créations en 3D, cette bête de puissance graphique repousse les frontières de l’imagination. Vous ne jouerez plus... vous vivrez l’action.
+            </h2>
+        </div>
+    </div>
+    
+    <!-- Disque dur -->
+    <div class="flex flex-col md:flex-row pt-10 items-center">
+        <div class="md:w-1/2">
+            <h1 class="font-poppins font-black text-2xl md:text-4xl text-white pl-4 md:pl-16 pb-6">
+                <span class="text-9xl m-10">07.</span><span class="text-[#00c9c6] pl-8">DISQUE DUR</span>
+            </h1>
+            <h2 class="font-poppins text-xl md:text-2xl text-white pl-4 md:pl-16 pb-6 w-full">
+                Offrez à vos données un espace où rapidité rime avec fiabilité grâce au SSD M.2 1 To de Samsung. Capable de charger vos jeux et vos fichiers en un éclair, ce disque dur transforme l’attente en passé. Avec Samsung, ne stockez pas vos projets : faites-les décoller à toute vitesse.
+            </h2>
+        </div>
+        <div class="hidden md:block w-[2px] bg-gradient-to-b from-white to-[#000011] mx-8 self-stretch"></div>
+        <img src="@/assets/disque_dur.png" alt="disque dur" class="md:w-1/2 w-full h-auto rounded-3xl mt-6 md:mt-0">
+    </div>
+    
+    <!-- Alimentation -->
+    <div class="flex flex-col md:flex-row pt-10 items-center">
+        <img src="@/assets/alimentation.png" alt="alimentation" class="md:w-1/2 w-full h-auto rounded-3xl mt-6 md:mt-0">
+        <div class="hidden md:block w-[2px] bg-gradient-to-b from-white to-[#000011] mx-8 self-stretch"></div>
+        <div class="md:w-1/2">
+            <h1 class="font-poppins font-black text-2xl md:text-4xl text-white pl-4 md:pl-16 pb-6">
+                <span class="text-9xl m-10">08.</span><span class="text-[#00c9c6] pl-8">ALIMENTATION</span>
+            </h1>
+            <h2 class="font-poppins text-xl md:text-2xl text-white pl-4 md:pl-16 pb-6 w-full">
+                Fournissez à votre machine l'énergie qu'elle mérite avec l'alimentation 1000W MPG. Plus qu’un simple générateur de puissance, c’est le cœur battant de votre setup, prêt à supporter les configurations les plus exigeantes avec une stabilité exemplaire. Jouez, créez et innovez sans jamais regarder en arrière.
+            </h2>
+        </div>
+    </div>
 </main>
 </template>
