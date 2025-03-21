@@ -12,7 +12,13 @@ interface Membre {
   logo?: string;
   portfolio: string;
 }
+const notreGroupeSection = ref<HTMLElement | null>(null);
 
+const scrollToGroupe = () => {
+  if (notreGroupeSection.value) {
+    notreGroupeSection.value.scrollIntoView({ behavior: "smooth" });
+  }
+};
 const membres = ref<Membre[]>([]);
 
 onMounted(async () => {
@@ -40,9 +46,19 @@ onMounted(async () => {
   <section class="fond_apropos pt-32 md:pt-12 pb-32">
     <div class="px-6 md:px-12">
       <h1 class="text-2xl md:text-4xl font-bold text-white">ROOM OF CHAMPIONS,</h1>
+      <div class="flex items-center">
       <h1 class="text-2xl md:text-4xl font-bold text-white">C'EST QUOI ?</h1>
-      <p class="text-white font-light text-sm md:text-2xl md:pl-4">Découvrez qui nous sommes</p>
-      <p class="text-white text-sm md:text-2xl md:pl-4">Le site internet de la salle d’esport de Montbéliard</p>
+      <p 
+  @click="scrollToGroupe"
+  class="text-white font-light text-sm md:text-2xl md:pl-4 mt-2 cursor-pointer relative underline-effect">
+  Découvrez qui nous sommes
+</p>
+
+
+</div>
+
+
+      <p class="text-white text-sm md:text-2xl mt-4">Le site internet de la salle d’esport de Montbéliard</p>
     </div>
 
     <div class="flex justify-center pt-4">
@@ -113,12 +129,13 @@ onMounted(async () => {
     </div>
   </section>
 
-  <section class="fond_groupe">
-    <div class="flex justify-center pt-4">
+  <section ref="notreGroupeSection" class="fond_groupe">
+
+    <div class="flex justify-center pt-12">
       <p class="text-white font-bold text-sm md:text-5xl">NOTRE GROUPE</p>
     </div>
 
-    <div class="flex flex-wrap justify-center gap-8 px-6 pt-8">
+    <div class="flex flex-wrap justify-center gap-8 px-6 pt-8 pb-48">
       <div v-for="membre in membres" :key="membre.id" class="text-center p-6  w-80">
         <img :src="pb.files.getUrl(membre, membre.photo)" alt="Photo" class="w-48 h-48 rounded-full mx-auto mb-4 object-cover">
         <h3 class="text-white text-xl font-bold">
@@ -161,4 +178,21 @@ strong {
   color: #00C9C6;
   font-size: 28px;
 }
+
+.underline-effect::after {
+  content: "";
+  position: absolute;
+  margin-left: 16px;
+  left: 0;
+  bottom: -2px;
+  width: 95%;
+  height: 1px;
+  background-color: white; /* Couleur initiale */
+  transition: background-color 0.3s ease;
+}
+
+.underline-effect:hover::after {
+  background-color: #00C9C6; /* Couleur au survol */
+}
+
 </style>
