@@ -61,7 +61,11 @@ import TwitchIcon from '@/assets/icons/TwitchIcon.vue';
         <a href="#" class="hover:text-black">Home of champions</a>
         <a href="#" class="hover:text-black">FAQ</a>
         <a href="#" class="hover:text-black">Politique de Cookies</a>
-        <a href="#" class="hover:text-black">Mentions légales</a>
+        <li>
+          <RouterLink to="/Mentions" class="hover:text-black">
+            Mentions légales
+          </RouterLink>
+        </li>
         <a href="#" class="hover:text-black">CGU</a>
         <a href="#" class="hover:text-black">Politique de confidentialité</a>
       </div>
