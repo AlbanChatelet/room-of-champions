@@ -11,19 +11,20 @@ const user = pb.authStore.model
 // On récupère le jeu favori de l'utilisateur
 const jeuFavori = ref<string | null>(null)
 
+const iconeJeuFavori = ref<string | null>(null)
+
 onMounted(async () => {
   if (user && user.jeuxFavoris) {
     try {
-      // Récupère directement le jeu à partir de l'ID
+      // Récupération du jeu à partir de son ID
       const jeu = await pb.collection('jeux').getOne(user.jeuxFavoris)
-      jeuFavori.value = jeu.nom_jeux // On récupère directement le nom du jeu
+      iconeJeuFavori.value = jeu.icone // On stocke l'icône du jeu
     } catch (error) {
-      console.error("Erreur lors de la récupération du jeu favori :", error)
-      jeuFavori.value = 'Erreur de récupération du jeu'
+      console.error("Erreur lors de la récupération de l'icône du jeu favori :", error)
+      iconeJeuFavori.value = null // En cas d'erreur, on ne met rien
     }
   }
 })
-
 const logout = () => {
   pb.authStore.clear()
   router.push('/Auth')
@@ -31,49 +32,53 @@ const logout = () => {
 </script>
 
 <template>
-  <section class="fond_auth">
-    <div class="container mx-auto py-10">
-      <h1 class="text-3xl font-bold text-blue-600 mb-6">Mon profil</h1>
-      <section class="bg-[#0F0F1D] rounded-l-xl">
+  <section class="pt-32 md:pt-0 fond_auth py-12 px-4 md:px-72 min-h-screen flex flex-col justify-between">
+    <section class="bg-white bg-opacity-10 rounded-tl-[80px] p-8 flex-grow">
+      <div v-if="user" class="flex flex-col md:flex-row justify-center items-center gap-8">
+        <div class="flex flex-col items-center">
+          <ImgPb 
+            v-if="user.avatar" 
+            :record="{ id: user.id, collectionName: 'users' }" 
+            :filename="user.avatar"
+            class="w-48 h-48 md:w-[600px] md:h-[300px] object-cover rounded-xl"
+          />
+          <ProfileIcon v-else class="md:w-[600px] md:h-[600px]" />
 
-        <div v-if="user" class="p-6 rounded-lg shadow-md">
-          <div class="flex items-center space-x-4">
-            <ImgPb 
-              v-if="user.avatar" 
-              :record="{ id: user.id, collectionName: 'users' }" 
-              :filename="user.avatar"
-              class="w-24 h-24 rounded-full border"
-            />
-            <ProfileIcon v-else class="w-24 h-24" /> <!-- Icône par défaut -->
-
-            <div>
-              <p class="text-lg font-semibold text-white">{{ user.username }}</p>
-              <p class="text-gray-600">{{ user.email }}</p>
-            </div>
-          </div>
-
-          <!-- Affichage du jeu favori -->
-          <div class="mt-6">
-            <h2 class="text-xl font-semibold text-white mb-4">Jeu favori</h2>
-            <p v-if="jeuFavori" class="text-white">{{ jeuFavori }}</p>
-            <p v-else class="text-gray-600">Aucun jeu favori trouvé</p>
-          </div>
-
-          <div class="mt-6 space-x-2">
-            <router-link to="/ProfileEdit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md">
-              Modifier mon profil
-            </router-link>
-            <button @click="logout" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md">
-              Déconnexion
-            </button>
+          <div>
+            <p class="text-center text-3xl md:text-7xl font-bold mb-4 text-white">
+              {{ user.username }}
+            </p>
           </div>
         </div>
 
-        <p v-else class="text-gray-600">Vous devez être connecté pour voir cette page.</p>
-      </section>
+        <div class="">
+          <h2 class="text-3xl md:text-7xl font-bold mb-4 text-white">Jeu favori</h2>
+          <div v-if="iconeJeuFavori">
+            <ImgPb 
+              :record="{ id: user.jeuxFavoris, collectionName: 'jeux' }" 
+              :filename="iconeJeuFavori"
+              class="w-48 h-48 md:w-96 md:h-96 object-cover"
+            />
+          </div>
+          <p v-else class="text-gray-600">Aucun jeu favori trouvé</p>
+        </div>
+      </div>
+
+      <p v-else class="text-gray-600">Vous devez être connecté pour voir cette page.</p><!-- Boutons en bas de la page -->
+    <div class="flex justify-center mt-12">
+      <router-link to="/ProfileEdit" class="bg-[#8E3F8D] hover:bg-[#be53bd] text-white font-bold py-2 px-4 rounded-md mx-2 md:text-3xl">
+        Modifier mon profil
+      </router-link>
+      <button @click="logout" class="bg-white text-[#8E3F8D] font-bold py-2 px-4 rounded-md mx-2 md:text-3xl">
+        Déconnexion
+      </button>
     </div>
+    </section>
+
+    
   </section>
 </template>
+
 
 <style>
 .fond_auth {

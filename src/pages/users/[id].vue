@@ -57,7 +57,7 @@ const gameIconUrl = computed(() => {
 
 // Fonction pour retourner à la page de la liste des utilisateurs
 const goBackToUsers = () => {
-  router.push('/users')
+  router.push('/equipes')
 }
 
 // Charger les données au montage
