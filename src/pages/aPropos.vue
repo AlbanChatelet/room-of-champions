@@ -10,6 +10,7 @@ interface Membre {
   Specialite: string;
   photo: string;
   logo?: string;
+  portfolio: string;
 }
 
 const membres = ref<Membre[]>([]);
@@ -114,17 +115,28 @@ onMounted(async () => {
 
   <section class="fond_groupe">
     <div class="flex justify-center pt-4">
-      <p class="text-white font-bold text-sm md:text-2xl">NOTRE GROUPE</p>
+      <p class="text-white font-bold text-sm md:text-5xl">NOTRE GROUPE</p>
     </div>
 
     <div class="flex flex-wrap justify-center gap-8 px-6 pt-8">
       <div v-for="membre in membres" :key="membre.id" class="text-center p-6  w-80">
-        <img :src="pb.files.getUrl(membre, membre.photo)" alt="Photo" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
-        <h3 class="text-white text-xl font-bold">{{ membre.Prenom_Nom }}</h3>
+        <img :src="pb.files.getUrl(membre, membre.photo)" alt="Photo" class="w-48 h-48 rounded-full mx-auto mb-4 object-cover">
+        <h3 class="text-white text-xl font-bold">
+  <a :href="membre.portfolio" target="_blank" rel="noopener noreferrer" class="hover:underline">
+    {{ membre.Prenom_Nom }}
+  </a>
+</h3>
+
         <p class="text-[#00C9C6] text-lg">{{ membre.Specialite }}</p>
-        <img v-if="membre.logo" :src="pb.files.getUrl(membre, membre.logo)" alt="Logo" class="w-12 h-12 mx-auto mt-4">
+        <img v-if="membre.logo" :src="pb.files.getUrl(membre, membre.logo)" alt="Logo" class="w-28 h-24 mx-auto mt-4">
+
+        <a :href="membre.portfolio" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 px-4 py-2 bg-[#00C9C6] bg-opacity-20 text-opacity-100 text-white font-bold rounded-lg hover:bg-[#008b8a] transition">
+    Portfolio
+  </a>
       </div>
+      
     </div>
+    
   </section>
 
 </template>

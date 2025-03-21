@@ -43,6 +43,7 @@ export type NousRecord = {
 	Specialite?: string
 	logo?: string
 	photo?: string
+	portfolio?: string
 }
 
 export type EquipesRecord = {
