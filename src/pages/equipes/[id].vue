@@ -90,7 +90,7 @@ const getIconUrl = (equipe: EquipesResponse) => {
 </script>
 
 <template>
-  <section class="fond_equipe py-12 px-12">
+  <section class="fond_equipe py-12 px-12 md:pt-0 pt-32">
     <section class="bg-white bg-opacity-10 rounded-tl-[80px]">
   <div v-if="equipe" class="container mx-auto pt-10 px-4">
     <div class="flex items-center justify-between">
@@ -99,7 +99,7 @@ const getIconUrl = (equipe: EquipesResponse) => {
     v-if="equipe.icone" 
     :src="getIconUrl(equipe)" 
     :alt="`Icône de ${equipe.nom}`" 
-    class="w-[185px] h-[185px] object-cover rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.85)]"
+    class="md:w-[185px] md:h-[185px] w-24 h-24 object-cover rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.85)]"
 />
 
 </div>
@@ -116,7 +116,7 @@ const getIconUrl = (equipe: EquipesResponse) => {
     <div 
       v-for="utilisateur in equipe.expand?.membres" 
       :key="utilisateur.id" 
-      class="bg-[#8B44FF] text-white rounded-tl-[60px] shadow-xl p-4 flex flex-col items-center justify-between md:w-[300px] md:h-[300px] transform transition-transform duration-300 hover:scale-105"
+      class="bg-[#8B44FF] text-white rounded-tl-[60px] shadow-xl mt-6 md:mt-0 p-4 flex flex-col items-center justify-between md:w-[300px] md:h-[300px] transform transition-transform duration-300 hover:scale-105"
     >
     <!-- Nom -->
       <h3 class="font-bold text-lg md:text-2xl">

@@ -17,7 +17,7 @@ const onRegisterSuccess = () => {
 </script>
 
 <template>
-  <section class="fond_auth">
+  <section class="fond_auth mt-28 md:mt-0">
     <div class="container mx-auto py-10">
       <div class="text-center pb-6">
         <h1 class="text-4xl font-black lg:text-7xl text-[#8B44FF] font-mulish shadow-text">

@@ -1,10 +1,10 @@
 <template>
-  <section class="bg-black">
+  <section class="bg-black md:mt-0 mt-28">
     <div class="pl-16 py-12">
-      <h1 class="font-poppins font-black text-4xl text-white pb-6">
+      <h1 class="font-poppins font-black text-2xl md:text-4xl text-white pb-6">
         LE PLANNING CHEZ HOME OF CHAMPIONS
       </h1>
-      <div class="w-[502px] h-[3px] bg-[#8B44FF]"></div>
+      <div class="md:w-[502px] w-64 h-[3px] bg-[#8B44FF]"></div>
     </div>
 
     <section class="max-w-md mx-auto p-6 bg-[#8B44FF] text-white shadow-lg rounded-lg">

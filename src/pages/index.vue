@@ -52,7 +52,7 @@ onMounted(() => {
 
 <template>
   <main>
-    <div class="relative mt-24 md:mt-0">
+    <div class="relative mt-28 md:mt-0">
       <!-- Image de couverture -->
       <img src="../assets/cover.webp" alt="Image de fond" class="w-full">
 
@@ -63,10 +63,10 @@ onMounted(() => {
         <!-- Texte au centre de l'image -->
         <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
           <!-- Titre principal -->
-          <p class="text-[#8B44FF] text-4xl md:text-8xl font-bold mt-16 md:mt-0">ROOM OF CHAMPIONS</p>
+          <p class="text-[#8B44FF] text-4xl md:text-8xl font-bold mt-48 md:mt-0">ROOM OF CHAMPIONS</p>
           <!-- Texte secondaire -->
           <div class="md:px-[450px] px-8">
-            <p class="text-white text-xs md:text-2xl mt-4 mb-4">
+            <p class="text-white text-xl md:text-2xl mt-4 mb-4">
               Découvrez l’univers de l’Esport Universitaire grâce à notre salle conçue
               spécialement pour la pratique de jeux vidéos compétitif et en équipe
             </p>
@@ -74,7 +74,7 @@ onMounted(() => {
         </div>
 
         <!-- Rectangle "LES JEUX PROPOSÉS" positionné sur l'image vague -->
-<div class="absolute px-4 py-1 md:top-[85%] left-8 top-[110%] bg-[#8E3F8D] text-white md:py-4 md:px-36 shadow-lg max-w-fit mt-6 md:mt-0
+<div class="absolute px-4 py-1 md:top-[85%] left-8 top-[110%] bg-[#8E3F8D] text-white md:py-4 md:px-36 shadow-lg max-w-fit mt-48 md:mt-0
             sm:px-10 sm:py-2 sm:text-xl">
   <p class="text-xs font-bold sm:text-2xl">LES JEUX PROPOSÉS</p>
 </div>
@@ -83,7 +83,7 @@ onMounted(() => {
     </div>
 
     <!-- Carrousel -->
-<section class="bg-[#000011] py-16">
+<section class="bg-[#000011] md:py-16 md:pt-0 pt-64">
     <div class="relative max-w-screen-lg mx-auto">
       <!-- Images -->
       <div v-if="images.length" class="flex justify-center">

@@ -35,15 +35,15 @@ const showLoginComponent = () => {
 </script>
 
 <template>
-  <section class="rounded-3xl overflow-hidden shadow-2xl">
+  <section class="rounded-3xl overflow-hidden shadow-2xl ">
     <div class="flex h-screen rounded-xl">
       <!-- Partie gauche pour l'image -->
-      <div class="w-1/2 bg-[#0F0F1D] flex justify-center items-center rounded-l-xl">
-        <img src="@/assets/logo_auth.webp" alt="Logo" class="max-w-[400px]"/>
+      <div class="md:w-1/2 bg-[#0F0F1D] flex justify-center items-center rounded-l-xl ml-4 px-6">
+        <img src="@/assets/logo_auth.webp" alt="Logo" class="md:w-[400px] w-0"/>
       </div>
 
       <!-- Partie droite pour le formulaire -->
-      <div class="w-1/2 bg-[#0F0F1D] pr-8 text-white flex pt-32 rounded-r-xl">
+      <div class="md:w-1/2 bg-[#0F0F1D] pr-8 text-white flex pt-32 rounded-r-xl">
         <form @submit.prevent="handleRegister" class="flex flex-col space-y-6 w-full max-w-2xl">
           <div class="relative pb-2 border-b border-white">
             <input
@@ -51,7 +51,7 @@ const showLoginComponent = () => {
               v-model="username"
               placeholder="Nom d'utilisateur"
               required
-              class="input-no-outline bg-[#0F0F1D] text-white text-3xl p-3 w-full rounded"
+              class="input-no-outline bg-[#0F0F1D] text-white md:text-3xl p-3 w-full rounded"
             />
           </div>
 
@@ -61,7 +61,7 @@ const showLoginComponent = () => {
               v-model="email"
               placeholder="Email"
               required
-              class="input-no-outline bg-[#0F0F1D] text-white text-3xl p-3 w-full rounded"
+              class="input-no-outline bg-[#0F0F1D] text-white md:text-3xl p-3 w-full rounded"
             />
           </div>
 
@@ -71,7 +71,7 @@ const showLoginComponent = () => {
               v-model="password"
               placeholder="Mot de passe"
               required
-              class="input-no-outline bg-[#0F0F1D] text-white text-3xl p-3 w-full rounded"
+              class="input-no-outline bg-[#0F0F1D] text-white md:text-3xl p-3 w-full rounded"
             />
           </div>
 
@@ -81,13 +81,13 @@ const showLoginComponent = () => {
               v-model="passwordConfirm"
               placeholder="Confirmer le mot de passe"
               required
-              class="input-no-outline bg-[#0F0F1D] text-white text-3xl p-3 w-full rounded"
+              class="input-no-outline bg-[#0F0F1D] text-white md:text-3xl p-3 w-full rounded"
             />
           </div>
 
           <button
             type="submit"
-            class="bg-[#8E3F8D] text-4xl text-white font-bold py-4 rounded hover:bg-[#793377] transition-colors duration-200 input-no-outline"
+            class="bg-[#8E3F8D] text-2xl md:text-4xl text-white font-bold py-4 rounded hover:bg-[#793377] transition-colors duration-200 input-no-outline"
           >
             VALIDER
           </button>

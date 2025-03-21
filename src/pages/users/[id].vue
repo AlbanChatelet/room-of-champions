@@ -65,7 +65,7 @@ fetchUser()
 </script>
 
 <template>
-  <section class="fond_equipe py-12 px-12">
+  <section class="fond_equipe py-12 px-12 md:pt-0 pt-32">
     <section class="bg-white bg-opacity-10 rounded-tl-[80px] p-8">
       <div v-if="user" class="flex flex-col md:flex-row justify-center items-center gap-8">
         <!-- Partie gauche : Avatar + Nom -->
@@ -119,7 +119,7 @@ fetchUser()
           @click="goBackToUsers"
           class="bg-[#8E3F8D] hover:bg-[#b447b2] text-white md:text-2xl font-bold py-2 px-4 rounded"
         >
-          Retour à la liste des utilisateurs
+          Retour à la liste des équipes
         </button>
       </div>
     </section>

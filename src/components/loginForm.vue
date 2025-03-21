@@ -26,7 +26,7 @@ const handleLogin = async () => {
 </script>
 
 <template>
-  <section class="rounded-3xl overflow-hidden ">
+  <section class="rounded-3xl overflow-hidden mx-4 md:mx-0 shadow-2xl">
     <div class="login-form bg-[#0F0F1D] pt-16 p-8 rounded-lg text-white max-w-[800px] mx-auto shadow-2xl">
       <form @submit.prevent="handleLogin" class="flex flex-col space-y-4">
         <div class="relative pb-2 border-b border-white">
@@ -50,7 +50,7 @@ const handleLogin = async () => {
         <div class="pb-12"></div>
         <button
           type="submit"
-          class="bg-[#8B44FF] text-white w-[400px] mx-auto font-bold py-4 text-3xl rounded hover:bg-[#6f37c9] transition-colors duration-200"
+          class="bg-[#8B44FF] text-white md:w-[400px] px-12 md:px-0 mx-auto font-bold py-4 text-3xl rounded hover:bg-[#6f37c9] transition-colors duration-200"
         >
           VALIDER
         </button>

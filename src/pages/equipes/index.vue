@@ -26,20 +26,20 @@ const getIconUrl = (equipe: EquipesResponse) => {
 
 <template>
   <main class="py-10 bg-[#000011] ">
-    <div class="pl-16 py-12">
-      <h1 class="font-poppins font-black text-4xl text-white pb-6">
+    <div class="md:pl-16 pl-4 py-12 pt-32 md:pt-0">
+      <h1 class="font-poppins font-black text-xl md:text-4xl text-white pb-6">
         LA LISTE DES EQUIPES INSCRITES
       </h1>
-      <div class="w-[502px] h-[3px] bg-[#00C9C6]"></div>
+      <div class="md:w-[502px] w-72 h-[3px] bg-[#00C9C6]"></div>
     </div>
     <div class="justify-center flex py-12">
       <button class="bg-[#FFFFFF] h-[60px] text-[#00C9C6] font-bold py-2 px-6 rounded-[32px] text-2xl shadow-xl transform transition-transform duration-300 hover:scale-105">
         <RouterLink to="/equipes/edit/:id?">Créer une équipe</RouterLink>
       </button>
     </div>
-    <div class="container mx-auto">
-      <div v-if="equipes.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div v-for="equipe in equipes" :key="equipe.id" class="bg-gradient-to-b from-[#016D72] to-black p-6 rounded-lg border-4 border-white shadow-md hover:shadow-xl flex flex-col justify-between h-full relative rounded-tr-[80px] transform transition-transform duration-300 hover:scale-105">
+    <div class="container md:mx-auto">
+      <div v-if="equipes.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-4 md:mx-0">
+        <div v-for="equipe in equipes" :key="equipe.id" class="bg-gradient-to-b from-[#016D72] to-black p-6 rounded-lg border-4 border-white shadow-md hover:shadow-xl flex flex-col justify-between h-full relative rounded-tr-[80px] md:transform md:transition-transform md:duration-300 md:hover:scale-105">
 
           <!-- Icône de l'équipe (format carré, en haut à gauche) -->
           <img v-if="equipe.icone" :src="getIconUrl(equipe)" :alt="`Icône de ${equipe.nom}`" class="absolute top-4 left-4 w-32 h-32 object-cover  shadow-xl">
