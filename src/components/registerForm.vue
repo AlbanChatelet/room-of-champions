@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { ref, defineEmits } from 'vue'
-import { registerUser } from '@/backend'
-import LoginForm from '@/components/loginForm.vue'
+import { registerUser, pb } from '@/backend'
 
 const acceptCookies = ref(false)
-
-const emit = defineEmits(['register-success', 'show-login']) // Ajout de l'événement 'show-login'
+const emit = defineEmits(['register-success', 'show-login'])
 const username = ref('')
 const email = ref('')
 const password = ref('')
@@ -14,18 +12,20 @@ const errorMessage = ref<string | null>(null)
 const showLogin = ref(false)
 
 const handleRegister = async () => {
-  if (!acceptCookies.value) {
-    errorMessage.value = "Veuillez accepter les CGU"
-    return
-  }
-
   try {
+    // Vérification des champs de base
+    if (!username.value || !email.value || !password.value || password.value !== passwordConfirm.value) {
+      errorMessage.value = "Tous les champs sont obligatoires et les mots de passe doivent correspondre."
+      return
+    }
+
+    // Enregistrement de l'utilisateur
     await registerUser(username.value, email.value, password.value, passwordConfirm.value)
-    errorMessage.value = null
-    alert("Inscription réussie ! Vous pouvez maintenant vous connecter.")
+
+    alert("Inscription réussie !")
     emit('register-success')
   } catch (error) {
-    errorMessage.value = "Échec de l'inscription. Vérifiez vos informations."
+    errorMessage.value = "Échec de l'inscription."
   }
 }
 
@@ -84,23 +84,6 @@ const showLoginComponent = () => {
               class="input-no-outline bg-[#0F0F1D] text-white text-3xl p-3 w-full rounded"
             />
           </div>
-          
-          <div class="flex items-start text-white mt-4 space-x-4">
-            <div
-              class="w-6 h-6 rounded-full border-2 border-white flex items-center justify-center cursor-pointer"
-              @click="acceptCookies = !acceptCookies"
-            >
-              <div
-                class="w-6 h-5 rounded-full bg-[#8E3F8D]"
-                :class="acceptCookies ? 'scale-100' : 'scale-0'"
-                style="transition: transform 0.2s ease"
-              ></div>
-            </div>
-
-            <label class="text-white text-[16px] font-light leading-5">
-              En cliquant sur “Valider”, vous confirmez que vous acceptez les Conditions Générales d'Utilisation (CGU) et la Politique de Confidentialité (lien vers les CGU et la politique de confidentialité).
-            </label>
-          </div>
 
           <button
             type="submit"
@@ -122,8 +105,6 @@ const showLoginComponent = () => {
     </div>
   </section>
 </template>
-
-
 
 <style>
 /* On cible tous les inputs, boutons et checkboxes */

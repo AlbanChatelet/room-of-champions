@@ -32,26 +32,31 @@ export async function loginWithGoogle() {
 
 
   /** Inscription d'un utilisateur */
-  export async function registerUser(
-    username: string,
-    email: string,
-    password: string,
-    passwordConfirm: string
-  ) {
-    try {
-      const newUser = await pb.collection('users').create({
-        username,
-        email,
-        password,
-        passwordConfirm
-      })
-      console.log('Utilisateur créé avec succès :', newUser)
-      return newUser
-    } catch (error) {
-      console.error("Erreur lors de l'inscription :", error)
-      throw error
-    }
+export async function registerUser(
+  username: string,
+  email: string,
+  password: string,
+  passwordConfirm: string,
+  jeuxFavoris: string // Un seul ID de jeu favori
+) {
+  try {
+    console.log('Jeu favori envoyé:', jeuxFavoris)
+
+    const newUser = await pb.collection('users').create({
+      username,
+      email,
+      password,
+      passwordConfirm,
+      jeux_favoris: jeuxFavoris // Envoie un seul ID au lieu d'un tableau
+    })
+    console.log('Utilisateur créé avec succès :', newUser)
+    return newUser
+  } catch (error) {
+    console.error("Erreur lors de l'inscription :", error)
+    throw error
   }
+}
+
 
   /** Connexion de l'utilisateur avec email et mot de passe */
   export async function loginWithEmail(email: string, password: string) {
