@@ -32,7 +32,7 @@ const logout = () => {
 </script>
 
 <template>
-  <section class="pt-32 md:pt-0 fond_auth py-12 px-4 md:px-72 min-h-screen flex flex-col justify-between">
+  <section class="pt-32 md:pt-12 fond_auth py-12 px-4 md:px-72 min-h-screen flex flex-col justify-between">
     <section class="bg-white bg-opacity-10 rounded-tl-[80px] p-8 flex-grow">
       <div v-if="user" class="flex flex-col md:flex-row justify-center items-center gap-8">
         <div class="flex flex-col items-center">

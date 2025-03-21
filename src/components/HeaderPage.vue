@@ -10,39 +10,23 @@ const pb = new PocketBase("http://127.0.0.1:8090");
 const isMenuOpen = ref(false);
 const isLoggedIn = ref(pb.authStore.isValid);
 const user = ref(pb.authStore.model);
-const isProfileMenuOpen = ref(false);
+
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
 
-const toggleProfileMenu = () => {
-  isProfileMenuOpen.value = !isProfileMenuOpen.value;
-};
 
-const logout = () => {
-  pb.authStore.clear();
-  isLoggedIn.value = false;
-  user.value = null;
-  window.location.reload(); // Force le refresh après la déconnexion
-};
-
-const login = async (credentials: { email: string; password: string }) => {
-  try {
-    await pb.collection('users').authWithPassword(credentials.email, credentials.password);
-    window.location.reload(); // Force le refresh après la connexion
-  } catch (error) {
-    console.error("Erreur de connexion :", error);
-  }
-};
-
+// Fonction pour initialiser l'utilisateur lors du montage du composant
 onMounted(() => {
-  isLoggedIn.value = pb.authStore.isValid;
-  user.value = pb.authStore.model;
+  isLoggedIn.value = pb.authStore.isValid;  // Vérifie si l'utilisateur est connecté
+  user.value = pb.authStore.model;          // Récupère le modèle de l'utilisateur
+  console.log(user.value);  // Vérifie la structure de l'utilisateur
 
   pb.authStore.onChange(() => {
     isLoggedIn.value = pb.authStore.isValid;
     user.value = pb.authStore.model;
+    console.log(user.value);  // Vérifie après changement
   });
 });
 </script>
