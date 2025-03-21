@@ -72,9 +72,9 @@ const submit = async (event: Event) => {
 
 
 <template>
-  <main class="min-h-screen flex items-center justify-center bg-[#000011] text-white">
-    <form @submit="submit" class="bg-[#012E40] p-8 rounded-lg shadow-md space-y-6 w-full max-w-3xl">
-      <h1 class="text-3xl font-bold">Créer une équipe</h1>
+  <main class="min-h-screen flex items-center justify-center fond_equipe text-white py-12 px-12">
+    <form @submit="submit" class="bg-white bg-opacity-10 rounded-tl-[80px] p-8">
+      <h1 class="text-3xl md:text-7xl font-bold mb-4 text-white">Créer une équipe</h1>
 
       <div>
         <label for="nom" class="block text-sm font-medium mb-1">Nom de l’équipe</label>
@@ -121,6 +121,7 @@ const submit = async (event: Event) => {
               class="w-4 h-4"
             />
             <span>{{ jeu.nom_jeux }}</span>
+            
           </label>
         </div>
       </div>
@@ -136,3 +137,10 @@ const submit = async (event: Event) => {
     </form>
   </main>
 </template>
+
+<style>
+.fond_equipe {
+  background-image: url('@/assets/fond_de_con.webp');
+  background-size: cover;
+}
+</style>
