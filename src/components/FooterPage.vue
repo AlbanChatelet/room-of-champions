@@ -67,7 +67,9 @@ import TwitchIcon from '@/assets/icons/TwitchIcon.vue';
           <RouterLink to="/CGU" class="hover:text-white">
             CGU
           </RouterLink>
-        <a href="#" class="hover:text-white">Politique de confidentialité</a>
+          <RouterLink to="/Confidentialite" class="hover:text-white">
+            Politique de confidentialité
+          </RouterLink>
       </div>
     </div>
   </footer>
