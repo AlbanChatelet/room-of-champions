@@ -4,11 +4,16 @@ import { ref, onMounted, onUnmounted } from "vue";
 import rocketleague from "@/assets/rocketleague.webp";
 import valorant from "@/assets/valorant.webp";
 import supersmashbros from "@/assets/supersmashbros.webp";
-
+import mariokart from "@/assets/mariokart.webp";
+import lol from "@/assets/lol.webp";
+import brawlstars from "@/assets/brawlstars.webp";
 const images = [
   { src: rocketleague, alt: "Rocket League" },
   { src: valorant, alt: "Valorant" },
   { src: supersmashbros, alt: "Super Smash Bros" },
+  { src: mariokart, alt: "Mario Kart" },
+  { src: lol, alt: "League of Legends" },
+  { src: brawlstars, alt: "Brawl Stars" },
 ];
 
 const currentIndex = ref(0);
@@ -76,7 +81,7 @@ onUnmounted(() => {
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
       <div v-for="(image, index) in images" :key="index" class="text-center">
         <img :src="image.src" :alt="image.alt" class="w-full h-48 md:h-64 object-cover rounded-lg">
-        <h3 class="text-white font-bold mt-2">{{ image.alt }}</h3>
+        
       </div>
     </div>
   </main>

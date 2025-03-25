@@ -1,5 +1,6 @@
 <template>
-    <section class="max-w-2xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+    <section class="fond_equipe py-10">
+    <section class="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
         <h2 class="text-2xl font-semibold text-[#4B0082] mb-4">Mes créneaux réservés</h2>
 
         <div v-if="loading" class="text-gray-500 text-center">Chargement...</div>
@@ -19,7 +20,7 @@
     <div class="text-center py-12">
     <router-link to="/Planning" class="px-4 py-2 bg-[#4B0082] text-white rounded-lg hover:bg-[#6A0DAD]">
     📅 Voir le planning
-</router-link></div>
+</router-link></div></section>
 </template>
 
 <script setup>
@@ -67,3 +68,9 @@ const formatDate = (dateString) => {
 
 onMounted(fetchMyReservations);
 </script>
+<style>
+.fond_equipe {
+  background-image: url('@/assets/fond_de_con.webp');
+  background-size: cover;
+}
+</style>
