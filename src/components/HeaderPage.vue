@@ -40,8 +40,11 @@ onMounted(() => {
 <template>
   <header class="fond_header text-black flex items-center pt-4 pb-0 justify-between fixed md:static top-0 left-0 w-full shadow-md z-50">
     <!-- Profile Icon Mobile -->
-    <div class="pl-4 md:hidden">
-      <ProfileIcon class="w-14 h-14" />
+     <div v-if="isLoggedIn" class="relative pl-4 md:hidden">
+    <RouterLink :to="isLoggedIn ? '/Profil' : '/Auth'">
+    
+        <ProfileIcon class="w-14 h-14" />
+      </RouterLink>
     </div>
 
     <!-- Logo -->
