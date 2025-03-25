@@ -54,7 +54,7 @@ onMounted(() => {
   <main>
     <div class="relative mt-28 md:mt-0">
       <!-- Image de couverture -->
-      <img src="../assets/cover.webp" alt="Image de fond" class="w-full">
+      <img src="../assets/Bg_HOC.webp" alt="Image de fond" class="w-full">
 
       <!-- Image vague avec texte centré -->
       <div class="relative">
