@@ -16,24 +16,24 @@
         </div>
         <div class="flex flex-col md:flex-row justify-between mt-12">
             <div class="bg-gradient-to-b from-black to-[#00c9c6] text-black p-6 md:p-10 w-full md:w-1/3 mx-2 mb-6 md:mb-0 border border-white rounded-3xl">
-                <span class="text-white font-black font-poppins text-2xl md:text-4xl">Tournoi Inter-Universitaire</span>
+                <span class="text-white font-black font-poppins text-2xl md:text-4xl">Événement à venir...</span>
                 <div class="text-white font-poppins mt-4 md:mt-10 text-lg md:text-xl leading-relaxed">
-                    Rassemblez les meilleures équipes universitaires de la région pour une compétition épique sur des jeux phares comme Rocket League, Valorant ou League of Legends. Défendez les couleurs de votre campus et tentez de remporter le titre de Champion Inter-Universitaire.
+                    Pas encore d'événement pour le moment. Restez connecté pour être informé des prochains événements organisés par Home of Champions.
                 </div>
             </div>
             <div class="bg-gradient-to-b from-black to-[#00c9c6] text-black p-6 md:p-10 w-full md:w-1/3 mx-2 mb-6 md:mb-0 border border-white rounded-3xl">
-                <span class="text-white font-black font-poppins text-2xl md:text-4xl">Masterclass Gaming</span>
+                <span class="text-white font-black font-poppins text-2xl md:text-4xl">Événement à venir...</span>
                 <div class="text-white font-poppins mt-4 md:mt-10 text-lg md:text-xl leading-relaxed">
-                    Apprenez les techniques des pros avec des sessions encadrées par des joueurs expérimentés. Cette masterclass propose des ateliers pratiques pour améliorer vos stratégies en jeu, optimiser vos équipements, et découvrir les secrets de l’esport.
-                </div>
-            </div>
+                    Pas encore d'événement pour le moment. Restez connecté pour être informé des prochains événements organisés par Home of Champions.
+            </div></div>
             <div class="bg-gradient-to-b from-black to-[#00c9c6] text-black p-6 md:p-10 w-full md:w-1/3 mx-2 mb-6 md:mb-0 border border-white rounded-3xl">
-                <span class="text-white font-black font-poppins text-2xl md:text-4xl">Retro Gaming Night</span>
+                <span class="text-white font-black font-poppins text-2xl md:text-4xl">Événement à venir...</span>
                 <div class="text-white font-poppins mt-4 md:mt-10 text-lg md:text-xl leading-relaxed">
-                    Plongez dans l’histoire du jeu vidéo avec une soirée dédiée aux classiques. Découvrez ou redécouvrez les jeux iconiques des années 80 et 90 sur des consoles rétro, dans une ambiance conviviale et nostalgique.
+                    Pas encore d'événement pour le moment. Restez connecté pour être informé des prochains événements organisés par Home of Champions.
                 </div>
             </div>
         </div>
+        <section class="hidden">
         <div class="flex justify-center items-center mt-12">
             <span class="bg-[#00c9c6] text-white font-black font-poppins text-2xl md:text-4xl py-2 px-4 mt-12">
             ÉVÉNEMENTS PRÉCÉDENTS
@@ -44,7 +44,7 @@
                 <img src="/img/inauguration_salle.png" alt="inauguration" class="w-full h-auto rounded-3xl">
             </div>
             <div class="w-full md:w-1/2 p-6 md:p-10 mt-4 bg-white rounded-3xl">
-                <div class="text-black font-black font-poppins text-2xl md:text-4xl">ÉVÉNEMENT 1</div>
+                <div class="text-black font-black font-poppins text-2xl md:text-4xl">Événement à venir...</div>
                 <div class="text-black font-poppins mt-4 text-lg md:text-xl leading-relaxed">
                     Une journée portes ouvertes marquant l’inauguration officielle de la salle Home for Champions. Les étudiants ont pu découvrir les équipements dernier cri, participer à des démonstrations de jeux en direct, et s’inscrire à des compétitions exclusives.
                 </div>
@@ -68,6 +68,6 @@
             <div class="w-full md:w-1/2 p-2">
                 <img src="/img/winter_gaming_cup.png" alt="winter gaming cup" class="w-full h-auto rounded-3xl">
             </div>
-        </div>
+        </div></section>
     </main>
 </template>
