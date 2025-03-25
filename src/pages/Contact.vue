@@ -1,4 +1,60 @@
-<!-- eslint-disable vue/multi-word-component-names -->
+<template>
+  <section class="fond_auth min-h-screen flex items-center justify-center px-6">
+    <div class="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-12  shadow-lg p-10 rounded-lg">
+      <!-- Partie gauche - Adresse -->
+      <div class="flex flex-col justify-center">
+      
+        <div class="mt-4 text-lg text-white">
+          <p class="md:text-4xl font-light">Localisation</p>
+          <p class="md:text-4xl font-semibold pt-4">4 place lucien tharradin</p>
+          <p class="md:text-4xl font-semibold pt-4">25200, montbéliard</p>
+        </div>
+
+        <div class="mt-20 text-lg text-white">
+          <p class="md:text-4xl font-light">Contact</p>
+          <p class="md:text-4xl font-semibold pt-4">07 81 03 49 34</p>
+          <p class="md:text-3xl font-semibold pt-4">homeofchampions@gmail.com</p>
+        </div>
+      </div>
+
+      <!-- Partie droite - Formulaire -->
+      <div class="flex flex-col justify-center bg-white p-8 shadow-md">
+        
+        <form @submit.prevent="handleSubmit" class="space-y-4">
+          <!-- Nom -->
+          <div>
+            <label for="name" class="block text-lg font-semibold text-black">Nom</label>
+            <input id="name" v-model="name" type="text" class="w-full h-12 px-4 text-gray-700" />
+            <div class="w-full h-[2px] bg-black mt-2"></div>
+          
+
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label for="email" class="block text-lg font-semibold text-black">Email</label>
+            <input id="email" v-model="email" type="email" class="w-full h-12 px-4 text-gray-700" />
+            <div class="w-full h-[2px] bg-black mt-2"></div>
+          </div>
+
+          <!-- Message -->
+          <div>
+            <label for="message" class="block text-lg font-semibold text-black">Message</label>
+            <textarea id="message" v-model="message" rows="4" class="w-full  px-4 py-2 text-gray-700"></textarea>
+            <div class="w-full h-[2px] bg-black mt-2"></div>
+          </div>
+
+          <!-- Bouton d'envoi -->
+           <div class="flex justify-center">
+          <button type="submit" :disabled="isLoading" class="w-72 h-12 bg-purple-600 text-white text-2xl font-semibold  hover:bg-purple-700 disabled:opacity-50">
+            {{ isLoading ? 'Envoi en cours...' : 'Envoyer le message' }}
+          </button></div>
+        </form>
+      </div>
+    </div>
+  </section>
+</template>
+
 <script setup lang="ts">
 import { ref } from 'vue';
 
@@ -44,72 +100,9 @@ const handleSubmit = async () => {
 };
 </script>
 
-<template>
-  <header class="w-full bg-gradient-to-r from-fond-foncé to-purple-700 py-16 md:py-20">
-    <div class="wrapper flex flex-col items-center justify-center text-center text-white">
-      <h2 class="font-montserrat text-3xl md:text-5xl font-semibold tracking-wide leading-snug">
-        Contactez-moi
-      </h2>
-      <p class="mt-4 text-lg md:text-xl opacity-80">
-        Une question, une idée ou un projet ? N'hésitez pas à me laisser un message.
-      </p>
-    </div>
-  </header>
-
-  <main class="py-12 px-6 md:px-12 bg-fond-clair">
-    <section class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-8">
-      <form @submit.prevent="handleSubmit" class="space-y-6">
-        <!-- Nom -->
-        <div class="relative">
-          <label for="name" class="block text-lg font-semibold text-fond-foncé mb-2">
-            Nom
-          </label>
-          <input
-            id="name"
-            v-model="name"
-            type="text"
-            placeholder="Entrez votre nom"
-            class="w-full h-[50px] text-base md:text-lg font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-lg px-4 focus:outline-none focus:ring-2 focus:ring-purple-500"
-          />
-        </div>
-
-        <!-- Email -->
-        <div class="relative">
-          <label for="email" class="block text-lg font-semibold text-fond-foncé mb-2">
-            Email
-          </label>
-          <input
-            id="email"
-            v-model="email"
-            type="email"
-            placeholder="Entrez votre email"
-            class="w-full h-[50px] text-base md:text-lg font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-lg px-4 focus:outline-none focus:ring-2 focus:ring-purple-500"
-          />
-        </div>
-
-        <!-- Message -->
-        <div class="relative">
-          <label for="message" class="block text-lg font-semibold text-fond-foncé mb-2">
-            Message
-          </label>
-          <textarea
-            id="message"
-            v-model="message"
-            placeholder="Entrez votre message"
-            rows="5"
-            class="w-full text-base md:text-lg font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
-          ></textarea>
-        </div>
-
-        <!-- Bouton d'envoi -->
-        <button
-          :disabled="isLoading"
-          type="submit"
-          class="w-full py-3 text-lg font-semibold text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {{ isLoading ? 'Envoi en cours...' : 'Envoyer' }}
-        </button>
-      </form>
-    </section>
-  </main>
-</template>
+<style>
+.fond_auth {
+  background-image: url('@/assets/fond_de_con.webp');
+  background-size: cover;
+}
+</style>

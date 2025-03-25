@@ -12,22 +12,23 @@ import TwitchIcon from '@/assets/icons/TwitchIcon.vue';
     <div class=" mx-auto px-8 pt-8">
       <div class="grid lg:grid-cols-2 md:gap-96 text-base text-white text-left font-bold">
         <div class="grid grid-cols-2  md:text-2xl text-white">
-        <a href="#" class="hover:text-white">JEUX</a>
-        <a href="#" class="hover:text-white">MATERIEL</a>
-        <a href="#" class="hover:text-white">EQUIPES</a>
-        <a href="#" class="hover:text-white">EVENEMENTS</a>
-        <a href="#" class="hover:text-white">PLANNING</a>
+        <a href="/jeux" class="hover:text-white">JEUX</a>
+        <a href="/materiel" class="hover:text-white">MATERIEL</a>
+        <a href="/equipes" class="hover:text-white">EQUIPES</a>
+        <a href="/events" class="hover:text-white">EVENEMENTS</a>
+        <a href="/planning" class="hover:text-white">PLANNING</a>
         <a href="#" class="hover:text-white"></a>
       <div class="flex">
         <div class="py-4 ">
+          <a href="/Auth">
     <button class="bg-[#8E3F8D] h-[60px] text-[#FFFFFF] font-bold py-2 px-4 rounded-[16px] text-base shadow-xl transform transition-transform duration-300 hover:scale-105">
       INSCRIPTION
-    </button>
+    </button></a>
   </div>
-  <div class="py-4  pl-2">
+  <div class="py-4  pl-2"><a href="/Auth">
     <button class="bg-[#FFFFFF] h-[60px] text-[#8E3F8D] font-bold py-2 px-4 rounded-[16px] text-base shadow-xl transform transition-transform duration-300 hover:scale-105">
       CONNEXION
-    </button>
+    </button></a>
   </div></div>
       </div>
         
