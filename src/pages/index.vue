@@ -199,9 +199,10 @@ l'univers e-sportif !</p>
         <p class="text-[#ffffff] text-2xl md:text-5xl font-bold md:pt-[180px] md:pr-[220px] md:px-0 px-8 ">PLANIFIEZ VOS ÉVÉNEMENTS E-SPORTS EN TOUTE SIMPLICITÉ</p>
         <p class="text-white text-lg md:text-4xl font-light pt-12 md:pr-64 mx-8 pb-8 md:mx-0 md:pb-0">Grâce à notre outil de planning intuitif, réservez vos créneaux pour vos matchs, entraînements ou rendez-vous stratégiques en quelques clics. Prenez le contrôle de votre calendrier, synchronisez-vous avec vos coéquipiers, et assurez-vous d’être toujours prêt pour la victoire. Commencez à planifier votre succès dès maintenant !</p>
         <div class="flex justify-center items-center md:pl-[500px] md:pt-12 pb-12 md:pb-0">
+          <a href="/planning">
   <button class="bg-[#FFFFFF] h-[60px] text-[#00C9C6] font-bold py-2 px-6 rounded-[32px] text-2xl shadow-xl transform transition-transform duration-300 hover:scale-105">
     DÉCOUVRIR
-  </button>
+  </button></a>
 
   
 </div>
