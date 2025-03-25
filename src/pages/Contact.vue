@@ -1,5 +1,5 @@
 <template>
-  <section class="fond_auth min-h-screen flex items-center justify-center px-6">
+  <section class="fond_auth min-h-screen flex items-center justify-center px-6 pt-28 md:pt-0">
     <div class="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-12  shadow-lg p-10 rounded-lg">
       <!-- Partie gauche - Adresse -->
       <div class="flex flex-col justify-center">
@@ -46,7 +46,7 @@
 
           <!-- Bouton d'envoi -->
            <div class="flex justify-center">
-          <button type="submit" :disabled="isLoading" class="w-72 h-12 bg-purple-600 text-white text-2xl font-semibold  hover:bg-purple-700 disabled:opacity-50">
+          <button type="submit" :disabled="isLoading" class="md:w-72 w-48 h-12 bg-purple-600 text-white text-lg md:text-2xl font-semibold  hover:bg-purple-700 disabled:opacity-50">
             {{ isLoading ? 'Envoi en cours...' : 'Envoyer le message' }}
           </button></div>
         </form>

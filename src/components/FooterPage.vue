@@ -38,12 +38,14 @@ import TwitchIcon from '@/assets/icons/TwitchIcon.vue';
           <p class="font-normal text-xl text-white">DÉPARTEMENT MMI</p>
           <p class="font-normal text-xl text-white">SALLE 201</p>
           <div class="flex space-x-4">
+            <a href="/contact">
             <button class="bg-[#FFFFFF] h-[60px] text-[#8E3F8D] font-bold py-2 px-4 rounded-[16px] border-2 border-[#8E3F8D] text-base shadow-xl transform transition-transform duration-300 hover:scale-105">
               CONTACT
-            </button>
+            </button></a>
+            <a href="apropos">
             <button class="bg-[#FFFFFF] h-[60px] text-[#8E3F8D] font-bold py-2 px-4 rounded-[16px] border-2 border-[#8E3F8D] text-base shadow-xl transform transition-transform duration-300 hover:scale-105">
               A PROPOS
-            </button>
+            </button></a>
           </div><div class="flex justify-center pt-4">
       <DiscordIcon class="w-24 h-24" />
       <YoutubeIcon class="w-24 h-24" />
@@ -59,9 +61,9 @@ import TwitchIcon from '@/assets/icons/TwitchIcon.vue';
     <div class="border-b border-white py-4"></div>
     <div class="max-w-screen-lg mx-auto px-8 pt-4">
       <div class="grid grid-cols-2 gap-4 text-sm text-gray-600 text-center">
-        <a href="#" class="hover:text-white">Home of champions</a>
-        <a href="#" class="hover:text-white">FAQ</a>
-        <a href="#" class="hover:text-white">Politique de Cookies</a>
+        <a href="/" class="hover:text-white">Home of champions</a>
+        <a href="/" class="hover:text-white">FAQ</a>
+        <a href="/" class="hover:text-white">Politique de Cookies</a>
           <RouterLink to="/Mentions" class="hover:text-white">
             Mentions légales
           </RouterLink>
