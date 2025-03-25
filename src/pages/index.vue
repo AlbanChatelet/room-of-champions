@@ -202,6 +202,8 @@ l'univers e-sportif !</p>
   <button class="bg-[#FFFFFF] h-[60px] text-[#00C9C6] font-bold py-2 px-6 rounded-[32px] text-2xl shadow-xl transform transition-transform duration-300 hover:scale-105">
     DÉCOUVRIR
   </button>
+
+  
 </div>
 
       </div>
