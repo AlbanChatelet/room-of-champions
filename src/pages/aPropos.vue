@@ -45,7 +45,7 @@ onMounted(async () => {
 <template>
   <section class="fond_apropos pt-32 md:pt-12 pb-32">
     <div class="px-6 md:px-12">
-      <h1 class="text-2xl md:text-4xl font-bold text-white">ROOM OF CHAMPIONS,</h1>
+      <h1 class="text-2xl md:text-4xl font-bold text-white">HOME OF CHAMPIONS,</h1>
       <div class="flex items-center">
       <h1 class="text-2xl md:text-4xl font-bold text-white">C'EST QUOI ?</h1>
       <p 

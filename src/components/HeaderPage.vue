@@ -67,7 +67,7 @@ onMounted(() => {
         <li>
           <RouterLink to="/equipes">
           <button class="text-black hover:text-white transition duration-300 ease-in-out  rounded-lg flex items-center justify-center font-source-code-pro font-bold">
-            EQUIPES
+            ÉQUIPES
           </button>
         </RouterLink>
         </li>
@@ -130,7 +130,7 @@ onMounted(() => {
       </RouterLink>
       <RouterLink to="/equipes" class="w-full">
         <button class="text-[#00C9C6] text-lg font-source-code-pro font-bold border-b border-gray-300 py-2 w-full text-center">
-          EQUIPES
+          ÉQUIPES
         </button>
       </RouterLink>
       <RouterLink to="/planning" class="w-full">

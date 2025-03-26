@@ -63,7 +63,7 @@ onMounted(() => {
         <!-- Texte au centre de l'image -->
         <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
           <!-- Titre principal -->
-          <p class="text-[#8B44FF] text-4xl md:text-8xl font-bold mt-48 md:mt-0">ROOM OF CHAMPIONS</p>
+          <p class="text-[#8B44FF] text-4xl md:text-8xl font-bold mt-48 md:mt-0">HOME OF CHAMPIONS</p>
           <!-- Texte secondaire -->
           <div class="md:px-[450px] px-8">
             <p class="text-white text-xl md:text-2xl mt-4 mb-4">

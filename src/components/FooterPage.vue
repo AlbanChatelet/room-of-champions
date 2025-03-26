@@ -13,9 +13,9 @@ import TwitchIcon from '@/assets/icons/TwitchIcon.vue';
       <div class="grid lg:grid-cols-2 md:gap-96 text-base text-white text-left font-bold">
         <div class="grid grid-cols-2  md:text-2xl text-white">
         <a href="/jeux" class="hover:text-white">JEUX</a>
-        <a href="/materiel" class="hover:text-white">MATERIEL</a>
-        <a href="/equipes" class="hover:text-white">EQUIPES</a>
-        <a href="/events" class="hover:text-white">EVENEMENTS</a>
+        <a href="/materiel" class="hover:text-white">MATÉRIEL</a>
+        <a href="/equipes" class="hover:text-white">ÉQUIPES</a>
+        <a href="/events" class="hover:text-white">ÉVÉNEMENTS</a>
         <a href="/planning" class="hover:text-white">PLANNING</a>
         <a href="#" class="hover:text-white"></a>
       <div class="flex">
