@@ -1,4 +1,5 @@
 import { fileURLToPath, URL } from 'node:url'
+
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
@@ -13,12 +14,8 @@ export default defineConfig({
     }
   },
 
-  // Config pour SSR (Server-Side Rendering)
+  // Décommenter pour build en mode production directement dans PocketBase
   build: {
-    ssr: 'src/entry-server.ts', // Point d'entrée pour le serveur
-    outDir: './dist', // Dossier de sortie
-    rollupOptions: {
-      input: 'src/entry-client.ts' // Point d'entrée pour le client
-    }
+    outDir: './dist' // Change le chemin ici pour que le build se fasse dans le dossier dist
   }
 })
