@@ -13,7 +13,7 @@ const route = useRoute() as { params: { id: string } };
 const router = useRouter()
 
 // Récupérer l'équipe
-const equipe = ref<EquipesResponse>(await pb.collection<EquipesResponse<{ chef: UsersResponse, membres: UsersResponse }>>('equipes').getOne(route.params.id, {
+const equipe = ref<EquipesResponse<{ chef_equipe: UsersResponse, membres: UsersResponse[], jeu_associe: JeuxResponse[] }>>(await pb.collection<EquipesResponse<{ chef_equipe: UsersResponse, membres: UsersResponse[], jeu_associe: JeuxResponse[] }>>('equipes').getOne(route.params.id, {
   expand: 'chef_equipe, membres, jeu_associe'
 }))
 
