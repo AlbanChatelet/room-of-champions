@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { ref, defineEmits } from 'vue'
-import { registerUser, pb } from '@/backend'
+import { registerUser } from '@/backend'
 
-const acceptCookies = ref(false)
+//const acceptCookies = ref(false)
 const emit = defineEmits(['register-success', 'show-login'])
 const username = ref('')
 const email = ref('')
 const password = ref('')
 const passwordConfirm = ref('')
+const jeuxFavoris = ref('')
 const errorMessage = ref<string | null>(null)
 const showLogin = ref(false)
 
@@ -20,7 +21,7 @@ const handleRegister = async () => {
     }
 
     // Enregistrement de l'utilisateur
-    await registerUser(username.value, email.value, password.value, passwordConfirm.value)
+    await registerUser(username.value, email.value, password.value, passwordConfirm.value, jeuxFavoris.value)
 
     alert("Inscription réussie !")
     emit('register-success')
