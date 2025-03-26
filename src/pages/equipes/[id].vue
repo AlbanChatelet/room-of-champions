@@ -1,12 +1,12 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import { user } from '@/backend'
 import { useRoute, useRouter } from 'vue-router'
 import { pb } from '@/backend'
 import type { EquipesResponse, UsersResponse, JeuxResponse } from '@/pocketbase-types'
 import sanitizeHtml from 'sanitize-html'
-import QuillEditor from '@/components/QuillEditor.vue'
+//import QuillEditor from '@/components/QuillEditor.vue'
 import deleteIcon from '@/assets/icons/deleteIcon.vue'
 const route = useRoute()
 const router = useRouter()
@@ -21,7 +21,7 @@ const listUsers = ref<UsersResponse[]>(await pb.collection('users').getFullList(
 const listJeux = ref<JeuxResponse[]>(await pb.collection('jeux').getFullList())
 
 // État pour gérer l'affichage du formulaire de modification
-const isEditing = ref(false)
+// const isEditing = ref(false)
 
 // Fonction pour mettre à jour les membres
 async function updateMembres(id: string) {
@@ -57,24 +57,26 @@ async function deleteGame(id: string) {
     'jeu_associe-': id
   }, { expand: 'chef_equipe, membres, jeu_associe' })
 }
+
 // Fonction pour supprimer l'équipe
-async function deleteEquipe(id: string) {
-  await pb.collection('equipes').delete(id)
-  router.push({ name: '/equipes/' })
-}
+// async function deleteEquipe(id: string) {
+//   await pb.collection('equipes').delete(id)
+//   router.push({ name: '/equipes/' })
+// }
 
 // Fonction pour soumettre les modifications
-async function submitChanges() {
-  try {
-    await pb.collection('equipes').update(equipe.value.id, {
-      nom: equipe.value.nom,
-      description: equipe.value.description,
-    })
-    isEditing.value = false // Fermer le formulaire après soumission
-  } catch (error) {
-    console.error('Erreur lors de la mise à jour de l\'équipe :', error)
-  }
-}
+// async function submitChanges() {
+//   try {
+//     await pb.collection('equipes').update(equipe.value.id, {
+//       nom: equipe.value.nom,
+//       description: equipe.value.description,
+//     })
+//     isEditing.value = false // Fermer le formulaire après soumission
+//   } catch (error) {
+//     console.error('Erreur lors de la mise à jour de l\'équipe :', error)
+//   }
+// }
+
 // Fonction pour obtenir l'URL de l'avatar de l'utilisateur, sinon retourner un avatar par défaut
 const getAvatarUrl = (utilisateur: UsersResponse) => {
   return utilisateur.avatar
@@ -82,7 +84,7 @@ const getAvatarUrl = (utilisateur: UsersResponse) => {
     : new URL('@/assets/profileDefaut.webp', import.meta.url).href;
 }
 
-const canEdit = computed(() => user.value && user.value.id === equipe.value.chef_equipe)
+// const canEdit = computed(() => user.value && user.value.id === equipe.value.chef_equipe)
 
 const getIconUrl = (equipe: EquipesResponse) => {
   return equipe.icone ? pb.getFileUrl(equipe, equipe.icone) : null

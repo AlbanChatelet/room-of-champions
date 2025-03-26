@@ -1,7 +1,8 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { pb } from '@/backend'
-import type { EquipesResponse, UsersResponse } from '@/pocketbase-types'
+import type { EquipesResponse } from '@/pocketbase-types'
 import { RouterLink } from 'vue-router'
 
 const equipes = ref<EquipesResponse[]>([])
@@ -42,7 +43,10 @@ const getIconUrl = (equipe: EquipesResponse) => {
         <div v-for="equipe in equipes" :key="equipe.id" class="bg-gradient-to-b from-[#016D72] to-black p-6 rounded-lg border-4 border-white shadow-md hover:shadow-xl flex flex-col justify-between h-full relative rounded-tr-[80px] md:transform md:transition-transform md:duration-300 md:hover:scale-105">
 
           <!-- Icône de l'équipe (format carré, en haut à gauche) -->
-          <img v-if="equipe.icone" :src="getIconUrl(equipe)" :alt="`Icône de ${equipe.nom}`" class="absolute top-4 left-4 w-32 h-32 object-cover  shadow-xl">
+          <img v-if="equipe.icone" 
+            :src="getIconUrl(equipe) ?? ''" 
+            :alt="`Icône de ${equipe.nom}`" 
+          class="absolute top-4 left-4 w-32 h-32 object-cover  shadow-xl"/>
           
           <!-- Contenu de l'équipe -->
           <div class="pl-24"> <!-- Décalage pour ne pas chevaucher l'icône -->
