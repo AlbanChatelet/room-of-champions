@@ -88,7 +88,7 @@ const getAvatarUrl = (utilisateur: UsersResponse) => {
 // const canEdit = computed(() => user.value && user.value.id === equipe.value.chef_equipe)
 
 const getIconUrl = (equipe: EquipesResponse) => {
-  return equipe.icone ? pb.getFileUrl(equipe, equipe.icone) : null
+  return equipe.icone ? pb.getFileUrl(equipe, equipe.icone) : undefined
 }
 </script>
 
@@ -101,7 +101,7 @@ const getIconUrl = (equipe: EquipesResponse) => {
     <img 
     v-if="equipe.icone" 
     :src="getIconUrl(equipe)" 
-    :alt="`Icône de ${equipe.nom}`" 
+    :alt="`Icône de ${equipe.nom}`"
     class="md:w-[185px] md:h-[185px] w-24 h-24 object-cover rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.85)]"
 />
 
