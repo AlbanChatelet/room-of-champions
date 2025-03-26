@@ -24,7 +24,14 @@ const membres = ref<Membre[]>([]);
 onMounted(async () => {
   try {
     const records = await pb.collection("Nous").getFullList();
-    membres.value = records;
+    membres.value = records.map((record) => ({
+      id: record.id,
+      Prenom_Nom: record.Prenom_Nom,
+      Specialite: record.Specialite,
+      photo: record.photo,
+      logo: record.logo,
+      portfolio: record.portfolio,
+    }));
   } catch (error) {
     console.error("Erreur lors de la récupération des membres :", error);
   }
