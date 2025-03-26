@@ -54,7 +54,7 @@ const getIconUrl = (equipe: EquipesResponse) => {
               <h2 class="text-2xl font-semibold text-white mb-1 uppercase">{{ equipe.nom }}</h2> <!-- Nom de l'équipe en majuscule -->
 
               <!-- Affichage des jeux associés -->
-              <div v-if="(equipe.expand as any).jeu_associe.length" class="text-white text-[16px] mt-2">
+              <div v-if="(equipe.expand as any).jeu_associe?.length" class="text-white text-[16px] mt-2">
   <ul>
     <li v-for="jeu in (equipe.expand as any).jeu_associe" :key="jeu.id" class="mb-1">
       {{ jeu.nom_jeux }}
@@ -67,9 +67,9 @@ const getIconUrl = (equipe: EquipesResponse) => {
 
           <!-- Affichage des membres -->
           <!-- Affichage des membres -->
-<div v-if="equipe.expand?.membres?.length" class="text-white mt-16 text-center mx-auto text-xl uppercase"> 
+<div v-if="(equipe.expand as any).membres?.length" class="text-white mt-16 text-center mx-auto text-xl uppercase"> 
   <div class="font-semibold flex flex-wrap justify-center gap-x-12 gap-y-2">
-    <span v-for="membre in equipe.expand.membres" :key="membre.id">
+    <span v-for="membre in (equipe.expand as any).membres" :key="membre.id">
       {{ membre.username }}
     </span>
   </div>

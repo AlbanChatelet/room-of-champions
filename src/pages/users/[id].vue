@@ -49,8 +49,9 @@ const avatarUrl = computed(() => {
 
 // Computed pour l'URL de l'icône du jeu favori
 const gameIconUrl = computed(() => {
-  if (user.value?.expand?.jeuxFavoris?.icone) {
-    return pb.getFileUrl(user.value.expand.jeuxFavoris, user.value.expand.jeuxFavoris.icone)
+  const jeuxFavoris = (user.value?.expand as any)?.jeuxFavoris
+  if (jeuxFavoris?.icone) {
+    return pb.getFileUrl(jeuxFavoris, jeuxFavoris.icone)
   }
   return undefined
 })
