@@ -65,7 +65,7 @@ fetchUser()
 </script>
 
 <template>
-  <section class="fond_equipe py-12 px-12 md:pt-0 pt-32">
+  <section class="fond_equipe py-12 px-12 md:pt-12 pt-32">
     <section class="bg-white bg-opacity-10 rounded-tl-[80px] p-8">
       <div v-if="user" class="flex flex-col md:flex-row justify-center items-center gap-8">
         <!-- Partie gauche : Avatar + Nom -->
