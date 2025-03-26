@@ -88,12 +88,12 @@ const getAvatarUrl = (utilisateur: UsersResponse) => {
 // const canEdit = computed(() => user.value && user.value.id === equipe.value.chef_equipe)
 
 const getIconUrl = (equipe: EquipesResponse) => {
-  return equipe.icone ? pb.getFileUrl(equipe, equipe.icone) : undefined
+  return equipe.icone ? pb.getFileUrl(equipe, equipe.icone) : null
 }
 </script>
 
 <template>
-  <section class="fond_equipe py-12 px-12 md:pt-12 pt-32">
+  <section class="fond_equipe py-12 px-12 md:pt-0 pt-32">
     <section class="bg-white bg-opacity-10 rounded-tl-[80px]">
   <div v-if="equipe" class="container mx-auto pt-10 px-4">
     <div class="flex items-center justify-between">
