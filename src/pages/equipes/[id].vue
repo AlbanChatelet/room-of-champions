@@ -8,7 +8,8 @@ import type { EquipesResponse, UsersResponse, JeuxResponse } from '@/pocketbase-
 import sanitizeHtml from 'sanitize-html'
 //import QuillEditor from '@/components/QuillEditor.vue'
 import deleteIcon from '@/assets/icons/deleteIcon.vue'
-const route = useRoute()
+
+const route = useRoute() as { params: { id: string } };
 const router = useRouter()
 
 // Récupérer l'équipe
