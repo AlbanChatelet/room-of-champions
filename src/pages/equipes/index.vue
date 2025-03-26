@@ -54,9 +54,9 @@ const getIconUrl = (equipe: EquipesResponse) => {
               <h2 class="text-2xl font-semibold text-white mb-1 uppercase">{{ equipe.nom }}</h2> <!-- Nom de l'équipe en majuscule -->
 
               <!-- Affichage des jeux associés -->
-              <div v-if="equipe.expand?.jeu_associe?.length" class="text-white text-[16px] mt-2">
+              <div v-if="(equipe.expand as any).jeu_associe.length" class="text-white text-[16px] mt-2">
   <ul>
-    <li v-for="jeu in equipe.expand.jeu_associe" :key="jeu.id" class="mb-1">
+    <li v-for="jeu in (equipe.expand as any).jeu_associe" :key="jeu.id" class="mb-1">
       {{ jeu.nom_jeux }}
     </li>
   </ul>
