@@ -88,7 +88,7 @@ const getAvatarUrl = (utilisateur: UsersResponse) => {
 // const canEdit = computed(() => user.value && user.value.id === equipe.value.chef_equipe)
 
 const getIconUrl = (equipe: EquipesResponse) => {
-  return equipe.icone ? pb.getFileUrl(equipe, equipe.icone) : null
+  return equipe.icone ? pb.getFileUrl(equipe, equipe.icone) : undefined
 }
 </script>
 
