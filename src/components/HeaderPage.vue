@@ -55,7 +55,7 @@ onMounted(() => {
     </div>
 
     <!-- Menu Desktop -->
-    <nav class="hidden 2xl:flex items-center justify-between py-14 w-full pl-[350px]">
+    <nav class="hidden 2xl:flex items-center justify-between py-14 w-full pl-[250px]">
       <ul class="flex space-x-16 bg-[#00C9C6] items-center h-[60px] rounded-[16px]">
         <li>
           <RouterLink to="/jeux">
@@ -77,7 +77,7 @@ onMounted(() => {
           </RouterLink>
         </li>
         <li>
-          <RouterLink to="/Event" class="text-black hover:text-white transition duration-300 ease-in-out  rounded-lg flex ml-[170px] items-center justify-center font-source-code-pro font-bold">
+          <RouterLink to="/Event" class="text-black hover:text-white transition duration-300 ease-in-out  rounded-lg flex ml-[50px] items-center justify-center font-source-code-pro font-bold">
             ÉVÉNEMENTS
           </RouterLink>
         </li>
