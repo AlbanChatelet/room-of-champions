@@ -55,7 +55,7 @@ onMounted(() => {
     </div>
 
     <!-- Menu Desktop -->
-    <nav class="hidden 2xl:flex items-center justify-between py-14 pr-96 w-full pl-[250px]">
+    <nav class="hidden 2xl:flex items-center justify-between py-14 pr-96 w-full pl-[450px]">
       <ul class="flex space-x-16 bg-[#1400c9] items-center h-[60px] rounded-[16px]">
         <li>
           <RouterLink to="/jeux">
