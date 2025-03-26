@@ -29,7 +29,7 @@ const getIconUrl = (equipe: EquipesResponse) => {
   <main class="py-10 bg-[#000011] ">
     <div class="md:pl-16 pl-4 py-12 pt-32 md:pt-0">
       <h1 class="font-poppins font-black text-xl md:text-4xl text-white pb-6">
-        LA LISTE DES EQUIPES INSCRITES
+        LA LISTE DES ÉQUIPES INSCRITES
       </h1>
       <div class="md:w-[502px] w-72 h-[3px] bg-[#00C9C6]"></div>
     </div>
@@ -79,7 +79,7 @@ const getIconUrl = (equipe: EquipesResponse) => {
           <!-- Bouton pour voir les détails -->
           <div class="flex justify-center items-center pt-8">
             <RouterLink :to="`/equipes/${equipe.id}`" class="text-center bg-white stroke-blue-500 text-black font-bold px-2 py-2 rounded-md shadow hover:bg-slate-200 transition-colors mt-auto w-[160px]">
-              VOIR L'EQUIPE
+              VOIR L'ÉQUIPE
             </RouterLink>
           </div>
 

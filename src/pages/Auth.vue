@@ -21,7 +21,7 @@ const onRegisterSuccess = () => {
     <div class="container mx-auto py-10">
       <div class="text-center pb-6">
         <h1 class="text-4xl font-black lg:text-7xl text-[#8B44FF] font-mulish shadow-text">
-          {{ showLoginForm ? 'CONNEXION' : 'CREER UN COMPTE' }}
+          {{ showLoginForm ? 'CONNEXION' : 'CRÉER UN COMPTE' }}
         </h1>
       </div>
       

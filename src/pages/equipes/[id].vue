@@ -173,7 +173,7 @@ const getIconUrl = (equipe: EquipesResponse) => {
     
     <!-- Liste des jeux -->
     <div class="mt-4">
-      <h2 class="text-lg text-[#8B44FF] md:text-4xl font-bold">JEUX ASSOCIES :</h2>
+      <h2 class="text-lg text-[#8B44FF] md:text-4xl font-bold">JEUX ASSOCIÉS :</h2>
       <ul class="list-disc py-8 flex">
         <li v-for="jeu in equipe.expand?.jeu_associe" :key="jeu.id" class="flex justify-between items-center">
           <div class="bg-white py-2 px-4 rounded-xl mr-8">
