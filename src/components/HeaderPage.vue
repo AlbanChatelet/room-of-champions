@@ -56,7 +56,7 @@ onMounted(() => {
 
     <!-- Menu Desktop -->
     <nav class="hidden 2xl:flex items-center justify-between py-14 pr-96 w-full pl-[450px]">
-      <ul class="flex space-x-16 bg-[#1400c9] items-center h-[60px] rounded-[16px]">
+      <ul class="flex space-x-16 bg-[#362a9c] items-center h-[60px] rounded-[16px]">
         <li>
           <RouterLink to="/jeux">
             <button class="text-black rounded-lg hover:text-white transition duration-300 ease-in-out flex pl-12 items-center justify-center font-source-code-pro font-bold">
@@ -77,7 +77,7 @@ onMounted(() => {
           </RouterLink>
         </li>
         <li>
-          <RouterLink to="/Event" class="text-black hover:text-white transition duration-300 ease-in-out  rounded-lg flex ml-[50px] items-center justify-center font-source-code-pro font-bold">
+          <RouterLink to="/Event" class="text-black hover:text-white transition duration-300 ease-in-out  rounded-lg flex ml-[170px] items-center justify-center font-source-code-pro font-bold">
             ÉVÉNEMENTS
           </RouterLink>
         </li>
