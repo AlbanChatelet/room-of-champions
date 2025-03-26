@@ -15,7 +15,8 @@ const userTeam = ref<EquipesResponse | null>(null) // Stocker l'équipe de l'uti
 // Fonction pour récupérer les détails de l'utilisateur
 const fetchUser = async () => {
   try {
-    const response = await pb.collection('users').getOne<UsersResponse>(route.params.id, {
+    const response = await pb.collection('users').getOne<UsersResponse>(String(route.params.id), {
+
       expand: 'jeuxFavoris' // Permet de récupérer l'objet jeu lié
     })
     user.value = response
