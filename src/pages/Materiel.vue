@@ -14,7 +14,7 @@
                 <span class="md:text-9xl text-2xl m-10">01.</span><span class="text-[#00c9c6] pl-8">LA SOURIS</span>
             </h1>
             <h2 class="font-poppins text-lg md:text-2xl text-white pl-4 md:pl-16 pb-6 w-full">
-                Souris Logitech G502. Prenez le contrôle avec la Logitech G502, la souris gaming de référence. 
+                Souris Logitech G502, prenez le contrôle avec la Logitech G502, la souris gaming de référence. 
                 Avec ses capteurs ultra-précis, son poids ajustable et ses boutons programmables, elle ne suit pas vos mouvements : 
                 elle les anticipe. Ergonomique et innovante, elle vous place toujours un clic d’avance.
             </h2>
