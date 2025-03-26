@@ -21,7 +21,7 @@ if (user) {
 }
 
 const jeuxList = ref<any[]>([]) // Liste des jeux de la collection 'jeux'
-const jeuxMap = ref<any>({}) // Map des noms de jeux à leurs ID
+const jeuxMap = ref<Record<string, string>>({}) // Map des noms de jeux à leurs IDs
 
 // Charger les jeux depuis la collection 'jeux'
 onMounted(async () => {
@@ -31,7 +31,7 @@ onMounted(async () => {
     jeuxMap.value = jeuxResponse.reduce((acc, jeu) => {
       acc[jeu.nom_jeux] = jeu.id // Créer un mapping des noms de jeux aux IDs
       return acc
-    }, {})
+    }, {} as Record<string, string>)
   } catch (error) {
     console.error('Error fetching games:', error)
   }
