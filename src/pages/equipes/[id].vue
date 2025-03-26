@@ -1,96 +1,80 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { user } from '@/backend'
 import { useRoute, useRouter } from 'vue-router'
 import { pb } from '@/backend'
 import type { EquipesResponse, UsersResponse, JeuxResponse } from '@/pocketbase-types'
 import sanitizeHtml from 'sanitize-html'
-//import QuillEditor from '@/components/QuillEditor.vue'
+// import QuillEditor from '@/components/QuillEditor.vue'
 import deleteIcon from '@/assets/icons/deleteIcon.vue'
 
-const route = useRoute() as { params: { id: string } };
+const route = useRoute()
 const router = useRouter()
 
-// Récupérer l'équipe
-const equipe = ref<EquipesResponse<{ chef_equipe: UsersResponse, membres: UsersResponse[], jeu_associe: JeuxResponse[] }>>(await pb.collection<EquipesResponse<{ chef_equipe: UsersResponse, membres: UsersResponse[], jeu_associe: JeuxResponse[] }>>('equipes').getOne(route.params.id, {
-  expand: 'chef_equipe, membres, jeu_associe'
-}))
+// Assurer que `id` est toujours une chaîne valide
+const routeId = computed(() => (route.params as { id?: string }).id ?? '')
 
-// Récupérer tous les utilisateurs
+// Récupérer l'équipe
+const equipe = ref<EquipesResponse<{ chef_equipe: UsersResponse, membres: UsersResponse[], jeu_associe: JeuxResponse[]; }>>(
+  await pb.collection<EquipesResponse<{ chef_equipe: UsersResponse, membres: UsersResponse[], jeu_associe: JeuxResponse[] }>>('equipes').getOne(routeId.value, {
+    expand: 'chef_equipe,membres,jeu_associe'
+  })
+)
+
+// Récupérer tous les utilisateurs et jeux
 const listUsers = ref<UsersResponse[]>(await pb.collection('users').getFullList())
 const listJeux = ref<JeuxResponse[]>(await pb.collection('jeux').getFullList())
 
-// État pour gérer l'affichage du formulaire de modification
-// const isEditing = ref(false)
-
 // Fonction pour mettre à jour les membres
 async function updateMembres(id: string) {
-  const currentMembres = equipe.value.membres || [];
-  const currentJeux = equipe.value.jeu_associe || [];  // Ajoute ça pour garder les jeux
+  const currentMembres = equipe.value.membres || []
+  const currentJeux = equipe.value.jeu_associe || []
 
-  equipe.value = await pb.collection('equipes').update(route.params.id, {
+  equipe.value = await pb.collection('equipes').update(routeId.value, {
     membres: [...currentMembres, id],
-    jeu_associe: currentJeux.map(j => j) // On renvoie tous les jeux existants
-  }, { expand: 'chef_equipe, membres, jeu_associe' });
+    jeu_associe: currentJeux.map(j => j)
+  }, { expand: 'chef_equipe,membres,jeu_associe' })
 }
 
-
+// Fonction pour mettre à jour les jeux
 async function updateJeux(id: string) {
-  const currentMembres = equipe.value.membres || [];  // Ajoute ça pour garder les membres
-  const currentJeux = equipe.value.jeu_associe || [];
+  const currentMembres = equipe.value.membres || []
+  const currentJeux = equipe.value.jeu_associe || []
 
-  equipe.value = await pb.collection('equipes').update(route.params.id, {
-    membres: currentMembres.map(m => m), // On renvoie tous les membres existants
+  equipe.value = await pb.collection('equipes').update(routeId.value, {
+    membres: currentMembres.map(m => m),
     jeu_associe: [...currentJeux, id]
-  }, { expand: 'chef_equipe, membres, jeu_associe' });
+  }, { expand: 'chef_equipe,membres,jeu_associe' })
 }
 
 // Fonction pour supprimer un membre
 async function deleteMembre(id: string) {
-  equipe.value = await pb.collection('equipes').update(route.params.id, {
+  equipe.value = await pb.collection('equipes').update(routeId.value, {
     'membres-': id
-  }, { expand: 'chef_equipe, membres, jeu_associe' }) // <- ajoute jeu_associe ici
+  }, { expand: 'chef_equipe,membres,jeu_associe' })
 }
 
+// Fonction pour supprimer un jeu associé
 async function deleteGame(id: string) {
-  equipe.value = await pb.collection('equipes').update(route.params.id, {
+  equipe.value = await pb.collection('equipes').update(routeId.value, {
     'jeu_associe-': id
-  }, { expand: 'chef_equipe, membres, jeu_associe' })
+  }, { expand: 'chef_equipe,membres,jeu_associe' })
 }
 
-// Fonction pour supprimer l'équipe
-// async function deleteEquipe(id: string) {
-//   await pb.collection('equipes').delete(id)
-//   router.push({ name: '/equipes/' })
-// }
-
-// Fonction pour soumettre les modifications
-// async function submitChanges() {
-//   try {
-//     await pb.collection('equipes').update(equipe.value.id, {
-//       nom: equipe.value.nom,
-//       description: equipe.value.description,
-//     })
-//     isEditing.value = false // Fermer le formulaire après soumission
-//   } catch (error) {
-//     console.error('Erreur lors de la mise à jour de l\'équipe :', error)
-//   }
-// }
-
-// Fonction pour obtenir l'URL de l'avatar de l'utilisateur, sinon retourner un avatar par défaut
+// Fonction pour obtenir l'URL de l'avatar d'un utilisateur
 const getAvatarUrl = (utilisateur: UsersResponse) => {
   return utilisateur.avatar
     ? pb.getFileUrl(utilisateur, utilisateur.avatar)
-    : new URL('@/assets/profileDefaut.webp', import.meta.url).href;
+    : new URL('@/assets/profileDefaut.webp', import.meta.url).href
 }
 
-// const canEdit = computed(() => user.value && user.value.id === equipe.value.chef_equipe)
-
+// Fonction pour obtenir l'icône de l'équipe
 const getIconUrl = (equipe: EquipesResponse) => {
   return equipe.icone ? pb.getFileUrl(equipe, equipe.icone) : undefined
 }
 </script>
+
 
 <template>
   <section class="fond_equipe py-12 px-12 md:pt-12 pt-32">
