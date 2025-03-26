@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
@@ -64,7 +65,7 @@ const submit = async (event: Event) => {
     const newEquipe = await pb.collection('equipes').create(formData)
     console.log("Équipe créée avec succès :", newEquipe)
     router.push(`/equipes/${newEquipe.id}`)
-  } catch (error) {
+  } catch (error: any) {
     console.error('Erreur lors de la création de l’équipe', error, error?.data)
   }
 }
