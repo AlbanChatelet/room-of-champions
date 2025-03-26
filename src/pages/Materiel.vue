@@ -3,7 +3,7 @@
 </script>
 
 <template>
-<main class="bg-[#000011] p-6 md:p-24 pt-32 md:pt-0">
+<main class="bg-[#000011] p-6 md:p-24 pt-32 md:pt-12">
     <h1 class="font-poppins font-black text-2xl md:text-4xl text-white pl-4 md:pl-16 pb-6">
         LE MATÉRIEL DES <span class="text-[#00c9c6]">CHAMPIONS</span>
     </h1>
